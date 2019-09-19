@@ -1,2 +1,2 @@
-# asl-fall19-project
+# asl-fall19-project (fimeier@student.ethz.ch)
 
