@@ -20,6 +20,8 @@ memtier_benchmark --port=11212 --protocol=memcache_text --json-out-file=json.txt
 
 memtier_benchmark --server=server1 --port=12333 --protocol=memcache_text
 
+ssh server1 "sudo service memcached restart"
+
 
 java -jar middleware-fimeier.jar -l 127.0.0.1 -p 11212 -t 8 -s false -m 127.0.0.1:12333
 
