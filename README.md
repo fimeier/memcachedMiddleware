@@ -24,13 +24,24 @@ fimeier ALL=(ALL) NOPASSWD:ALL
 test memcached auf vm-yoga port 12666
 
 # loadIt procedure
+* add value size in procedure BZW data-size=4096 jeweils anpassen
 --test-time=3 willkürlich
 
+* localtest write
+memtier_benchmark --protocol=memcache_text --key-maximum=10000 --server=localhost --test-time=3 --clients=50 --json-out-file=json.txt --run-count=1 --expiry-range=2000000-2000001 --threads=4 --data-size=4096 --port=12666 --key-pattern=P:P --ratio=1:0 
+
+* localtest read
+memtier_benchmark --protocol=memcache_text --json-out-file=json.txt --run-count=1 --expiry-range=2000000-2000001 --threads=4 --data-size=4096 --port=12666 --key-maximum=10000 --server=localhost --test-time=6 --ratio=0:1 --clients=50 
+
+* write
 --protocol=memcache_text --key-maximum=10000 --server=10.0.0.32 --test-time=3 --clients=50 --json-out-file=json.txt --run-count=1 --expiry-range=2000000-2000001 --threads=4 --data-size=4096 --port=12444 --key-pattern=P:P --ratio=1:0 
 
 --protocol=memcache_text --key-maximum=10000 --server=10.0.0.31 --test-time=3 --clients=50 --json-out-file=json.txt --run-count=1 --expiry-range=2000000-2000001 --threads=4 --data-size=4096 --port=12333 --key-pattern=P:P --ratio=1:0 
 
---protocol=memcache_text --key-maximum=10000 --server=10.0.0.33 --test-time=3 --clients=50 --json-out-file=json.txt --run-count=1 --expiry-range=2000000-2000001 --threads=4 --data-size=4096 --port=12555 --key-pattern=P:P --ratio=1:0 
+--protocol=memcache_text --key-maximum=10000 --server=10.0.0.33 --test-time=3 --clients=50 --json-out-file=json.txt --run-count=1 --expiry-range=2000000-2000001 --threads=4 --data-size=4096 --port=12555 --key-pattern=P:P --ratio=1:0
+
+* read
+--protocol=memcache_text --json-out-file=json.txt --run-count=1 --expiry-range=2000000-2000001 --threads=4 --data-size=4096 --port=12333 --key-maximum=10000 --server=10.0.0.31 --test-time=6 --ratio=0:1 --clients=50 
 
 
 # Runcommands 
