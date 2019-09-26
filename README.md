@@ -1,7 +1,10 @@
 # asl-fall19-project (fimeier@student.ethz.ch)
 ....touched by Ubi-VM-P52!
 ....touched by WSL-P52......
-asdasdasdasd
+
+- [asl-fall19-project (fimeier@student.ethz.ch)](#asl-fall19-project-fimeierstudentethzch)
+- [Commands for Job Controlling](#commands-for-job-controlling)
+
 # Commands for Job Controlling
 screen -S jobcontrolling
 java -jar ~/asl-fall18-project/dist/ASLJobControlling.jar > outputASLJOB 2>errorASLJOB 
