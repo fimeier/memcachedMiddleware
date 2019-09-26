@@ -75,11 +75,17 @@ cd automato; ./start_memcached.bash 12555
 Config-file: **/etc/memcached.conf**
 
 -d
+
 logfile ~/automato/memcached.log
+
 -m 64
+
 -t 1
+
 -p 12xxx
+
 -u memcache
+
 
 Step 2 – launch service
 #!/bin/bash
@@ -101,15 +107,20 @@ Middleware1@azure
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDIxConFFDefmFmNMdEQkitzyQDeMIgxWuJUM8Mw9VbuaIwnv40I6YVeGcgIGRpinNLEafkEdgnWNZTbMFhtEGaXLGXMZWNA6hHpDiDq4cMJKqtwtS9VpHdH1NguMIdarhsBrvlMaUKXtkqqS3H7w7x6J3657kL6vT6x70I9nLWSdfy6iDPtCEpEyeNKS1wnAqkkDu1WtMjHC/GesYKcKMxIrZStzd0jNN4MESKuFXuyWSCvjrVzrKPtUMXjlAR8TDb89IFN37NGtrS/MZRm8v76C8wEc2ls/LiMdTdWPA8f1CwqtqLQQLClcVSN5eJOcYx93iNho7REFyw6CGi9pFyiSvFWFQfL2cNga338pK8w4mvMHd+4CtA/nh5RhwTQWjJKNpYnzYgXbYqamANnn71KEOFjc8o+uqvdPIRujFeRKY6CrbzGmZRAOpnP8x1LI3ngceVTmp+7DP02RHmzovdcyHssjxLyaaw/4PU4peiFhVF6AYfLB1QNL58RsnQimFr5Eufu0OFCoMEm1j1Af9QUiljTLXEeUEgTFJiO4Go8jl78rk8620992XaovslE6ZrZmWn38KyaHpBM5ZTADAOQiqgH4mFOBo5LQ4nIrgul0HE1RXYGAWnedx9bdxaXjRpYXfTMcaff7N8gUR5r0JZvlsZijk6Ui8QL/K2bI5TVQ== Middleware1@azure
 
 Client1 sshNIC1 10.0.0.11 storetcpprteunt27ksshpublicip1.westeurope.cloudapp.azure.com
+
 Client2 sshNIC2 10.0.0.12 storetcpprteunt27ksshpublicip2.westeurope.cloudapp.azure.com
+
 Client3 sshNIC3 10.0.0.13 storetcpprteunt27ksshpublicip3.westeurope.cloudapp.azure.com
 
 
 Middleware1 sshNIC4 10.0.0.21 storetcpprteunt27ksshpublicip4.westeurope.cloudapp.azure.com
+
 Middleware2 sshNIC5 10.0.0.22 storetcpprteunt27ksshpublicip5.westeurope.cloudapp.azure.com
 
 Server1 sshNIC6 10.0.0.31 storetcpprteunt27ksshpublicip6.westeurope.cloudapp.azure.com
+
 Server2 sshNIC7 10.0.0.32 storetcpprteunt27ksshpublicip7.westeurope.cloudapp.azure.com
+
 Server3 sshNIC8 10.0.0.33 storetcpprteunt27ksshpublicip8.westeurope.cloudapp.azure.com
 
 
