@@ -5,7 +5,15 @@
 - [Runcommands](#runcommands)
 - [Commands (azure?)](#commands-azure)
 - [Commands for Job Controlling](#commands-for-job-controlling)
+- [memcache configuration](#memcache-configuration)
 - [configAzureHostIP and Setup](#configazurehostip-and-setup)
+
+
+
+
+nopwlogin local
+sudo visudo
+fimeier ALL=(ALL) NOPASSWD:ALL
 
 # Runcommands 
 memtier_benchmark --port=11212 --protocol=memcache_text --json-out-file=json.txt -d4096 -x1
@@ -57,6 +65,27 @@ cd automato; ./start_memcached.bash 12444
 ssh 10.0.0.33
 screen -S experiment
 cd automato; ./start_memcached.bash 12555
+
+# memcache configuration
+
+10.0.0.31:12333
+10.0.0.32:12444
+10.0.0.33:12555
+
+Config-file: **/etc/memcached.conf**
+
+-d
+logfile ~/automato/memcached.log
+-m 64
+-t 1
+-p 12xxx
+-u memcache
+
+Step 2 – launch service
+#!/bin/bash
+ssh azureuser@<dns name> "sudo service memcached restart"
+
+
 
 # configAzureHostIP and Setup
 
