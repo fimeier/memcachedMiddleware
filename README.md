@@ -18,6 +18,8 @@ fimeier ALL=(ALL) NOPASSWD:ALL
 # Runcommands 
 memtier_benchmark --port=11212 --protocol=memcache_text --json-out-file=json.txt -d4096 -x1
 
+memtier_benchmark --server=server1 --port=12333 --protocol=memcache_text
+
 
 java -jar middleware-fimeier.jar -l 127.0.0.1 -p 11212 -t 8 -s false -m 127.0.0.1:12333
 
