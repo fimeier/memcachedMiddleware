@@ -13,8 +13,10 @@
 - [memtier_benchmark --help](#memtierbenchmark---help)
 
 # TODO
-* prüfe loadIt... sollte es eigentlich intelligent laden... prüfe ob alle keys geladen (statistik wert?)
-    * passe Paremeter für load an
+* ~~prüfe loadIt... sollte es eigentlich intelligent laden... prüfe ob alle keys geladen (statistik wert?)~~
+    * ~~passe Paremeter für load an~~   
+
+
 
 # Scratchpad
 no pw login local
