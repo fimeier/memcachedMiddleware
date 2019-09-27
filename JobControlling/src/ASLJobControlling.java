@@ -1217,7 +1217,7 @@ public class ASLJobControlling {
 			String fileSource = scriptToCopy;
 			String fileDestination =hostIP + ":" + ASLJobControlling.workingFolder + ".";
 
-			String[] copyFile = {"scp", fileSource, fileDestination};
+			String[] copyFile = {"scp","-p",fileSource, fileDestination};
 			scpJobs.add(copyFile);
 		}
 		scpJopsExecutor(scpJobs);
