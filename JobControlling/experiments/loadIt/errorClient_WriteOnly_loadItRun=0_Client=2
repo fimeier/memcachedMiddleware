@@ -1,7 +1,0 @@
-Fri Sep 27 17:39:06 UTC 2019
-Json file json.txt created...
-[RUN #1] Preparing benchmark client...
-[RUN #1] Launching threads now...
-[RUN #1 33%,   0 secs]  4 threads:        6037 ops,    6059 (avg:    6059) ops/sec, 23.92MB/sec (avg: 23.92MB/sec), 30.79 (avg: 30.79) msec latency[RUN #1 67%,   1 secs]  4 threads:       11875 ops,    5836 (avg:    5947) ops/sec, 23.04MB/sec (avg: 23.48MB/sec), 34.86 (avg: 32.79) msec latency[RUN #1 100%,   2 secs]  4 threads:       17723 ops,    5846 (avg:    5914) ops/sec, 23.08MB/sec (avg: 23.34MB/sec), 34.36 (avg: 33.31) msec latency[RUN #1 101%,   3 secs]  0 threads:       17957 ops,    5846 (avg:    5933) ops/sec, 23.08MB/sec (avg: 23.42MB/sec), 34.36 (avg: 33.70) msec latency
-
-Json file closed.
