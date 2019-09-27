@@ -14,7 +14,12 @@
 
 # TODO
 * ~~prüfe loadIt... sollte es eigentlich intelligent laden... prüfe ob alle keys geladen (statistik wert?)~~
-    * ~~passe Paremeter für load an~~   
+    * ~~passe Paremeter für load an~~
+
+* DataProcessing
+    * wichtig: allenfalls gibt es probleme, da ich die classe nicht richtig resete
+    * prüfe ob bei den statistiken die "alte variante" überhaupt noch benötigt wird
+      * ich vermute ich habe alles ersetzt durch die Konfig files welche noch im alten git sind
 
 
 
