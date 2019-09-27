@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 import java.util.Set;
 
 import javax.json.Json;
@@ -27,90 +28,55 @@ import javax.json.JsonReader;
  *
  */
 public class ASLJobControlling {
-	public static boolean showIdInLineTitle = true;
-
-	static private int globalUniqueLineIdentifier = 0;
-	static public String getUniqueLineIdentifier() {
-		globalUniqueLineIdentifier++;
-		return globalUniqueLineIdentifier+"";
-	}
-	static private int allLinesFileID = 0;
-	static public String getallLinesFileID() {
-		allLinesFileID++;
-		return allLinesFileID+"";
-	}
-
-	static String[] defaultColorsThroughputRead = {"#33ccff", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"}; 
-	static String[] defaultColorsThroughputWrite = {"#33ccff", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"};
-
-	static String[] defaultColorsLatencyRead = {"#ffcc99", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"};
-	static String[] defaultColorsLatencyWrite = {"#661400", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"};
-
-	static String[] unknownTypeColors = {"#D30FAF", "#D30FAF","#D30FAF", "#D30FAF", "#D30FAF", "#D30FAF"};
-
-
-	/**
-	 * those keys are not available as real data
-	 * they can be used to aggreagate aggregated data
-	 * HINT: Maybe better do define a separate function
+	/*
+	 * HERE IS THE WHOLE CONFIGURATION
+	 * TODO: Parse parameters from configfile 1:1
 	 */
-	public static Set<String> virtualKeys = new HashSet<>(); 
-	static{
-		virtualKeys.add("combinedResponseTimeGetMultiGet");
-	}
-
-	public static String experimentsFolderForLatex = "../git/asl-fall18-project/JobControlling/experiments/";
-
-	public static boolean consolidateStatistics = true;
-	public static boolean consolidateStatisticsBaseline21 = true;
-	public static boolean consolidateStatisticsBaseline22 = true;
-
-	public static boolean consolidateStatisticsBaseline31 = true;
-	public static boolean consolidateStatisticsBaseline32 = true;
-
-	public static boolean consolidateStatisticsfullSystem41 = true;
-
-	public static boolean consolidateStatisticsshardedCase51 = true;
-	public static boolean consolidateStatisticsnonshardedCase52 = true;
-	//chapter 5.1 and 5.2
-	public static boolean consolidateStatisticsMultiGetsPercentiles = true;
-	public static boolean createHistogramsMultiGets = true;
-
-
-	public static boolean createConsolitatedPlots = true;
-
-
-
-
-
-
-
-	public static boolean loadIt = false;
-	public static int MEMTIERLOADIterations = 3;
-	public static int MEMTIERLOADTIMEWriteOnly = 30;
-	public static int MEMTIERLOADTIMEReadOnly = 60;
-
-	public static boolean deployClientScripts = false;
-	public static boolean deployMiddlewareScripts = false;
-	public static boolean deployMiddlewareJava = false;
-	public static boolean deployServerScripts = false; //überlege ob das nötig ist
-
-
-	public static int totalNumberOfexperiments = 0;
+	
+	/*
+	 * 
+	 * 
+	 * 
+	 * Parameters used for Benchmarks-Configuration
+	 * 
+	 * 
+	 */
+	
+	/*
+	 * loading of the memcached server's
+	 * TODO: find necessary and needed limit's (do not waste time here)
+	 * jedes Experiment macht ein restart des memcached servers und läd ihn....
+	 * jeweils immer alle clients server mit der benötigten value-size
+	 */
+	//public static boolean loadIt = false;
+	public static int MEMTIERLOADIterations = 1;
+	public static int MEMTIERLOADTIMEWriteOnly = 3;
+	public static int MEMTIERLOADTIMEReadOnly = 6;
 
 	/*
-	 * globally fix test parameters
+	 * deployment of needed "software" for individual task's
 	 */
-	/**
-	 * 	delay before the memtierclient get started
+	public static boolean createFolders = true;
+	
+	public static boolean deployClientScripts = true;
+	
+	public static boolean deployMiddlewareScripts = true;
+	public static boolean deployMiddlewareJava = true;
+	
+	//public static boolean deployServerScripts = false; //überlege ob das nötig ist
+	
+
+	/*
+	 * 
+	 * Timing-Parameters for Benchmarks
+	 * 
+	 * 
 	 */
+	//delay before the memtierclient get started
 	public long STARTUPTIMEMIDDLEWARE = 2000;
-	/**
-	 * time in seconds for the memtier_benchmark to be running
-	 */
+	
+	//time in seconds for the memtier_benchmark to be running
 	public int MEMTIERTESTTIME = 64; //Set this to 63 for final experiments
-
-
 	/*
 	 * MyMiddleware parameters: start, measure, kill
 	 */
@@ -119,14 +85,25 @@ public class ASLJobControlling {
 	long JAVAMIDDLEWAREKILLDELAY = STARTUPTIMEMIDDLEWARE + tWAITBEFOREMEASUREMENTS +tTIMEFORMEASUREMENTS +1000; //~2+1.5+65.5+1=68
 
 
+	/*
+	 * 
+	 * ASL2018 not needed anymore
+	 * 
+	 * 
+	 * 
+	 */
+	/*
+	 * ASL2018 not needed anymore: workload (read/write and ratio parameters)
+	 * 
+	 * wird bei loadIt benutzt
+	 */
 	static String WRITEONLY = " --ratio=1:0";
 	static String READONLY = " --ratio=0:1";
 	static String RATIO11 = " --ratio=1:1";
 	static String RATIO13 = " --ratio=1:3";
 	static String RATIO16 = " --ratio=1:6";
 	static String RATIO19 = " --ratio=1:9";
-
-	static String getSimpleWorkloadName(String wl) { //ENUM??
+	static String getSimpleWorkloadName(String wl) { 
 		if (wl.equals(WRITEONLY))
 			return "WriteOnly";
 		if (wl.equals(READONLY))
@@ -147,14 +124,113 @@ public class ASLJobControlling {
 		return "UnknownWorkload";
 	}
 
+	/**
+	 * scheint auch im ASL18 nicht gebraucht worden zu sein
+	 * 
+	 * those keys are not available as real data
+	 * they can be used to aggreagate aggregated data
+	 * HINT: Maybe better do define a separate function
+	 */
+	/*public static Set<String> virtualKeys = new HashSet<>(); 
+	static{
+		virtualKeys.add("combinedResponseTimeGetMultiGet");
+	}*/
+
+	
+	
+	
+	
+	
+	/*
+	 * 
+	 * 
+	 * Parameters used for DataProcessing-Configuration
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	/*
+	 * Colors for plots
+	 * TODO: reuse Write Colors... or find better ones
+	 */
+	static String[] defaultColorsThroughputRead = {"#33ccff", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"}; 
+	static String[] defaultColorsThroughputWrite = {"#33ccff", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"};
+	static String[] defaultColorsLatencyRead = {"#ffcc99", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"};
+	static String[] defaultColorsLatencyWrite = {"#661400", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"};
+	static String[] unknownTypeColors = {"#D30FAF", "#D30FAF","#D30FAF", "#D30FAF", "#D30FAF", "#D30FAF"};
+
+	
+	/*
+	 * what pictures should be generate (from ASL2018)
+	 */
+	public static boolean consolidateStatistics = false;
+	public static boolean consolidateStatisticsBaseline21 = false;
+	public static boolean consolidateStatisticsBaseline22 = false;
+	public static boolean consolidateStatisticsBaseline31 = false;
+	public static boolean consolidateStatisticsBaseline32 = false;
+	public static boolean consolidateStatisticsfullSystem41 = false;
+	public static boolean consolidateStatisticsshardedCase51 = false;
+	public static boolean consolidateStatisticsnonshardedCase52 = false;
+	public static boolean consolidateStatisticsMultiGetsPercentiles = false;
+	public static boolean createHistogramsMultiGets = false;
+	public static boolean createConsolitatedPlots = false;
+
+	
+	/*
+	 * Helper for Statistics
+	 */
+	//used in createAllStatistics&createSpecialPlots
+	public static boolean showIdInLineTitle = true;
+
+	
+	/*
+	 * TODO: move inti DataProcessing (everything is local!!!)
+	 * used in createAllStatistics()
+	 */
+	static private int globalUniqueLineIdentifier = 0;
+	static public String getUniqueLineIdentifier() {
+		globalUniqueLineIdentifier++;
+		return globalUniqueLineIdentifier+"";
+	}
+	static private int allLinesFileID = 0;
+	static public String getallLinesFileID() {
+		allLinesFileID++;
+		return allLinesFileID+"";
+	}
+
+
+	
+	
+	/*
+	 * 
+	 * FILES
+	 * FOLDERS
+	 * IP
+	 * PORTS
+	 * 
+	 * 
+	 */
+
+
+	//used in statisticsThroughputLatencyClientorMiddleware
+	public static String experimentsFolderForLatex = "ANPASSEN";// ../git/asl-fall18-project/JobControlling/experiments/";
+
+
 
 	/*
-	 * fixed files, folders, IPs etc....
+	 * working folder for clients, servers and middlewares
+	 * 
+	 * REMARK:
+	 * 		-everything gets startet in this folder from this class (ASLJobControlling)
+	 * 		-this class itself is in the gitrepo/dist as runnable-jar file stored
 	 */
 	public static String workingFolder = "~/automato/";
 
-	//public static String gitBaseFolder = "/home/fimeier/asl-fall18-project/";
-	public static String gitBaseFolder = "/home/fimeier/Dropbox/00ETH/HS18/05_Advanced_Systems_Lab/git/asl-fall18-project/";
+	public static String gitBaseFolder = "/home/fimeier/asl-fall19-project/";
 
 	public static String experimentsBaseFolder = gitBaseFolder+"JobControlling/experiments/";
 	public static String allLinesBaseFolder = experimentsBaseFolder+"generatedPlots/allLines/";
@@ -168,13 +244,11 @@ public class ASLJobControlling {
 	public static String middlewareScriptSource = scriptsFolder + "runMiddleware.bash";
 	public static String middlewareScriptTarget = workingFolder + "runMiddleware.bash";
 	public static String jarFile = "middleware-fimeier.jar";
-	//public static String jarFile = "EclipseMiddleware.jar";
 	public static String middlewareJavaSource = javaSourceFolder + jarFile;
 	public static String middlewareOutputFile = workingFolder+"outputMiddleware";
 	public static String middlewareErrorFile = workingFolder+"errorMiddleware";
 	public static String middlewarefinalStats = workingFolder+"finalStats";
 	public static String middlewarehistogram = workingFolder+"histogram";
-
 
 	public static String[] middlewareFiles = new String[] {middlewareOutputFile,middlewareErrorFile,middlewarefinalStats,middlewarehistogram};
 
@@ -190,15 +264,17 @@ public class ASLJobControlling {
 	public static String[] clientFiles = new String[] {clientOutputFile,clientErrorFile,clientOutputJSONFile};
 	public static String[] clientFilesIncluding2ndInstance = new String[] {clientOutputFile,clientErrorFile,clientOutputJSONFile,clientOutputFile+"2ndInst",clientErrorFile+"2ndInst",clientOutputJSONFile+"2ndInst"};
 
-
 	public static String[] serverIPs = new String[] {"10.0.0.31","10.0.0.32","10.0.0.33"};
 	public static String[] serverPorts = new String[] {"12333","12444","12555"};
 	public static String[] serverIpandPorts = new String[] {serverIPs[0]+":"+serverPorts[0],serverIPs[1]+":"+serverPorts[1],serverIPs[2]+":"+serverPorts[2]};
 
+	/*
 	public static String serverScriptSoure = scriptsFolder + "start_memcached.bash";
 	public static String serverOutputFile = workingFolder+"outputMemcached";
 	public static String serverErrorFile = workingFolder+"errorMemcached";
 	public static String[] serverFiles = new String[] {serverOutputFile,serverErrorFile};
+	*/
+	
 
 	/**
 	 * inner loop:
@@ -573,393 +649,6 @@ public class ASLJobControlling {
 
 	}
 
-	/**
-	 * Experiment according to section 2.1 of the report outline
-	 */
-	public void baseline21(){
-		long startExperiment = System.currentTimeMillis();
-		int numExperiments = 0;
-		// paramters to change for real experiment
-
-
-		int repetitions = 3;
-		int nVCmax = 32;
-
-		String experimentFolder = "baseline21";
-		String[] workloads = {WRITEONLY, READONLY};
-
-		for (String workload: workloads) {
-			for (int rep = 1; rep <= repetitions; rep++) {
-				String suffixForThisRunPrefix = "Baseline21_"+getSimpleWorkloadName(workload);
-				for (int nVC = 1; nVC <=nVCmax; nVC++) {
-					String suffixForThisRun = suffixForThisRunPrefix + "_nVC="+nVC+"_Rep="+rep;
-					int nServer=1;
-					int nVirtualMachineClients=3;
-					//int nVC
-					int nCT = 2;
-					//String workload
-					//String suffixForThisRun
-					int nMW = 0;
-					int nWorkerThreads = 0;
-					int  multiGetSize = 0;
-					String shardedReading = "false";
-					TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT, workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
-
-					numExperiments++;
-					//new ASLJobControlling().doBenchmarks(experiment);
-				}
-			}
-		}
-
-
-		ASLJobControlling.totalNumberOfexperiments += numExperiments;
-		long experimentDuration = System.currentTimeMillis() - startExperiment;
-		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
-
-	}
-
-	/**
-	 * Experiment according to section 2.2 of the report outline
-	 */
-	public void baseline22() {
-		long startExperiment = System.currentTimeMillis();
-		int numExperiments = 0;
-
-		// paramters to change for real experiment
-		int repetitions = 3; //3
-		int nVCmax = 32; //32
-
-		String experimentFolder = "baseline22";
-		String[] workloads = {WRITEONLY, READONLY};
-
-		for (String workload: workloads) {
-			for (int rep = 1; rep <= repetitions; rep++) {
-				String suffixForThisRunPrefix = "Baseline22_"+getSimpleWorkloadName(workload);
-				for (int nVC = 1; nVC <=nVCmax; nVC++) {
-					String suffixForThisRun = suffixForThisRunPrefix + "_nVC="+nVC+"_Rep="+rep;
-					int nServer=2;
-					int nVirtualMachineClients=1;
-					//int nVC
-					int nCT = 1;
-					//String workload
-					//String suffixForThisRun
-					int nMW = 0;
-					int nWorkerThreads = 0;
-					int  multiGetSize = 0;
-					String shardedReading = "false";
-
-					TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
-
-					numExperiments++;
-					//new ASLJobControlling().doBenchmarks(experiment);
-				}
-			}
-		}
-
-
-		ASLJobControlling.totalNumberOfexperiments += numExperiments;
-
-		long experimentDuration = System.currentTimeMillis() - startExperiment;
-		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
-
-
-	}
-
-	/**
-	 * Experiment according to section 3.1 of the report outline
-	 */
-	public void baseline31() {
-		long startExperiment = System.currentTimeMillis();
-		int numExperiments = 0;
-
-
-		// paramters to change for real experiment
-		int repetitions = 3;
-		//int nVCmax = 32; //
-		int[] nVCsamples = {1,4,8,12,16,20,24,28,32};
-		int[] nWorkerThreadsTodoList = {8, 16, 32, 64};
-
-
-		String experimentFolder = "baseline31";
-		String[] workloads = {WRITEONLY, READONLY};
-
-		/*
-		 * test duration
-		 * 							|workload|	* rep * |nVC| 	* |nWorkerThreads| 	* JAVAMIDDLEWAREKILLDELAY
-		 * 	50'000sec=13.76h			2		*	3 * 32		*	4				* 68	
-		 */
-		for (String workload: workloads) {
-			for (int rep = 1; rep <= repetitions; rep++) {
-				String suffixForThisRunPrefix = "Baseline31_"+getSimpleWorkloadName(workload);
-				//for (int nVC = 1; nVC <=nVCmax; nVC++) {
-				for (int nVC: nVCsamples) {
-					for (int nWorkerThreads: nWorkerThreadsTodoList) {
-						String suffixForThisRun = suffixForThisRunPrefix + "_nVC="+nVC+"nWorkerThreads"+nWorkerThreads+"_Rep="+rep;
-						int nServer=1;
-						int nVirtualMachineClients=3;
-						//int nVC
-						int nCT = 2;
-						//String workload
-						//String suffixForThisRun
-						int nMW = 1;
-						//int nWorkerThreads = 8;
-						int  multiGetSize = 0;
-						String shardedReading = "false";
-						TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
-
-						numExperiments++;
-						new ASLJobControlling().doBenchmarks(experiment);
-
-					}
-				}
-			}
-		}
-
-		ASLJobControlling.totalNumberOfexperiments += numExperiments;
-
-		long experimentDuration = System.currentTimeMillis() - startExperiment;
-		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
-
-
-	}
-
-	/**
-	 * Experiment according to section 3.2 of the report outline
-	 */
-	public void baseline32() {
-		long startExperiment = System.currentTimeMillis();
-		int numExperiments = 0;
-
-		// paramters to change for real experiment
-		int repetitions = 3;
-		//int nVCmax = 32;
-		int[] nVCsamples = {1,4,8,12,16,20,24,28,32};
-
-		int[] nWorkerThreadsTodoList = {8, 16, 32, 64};
-
-
-		String experimentFolder = "baseline32";
-		String[] workloads = {WRITEONLY, READONLY};
-
-
-		for (String workload: workloads) {
-			for (int rep = 1; rep <= repetitions; rep++) {
-				String suffixForThisRunPrefix = "Baseline32_"+getSimpleWorkloadName(workload);
-				//for (int nVC = 1; nVC <=nVCmax; nVC++) {
-				for (int nVC: nVCsamples) {
-
-					for (int nWorkerThreads: nWorkerThreadsTodoList) {
-						String suffixForThisRun = suffixForThisRunPrefix + "_nVC="+nVC+"nWorkerThreads"+nWorkerThreads+"_Rep="+rep;
-						int nServer=1;
-						int nVirtualMachineClients=3;
-						//int nVC
-						int nCT = 1;
-						//String workload
-						//String suffixForThisRun
-						int nMW = 2;
-						//int nWorkerThreads = 8;
-						int  multiGetSize = 0;
-						String shardedReading = "false";
-						TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
-
-						numExperiments++;
-						new ASLJobControlling().doBenchmarks(experiment);
-
-					}
-				}
-			}
-		}
-
-		ASLJobControlling.totalNumberOfexperiments += numExperiments;
-
-		long experimentDuration = System.currentTimeMillis() - startExperiment;
-		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
-
-	}
-
-
-
-	/**
-	 * Experiment according to section 4.1 of the report outline
-	 */
-	public void fullSystem41() {
-		long startExperiment = System.currentTimeMillis();
-		int numExperiments = 0;
-		// paramters to change for real experiment
-		int repetitions = 6;
-		//int nVCmax = 32;
-		int[] nVCsamples = {1,4,8,12,16,20,24,28,32};
-
-		int[] nWorkerThreadsTodoList = {8, 16, 32, 64};
-
-		String experimentFolder = "fullSystem41";
-		String[] workloads = {WRITEONLY};
-
-		for (String workload: workloads) {
-			for (int rep = 1; rep <= repetitions; rep++) {
-				String suffixForThisRunPrefix = "fullSystem41"+getSimpleWorkloadName(workload);
-				//for (int nVC = 1; nVC <=nVCmax; nVC++) {
-				for (int nVC: nVCsamples) {
-					for (int nWorkerThreads: nWorkerThreadsTodoList) {
-						String suffixForThisRun = suffixForThisRunPrefix + "_nVC="+nVC+"nWorkerThreads"+nWorkerThreads+"_Rep="+rep;
-						int nServer=3;
-						int nVirtualMachineClients=3;
-						//int nVC
-						int nCT = 1;
-						//String workload
-						//String suffixForThisRun
-						int nMW = 2;
-						//int nWorkerThreads = 8;
-						int  multiGetSize = 0;
-						String shardedReading = "false";
-						TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads,  multiGetSize, shardedReading, experimentFolder);
-
-						numExperiments++;
-						new ASLJobControlling().doBenchmarks(experiment);
-
-						System.out.println(experimentFolder+": did "+numExperiments+ " of 216 experiments");
-
-
-					}
-				}
-			}
-		}
-
-		ASLJobControlling.totalNumberOfexperiments += numExperiments;
-
-		long experimentDuration = System.currentTimeMillis() - startExperiment;
-		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
-
-	}
-
-	/**
-	 * Experiment according to section 5.1 (called with true) or 5.2 (called with false)  of the report outline
-	 */
-	public void multiGets(boolean _shardedReading) {
-		long startExperiment = System.currentTimeMillis();
-		int numExperiments = 0;
-
-		// paramters to change for real experiment
-		int repetitions = 6; //CHANGE!!!!
-
-		int[] nWorkerThreadsTodoList = {8, 16, 32, 64, 128}; //TODO max throughput wird hier gesucht
-
-		String experimentFolder = (_shardedReading) ? "shardedCase51": "nonshardedCase52";
-		String[] workloads = {RATIO11, RATIO13, RATIO16, RATIO19};
-		int[] multiGetSizes = {1,3,6,9};
-
-		for (int i = 0; i < multiGetSizes.length; i++) {
-			int multiGetSize = multiGetSizes[i];
-			String workload = workloads[i];
-			for (int rep = 1; rep <= repetitions; rep++) {
-				String suffixForThisRunPrefix = experimentFolder+getSimpleWorkloadName(workload);
-				for (int nWorkerThreads: nWorkerThreadsTodoList) {
-					int nServer=3;
-					int nVirtualMachineClients=3;
-					int nVC=2;
-					int nCT = 1;
-					//String workload
-					//String suffixForThisRun
-					int nMW = 2;
-					//int nWorkerThreads = 8;
-					String shardedReading = String.valueOf(_shardedReading);
-
-					String suffixForThisRun = suffixForThisRunPrefix + "_nWorkerThreads"+nWorkerThreads+"_Rep="+rep;
-
-					TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
-
-					/*
-					System.out.println("experiment.argsMiddleware1: " +experiment.argsMiddleware1);
-					System.out.println("experiment.argsMiddleware2: "+experiment.argsMiddleware2);
-					System.out.println("experiment.argsDifferentFromDefault1stInstance: "+experiment.argsDifferentFromDefault1stInstance);
-					System.out.println("experiment.argsDifferentFromDefault2ndInstance: "+experiment.argsDifferentFromDefault2ndInstance);
-					 */
-
-					numExperiments++;
-					new ASLJobControlling().doBenchmarks(experiment);
-
-					System.out.println(experimentFolder+": did "+numExperiments+ " of 120 experiments");
-				}
-			}
-		}
-
-		ASLJobControlling.totalNumberOfexperiments += numExperiments;
-
-		long experimentDuration = System.currentTimeMillis() - startExperiment;
-		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
-
-	}
-
-	/**
-	 * Experiment according to section 6 of the report outline
-	 */
-	public void twoKAnalysis6() {
-		long startExperiment = System.currentTimeMillis();
-		int numExperiments = 0;
-
-		// paramters to change for real experiment
-		int repetitions = 6;
-		String experimentFolder = "twoKAnalysis6";
-		String[] workloads = {WRITEONLY, READONLY};
-		int[] memcachedServers = {1, 3};
-		int[] middlewares = {1, 2};
-		int[] nWorkerThreadsTodoList = {8, 32};
-
-
-
-		for (String workload: workloads) {
-
-			for (int rep = 1; rep <= repetitions; rep++) {
-				//suffixForThisRun += "_rep="+rep;
-
-				for (int nMemcached: memcachedServers) {
-					//suffixForThisRun += "_nServer="+nMemcached;
-
-					for (int nMiddlewares: middlewares) {
-						//suffixForThisRun += "_nMW="+nMiddlewares;
-
-						for (int nWorkerThreads: nWorkerThreadsTodoList) {
-							//suffixForThisRun += "_nWorkerThreads="+nWorkerThreads;
-
-							String suffixForThisRun = experimentFolder+getSimpleWorkloadName(workload)+ "_rep="+rep + "_nServer="+nMemcached+"_nMW="+nMiddlewares+"_nWorkerThreads="+nWorkerThreads;
-							//System.out.println(suffixForThisRun);
-
-							int nServer=nMemcached;
-							int nVirtualMachineClients=3;
-							int nVC = 32;
-							int nCT = 2 / nMiddlewares;
-							//String workload
-							//String suffixForThisRun
-							int nMW = nMiddlewares;
-							//int nWorkerThreads = 8;
-							int  multiGetSize = 0;
-							String shardedReading = "false";
-							TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads,  multiGetSize, shardedReading, experimentFolder);
-
-							/*
-							System.out.println("experiment.argsMiddleware1: " +experiment.argsMiddleware1);
-							System.out.println("experiment.argsMiddleware2: "+experiment.argsMiddleware2);
-							System.out.println("experiment.argsDifferentFromDefault1stInstance: "+experiment.argsDifferentFromDefault1stInstance);
-							System.out.println("experiment.argsDifferentFromDefault2ndInstance: "+experiment.argsDifferentFromDefault2ndInstance);
-							System.out.println("*****************************************************************************************************************\n");
-							 */
-
-							numExperiments++;
-							new ASLJobControlling().doBenchmarks(experiment);
-							System.out.println(experimentFolder+": did "+numExperiments+ " of 96 experiments");
-
-						}
-					}
-				}
-			}
-		}
-
-		ASLJobControlling.totalNumberOfexperiments += numExperiments;
-
-		long experimentDuration = System.currentTimeMillis() - startExperiment;
-		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
-
-	}
 
 
 	/**
@@ -1373,7 +1062,7 @@ public class ASLJobControlling {
 
 				if (isMiddlewareObject) {
 					try {
-						Thread.sleep(middlewareObject.javaJobKillDelay);
+						Thread.sleep(middlewareObject.javaJobKillDelay); //Einlfuss??? :-)
 						/*
 						 * get pid.. returned from bash script
 						 */
@@ -1448,9 +1137,10 @@ public class ASLJobControlling {
 				absolutePaths=ASLJobControlling.middlewareFiles;
 
 			//Server
+			/*
 			if (hostIP.startsWith("10.0.0.3"))
 				absolutePaths=ASLJobControlling.serverFiles;
-
+			*/
 
 			for(String absoluteFileName: absolutePaths) {
 				String hostFileSource = hostIP + ":" + absoluteFileName;
@@ -1489,6 +1179,36 @@ public class ASLJobControlling {
 		}
 
 	}
+	
+	//sshJobs target command
+	public static void sshJopsExecutor(List<String[]> sshJobs) {
+		for (String[] sshJob: sshJobs) {
+			try {
+				System.out.println("Running Job: "+ sshJob[0] + " "+ sshJob[1]+ " "+ sshJob[2]);
+				Process p = Runtime.getRuntime().exec(sshJob);
+				BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+				String error = stdError.readLine();
+				
+				BufferedReader stdOutput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+				String output = stdOutput.readLine();
+				
+				//BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+
+				
+				if (error != null)
+					System.out.println("***Error sshJopsExecutor: "+error);
+				else
+					if (output != null)
+						System.out.println("sshJopsExecutor-Output: "+output);
+					else
+						System.out.println("sshJopsExecutor-Executed: "+sshJob[2]);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
 
 	public static void deployScripts(String[] ips, String scriptToCopy) {
 		List<String[]> scpJobs = new ArrayList<String[]>();
@@ -1502,69 +1222,7 @@ public class ASLJobControlling {
 		}
 		scpJopsExecutor(scpJobs);
 	}
-	public void loadIt(String workload, int loadTime, int loadItRun) {
-		/*
-		 * example test VC in [1..32]
-		 */
-		// paramters to change for real experiment
-		int memtierLoadTime = loadTime;
-
-		String experimentFolder = "loadIt";
-
-
-		String argsMemtier = "--test-time="+memtierLoadTime;
-		argsMemtier += " --clients="+50;
-		argsMemtier += " --threads="+4;
-		argsMemtier += workload;
-		if (workload.equals(WRITEONLY)) {
-			argsMemtier += " --key-pattern=P:P";
-		}
-		/*
-		 * start memtier_benchmark
-		 */
-		List<Thread> clientThreads = new ArrayList<>();
-		/*
-		 * start all clients
-		 */
-
-		for (int i = 0; i<3; i++) {
-			MemtierCommand memtierRun = new MemtierCommand();
-			boolean start2ndInstance = false;
-			memtierRun.setMemtierCommand(clientIPs[i], argsMemtier + " --server="+serverIPs[i] + " --port="+serverPorts[i], start2ndInstance);
-
-			Thread threadMemtier = new Thread(new RunCommandInThread(memtierRun));
-			clientThreads.add(threadMemtier);
-			threadMemtier.start();
-		}
-
-		/*
-		 * join all clients
-		 */
-		int i = 0;
-		for (Thread threadMemtier: clientThreads) {
-			try {
-				System.out.println("Trying clientThreads["+i+"].join()... "+(i+1)+"-out-of-"+clientThreads.size());
-				threadMemtier.join();
-				System.out.println("clientThreads["+i+"].join() succeded!");
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			i++;
-		}
-
-		/*
-		 * copy all client files back
-		 */
-		int c = 1;
-		for (String clientIP: ASLJobControlling.clientIPs) {
-			String completeFileSuffix = "_"+getSimpleWorkloadName(workload)+"_loadItRun="+loadItRun+"_Client="+c;
-			copyFilesback(new String[] {clientIP},completeFileSuffix, false, experimentFolder);
-			c++;
-
-		}
-
-	}
-
+	
 
 
 	static FilenameFilter getFilter(String startsWith, String[] contains) {
@@ -4511,262 +4169,57 @@ public class ASLJobControlling {
 	}
 
 	public static void main(String[] args) {
-
-		if (consolidateStatistics) {
-			if(consolidateStatisticsBaseline21) {
-				//consolidateStatisticsBaseline21();
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline21/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline21Client";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline21/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline21Client";
-				createPlots(configAggregation);
-			}
-			if(consolidateStatisticsBaseline22) {
-				//consolidateStatisticsBaseline22();
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline22/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline22Client";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline22/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline22Client";
-				createPlots(configAggregation);
-			}
-
-			if(consolidateStatisticsBaseline31) {
-				//consolidateStatisticsBaseline31();
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating baseline31/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline31";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating baseline31/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline31";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline31/ReadOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline31Client";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline31/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline31Client";
-				createPlots(configAggregation);
-
-
-			}
-			if(consolidateStatisticsBaseline32) {
-				//consolidateStatisticsBaseline32();
-				//consolidateStatisticsBaseline31();
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating baseline32/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline32";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating baseline32/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline32";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline32/ReadOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline32Client";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline32/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline32Client";
-				createPlots(configAggregation);
-
-
-			}
-			if(consolidateStatisticsfullSystem41) {
-				//consolidateStatisticsfullSystem41();
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating fullSystem41 plots *******************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationfullSystem41";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT fullSystem41 plots *******************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationfullSystem41Client";
-				createPlots(configAggregation);				
-			}
-
-
-
-			/**
-			 * multi-gets vs gets
-			 * 
-			 * Middleware kann nicht unterscheiden ob get oder multiget
-			 * 
-			 */
-			if(consolidateStatisticsshardedCase51) {
-				//consolidateStatisticsshardedCase51();
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating shardedCase51/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationshardedCase51";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT shardedCase51/ReadOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationshardedCase51Client";
-				createPlots(configAggregation);
-			}
-			if(consolidateStatisticsnonshardedCase52) {
-				//consolidateStatisticsnonshardedCase52();
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating nonshardedCase52/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationnonshardedCase52";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT nonshardedCase52/ReadOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationnonshardedCase52Client";
-				createPlots(configAggregation);
-			}
-			if(consolidateStatisticsMultiGetsPercentiles) {
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating special plots Multi-Gets sharded and non-sharded **************************************\n");
-				//configAggregationshardedCase51PercentilesClient
-				String configAggregation=experimentsBaseFolder+"configAggregationshardedCase51Percentiles";
-				createPlots(configAggregation);                        
-				configAggregation=experimentsBaseFolder+"configAggregationnonshardedCase52Percentiles";
-				createPlots(configAggregation);
-			}
-			if(createHistogramsMultiGets) {
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating Histograms Multi-Gets sharded and non-sharded **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationshardedCase51Histogram";		
-				createPlots(configAggregation); 
-
-
-				configAggregation=experimentsBaseFolder+"configAggregationNonshardedCase52Histogram";		
-				createPlots(configAggregation); 
-
-				configAggregation=experimentsBaseFolder+"configAggregationshardedCase51HistogramClient";		
-				createPlots(configAggregation); 
-
-				configAggregation=experimentsBaseFolder+"configAggregationNonshardedCase52HistogramClient";		
-				createPlots(configAggregation);
-			}
-
-
-
-
-
-
-			/**
-			 * create special plots
-			 */
-			if (createConsolitatedPlots) {
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** consolidate PLOTS **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationAllLines";
-				createSpecialPlots(configAggregation,"special Plot: allLines ");
-
-
-			}
-
-
-			return;
-		}
-
-
-
-		long startExperiment = System.currentTimeMillis();
-		ASLJobControlling.totalNumberOfexperiments = 0;
+		
 		/*
-		 * deploy scripts
+		 * create folders
+		 * HINT: Here and not in Benchmarks-Folder as I might also need it for DataProcessing
+		 * 
 		 */
-		if (deployClientScripts) {
-			deployScripts(clientIPs, clientScriptSource);
-			deployScripts(clientIPs, clientScriptSource2ndInstance);
-		}
+		if (createFolders) {
+			
+			List<String[]> allSystemIPs = new ArrayList<>();
+			allSystemIPs.add(clientIPs);
+			allSystemIPs.add(middlewareIPs);
+			allSystemIPs.add(serverIPs);
 
-		if (deployMiddlewareScripts) {
-			deployScripts(middlewareIPs, middlewareScriptSource);
-		}
-		if (deployMiddlewareJava) {
-			deployScripts(middlewareIPs, middlewareJavaSource);
-		}
-
-		if (deployServerScripts) {
-			deployScripts(serverIPs, serverScriptSoure);
-		}
-
-		if (loadIt) {
-			for(int i = 0; i<MEMTIERLOADIterations; i++) {
-				System.out.println("Loading the system.....");
-				int loadTime = MEMTIERLOADTIMEWriteOnly;
-				new ASLJobControlling().loadIt(WRITEONLY, loadTime, i);
-				loadTime = MEMTIERLOADTIMEReadOnly;
-				new ASLJobControlling().loadIt(READONLY, loadTime, i);
+		
+			//create workingFolder ~/automato
+			for(String[] ips: allSystemIPs) {
+				createFolders(ips,workingFolder);
 			}
-
+			
+			//create folder for experiments on middleware1
+			String[] ips = {middlewareIPs[0]};
+			String[] experimentFoldersToCreate = {"loadIt"};
+			for (String experimentFolder: experimentFoldersToCreate) {
+				String folderToCreate = ASLJobControlling.experimentsBaseFolder + experimentFolder;
+				createFolders(ips,folderToCreate);
+			}
 		}
+		
 
-		/*
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting ASLJobControlling().baseline21() *****************************\n");
-		new ASLJobControlling().baseline21();
+		Benchmarks benchmark = new Benchmarks();
+		benchmark.runBenchmarks();
 
+		
+		System.out.println("the E N D of ASLJobControlling!!!!");
+	
 
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting ASLJobControlling().baseline22() *****************************\n");
-		new ASLJobControlling().baseline22();
+	}
+	
+	
+	
+	public static void createFolders(String[] ips, String folder) {
+		List<String[]> sshJobs = new ArrayList<String[]>(); 
 
-
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting ASLJobControlling().baseline31() *****************************\n");
-		new ASLJobControlling().baseline31();
-
-
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting ASLJobControlling().baseline32() *****************************\n");
-		new ASLJobControlling().baseline32();
-
-
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting ASLJobControlling().fullSystem41() ***************************\n");
-		new ASLJobControlling().fullSystem41();
-
-
-
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("*************************starting ASLJobControlling().multiGets(true) == sharedCase51****************************\n");
-		new ASLJobControlling().multiGets(true);
-
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("*************************starting ASLJobControlling().multiGets(false) == nonsharedCase52************************\n");
-		new ASLJobControlling().multiGets(false);
-
-
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting ASLJobControlling().twoKAnalysis6() **************************\n");
-		new ASLJobControlling().twoKAnalysis6();
-		 */
-
-		/*
-
-		long experimentDurationinSeconds = (System.currentTimeMillis() - startExperiment) / 1000;
-		long expectedRuntimeInSeconds = ASLJobControlling.totalNumberOfexperiments * 77;
-		System.out.println("Total Number of Experiments: "+ASLJobControlling.totalNumberOfexperiments);
-		System.out.println("Total Runtime: "+experimentDurationinSeconds);
-		System.out.println("Expected Runtime for 60sec runs: "+expectedRuntimeInSeconds +"sec, "+expectedRuntimeInSeconds/3600+"h");
-		 */
-
-		System.out.println("leaving programm....");
-
-
+		String folderexists = "[ ! -d "+folder+" ] && mkdir "+folder;
+		
+		for(String ip: ips) {
+			String[] sshJob = {"ssh", ip, folderexists};
+			sshJobs.add(sshJob);
+		}
+		sshJopsExecutor(sshJobs);
+		
 	}
 
 

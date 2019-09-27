@@ -26,7 +26,7 @@ public class MyMiddleware{
 	static final Level LOGLEVEL = Level.ALL;//Level.ALL;
 	static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	static final Handler handler = new ConsoleHandler();*/
-	static public Level LOGLEVEL = Level.WARNING;//Level.ALL;
+	static public Level LOGLEVEL = Level.ALL; //Level.WARNING;
 	static public Logger logger;// = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	static public Handler handler;// = new ConsoleHandler();
 

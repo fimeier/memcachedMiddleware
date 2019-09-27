@@ -1,5 +1,13 @@
 #!/bin/bash
 
-git add .
-git commit -m "Backup"
-git push -u
+if [ $1 == 'readme' ]
+then
+    git add README.md
+    git commit -m "readme"
+    git push -u
+else
+    git add .
+    git commit -m "Backup all"
+    git push -u
+fi
+

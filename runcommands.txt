@@ -1,11 +1,1 @@
-memtier_benchmark --port=11212 --protocol=memcache_text --json-out-file=json.txt -d4096 -x1
-
-
-java -jar middleware-fimeier.jar -l 127.0.0.1 -p 11212 -t 8 -s false -m 127.0.0.1:12333
-
-memcached -p 12333
-
-
-java -jar middleware-fimeier.jar -l 127.0.0.1 -p 11212 -t 32 -s false -m 127.0.0.1:12333
-
-
+in readmeverschoben
