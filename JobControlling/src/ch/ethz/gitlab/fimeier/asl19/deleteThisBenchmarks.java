@@ -58,11 +58,11 @@ public class deleteThisBenchmarks extends Benchmarks{
 					int nWorkerThreads = 0;
 					int  multiGetSize = 0;
 					String shardedReading = "false";
-					TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT, workload, suffixForThisRun, nMW, 
-							nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
+					//TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT, workload, suffixForThisRun, nMW, 
+							//nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
 
 					numExperiments++;
-					doBenchmarks(experiment);
+					//doBenchmarks(experiment);
 				}
 			}
 		}
@@ -104,10 +104,10 @@ public class deleteThisBenchmarks extends Benchmarks{
 					int  multiGetSize = 0;
 					String shardedReading = "false";
 
-					TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
+					//TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
 
 					numExperiments++;
-					doBenchmarks(experiment);
+					//doBenchmarks(experiment);
 				}
 			}
 		}
@@ -163,10 +163,10 @@ public class deleteThisBenchmarks extends Benchmarks{
 						//int nWorkerThreads = 8;
 						int  multiGetSize = 0;
 						String shardedReading = "false";
-						TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
+						//TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
 
 						numExperiments++;
-						doBenchmarks(experiment);
+						//doBenchmarks(experiment);
 
 					}
 				}
@@ -218,10 +218,10 @@ public class deleteThisBenchmarks extends Benchmarks{
 						//int nWorkerThreads = 8;
 						int  multiGetSize = 0;
 						String shardedReading = "false";
-						TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
+						//TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
 
 						numExperiments++;
-						doBenchmarks(experiment);
+						//doBenchmarks(experiment);
 
 					}
 				}
@@ -268,10 +268,10 @@ public class deleteThisBenchmarks extends Benchmarks{
 						//int nWorkerThreads = 8;
 						int  multiGetSize = 0;
 						String shardedReading = "false";
-						TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads,  multiGetSize, shardedReading, experimentFolder);
+						//TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads,  multiGetSize, shardedReading, experimentFolder);
 
 						numExperiments++;
-						doBenchmarks(experiment);
+						//doBenchmarks(experiment);
 
 						System.out.println(experimentFolder+": did "+numExperiments+ " of 216 experiments");
 
@@ -322,7 +322,7 @@ public class deleteThisBenchmarks extends Benchmarks{
 
 					String suffixForThisRun = suffixForThisRunPrefix + "_nWorkerThreads"+nWorkerThreads+"_Rep="+rep;
 
-					TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
+					//TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads, multiGetSize, shardedReading, experimentFolder);
 
 					/*
 					System.out.println("experiment.argsMiddleware1: " +experiment.argsMiddleware1);
@@ -332,7 +332,7 @@ public class deleteThisBenchmarks extends Benchmarks{
 					 */
 
 					numExperiments++;
-					doBenchmarks(experiment);
+					//doBenchmarks(experiment);
 
 					System.out.println(experimentFolder+": did "+numExperiments+ " of 120 experiments");
 				}
@@ -390,7 +390,7 @@ public class deleteThisBenchmarks extends Benchmarks{
 							//int nWorkerThreads = 8;
 							int  multiGetSize = 0;
 							String shardedReading = "false";
-							TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads,  multiGetSize, shardedReading, experimentFolder);
+							//TestSetting experiment = new TestSetting(nServer, nVirtualMachineClients, nVC, nCT,workload, suffixForThisRun, nMW, nWorkerThreads,  multiGetSize, shardedReading, experimentFolder);
 
 							/*
 							System.out.println("experiment.argsMiddleware1: " +experiment.argsMiddleware1);
@@ -401,7 +401,7 @@ public class deleteThisBenchmarks extends Benchmarks{
 							 */
 
 							numExperiments++;
-							doBenchmarks(experiment);
+							//doBenchmarks(experiment);
 							System.out.println(experimentFolder+": did "+numExperiments+ " of 96 experiments");
 
 						}

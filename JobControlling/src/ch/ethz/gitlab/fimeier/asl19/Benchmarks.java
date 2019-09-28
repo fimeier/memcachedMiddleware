@@ -29,20 +29,34 @@ public class Benchmarks extends ASLJobControlling {
 
 
 
-
-		//Test: inlcude this in each experiment with the needed values
-		loadingMemcachedServer(4096);
-
-
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting fullSystem41() *****************************\n");
-		//fullSystem41();
-
 		System.out.println("*****************************************************************************************************************\n");
 		System.out.println("***************************************** starting baseline21() *****************************\n");
-		//baseline21();
+		baseline21();
 
+		System.out.println("*****************************************************************************************************************\n");
+		System.out.println("***************************************** starting baseline22() *****************************\n");
+		baseline22();
+
+		System.out.println("*****************************************************************************************************************\n");
+		System.out.println("***************************************** starting baseline31() *****************************\n");
+		baseline31();
+
+		System.out.println("*****************************************************************************************************************\n");
+		System.out.println("***************************************** starting baseline32() *****************************\n");
+		baseline32();
+
+		System.out.println("*****************************************************************************************************************\n");
+		System.out.println("***************************************** starting baseline33() *****************************\n");
+		baseline33();
+
+		System.out.println("*****************************************************************************************************************\n");
+		System.out.println("***************************************** starting baseline34() *****************************\n");
+		baseline34();
 		
+		System.out.println("*****************************************************************************************************************\n");
+		System.out.println("***************************************** starting twoKAnalyse() ****************************\n");
+		twoKAnalyse();
+
 
 
 		long experimentDurationinSeconds = (System.currentTimeMillis() - startExperiment) / 1000;
@@ -64,6 +78,10 @@ public class Benchmarks extends ASLJobControlling {
 	 * 			=> probably more time needed on azure!!!
 	 */
 	public void loadingMemcachedServer(int dataSize) {
+
+		System.out.println("*****************************************************************************************************************");
+		System.out.println("******************************loading --data-size="+dataSize+" into memcached server's*************************************");
+		System.out.println("*****************************************************************************************************************");
 
 
 		//HERE Restart all Servers!!!
@@ -88,6 +106,7 @@ public class Benchmarks extends ASLJobControlling {
 
 	}
 
+	//load it is eigentlich ein "normaler" benchmark wie alle anderen auch
 	public void loadIt(String workload, int loadDuration, int loadItRun, int dataSize) {
 
 		String experimentFolder = "loadIt";
@@ -113,8 +132,8 @@ public class Benchmarks extends ASLJobControlling {
 
 		for (int i = 0; i<3; i++) {
 			MemtierCommand memtierRun = new MemtierCommand();
-			boolean start2ndInstance = false;
-			memtierRun.setMemtierCommand(clientIPs[i], argsMemtier + " --server="+serverIPs[i] + " --port="+serverPorts[i], start2ndInstance);
+			int memtierInstance = 1;
+			memtierRun.setMemtierCommand(clientIPs[i], argsMemtier + " --server="+serverIPs[i] + " --port="+serverPorts[i], memtierInstance);
 
 			Thread threadMemtier = new Thread(new RunCommandInThread(memtierRun));
 			clientThreads.add(threadMemtier);
@@ -141,8 +160,8 @@ public class Benchmarks extends ASLJobControlling {
 		 */
 		int c = 1;
 		for (String clientIP: ASLJobControlling.clientIPs) {
-			String completeFileSuffix = "_"+getSimpleWorkloadName(workload)+"_loadItRun="+loadItRun+"_Client="+c;
-			copyFilesback(new String[] {clientIP},completeFileSuffix, false, experimentFolder);
+			String completeFileSuffix = "_"+getSimpleWorkloadName(workload)+"_loadItRun="+loadItRun+"_dataSize="+dataSize+"_Client="+c;
+			copyFilesback(new String[] {clientIP},completeFileSuffix, false, false, experimentFolder);
 			c++;
 
 		}
@@ -164,34 +183,15 @@ public class Benchmarks extends ASLJobControlling {
 	 * 
 	 */
 	public class TestSetting{
-		/*
-		 * memtier client arguments config
-		 */
-		String argsDifferentFromDefault1stInstance = "";
-		String argsDifferentFromDefault2ndInstance = "";
-
-		/*
-		 * middleware arguments config
-		 */
-		String argsMiddleware1 = "";
-		String argsMiddleware2 = "";
-
-		/**
-		 * #-memcached servers
-		 */
-		int nServer = 1;
-		int nVirtualMachineClients = 1;
-		String[] clientInTestIPs = null;
-		int nInstancesOfMemtierPerMachine = 1; //sollte immer gleich sein wie 2 / nCT
-
-		/**
-		 * nCT == 1 implies start 2x memtier_benchmark per VM-client
-		 */
-		int nCT = 2;
-		boolean start2ndMemtierInstance = false;
-		int nVC = 1;
-		String workload = "";
-		String suffixForThisRun = "Run666";
+		//Testsettings
+		String experimentFolder = "";
+		int nServer = 0;
+		int nVirtualMachineClients = 0;
+		int nInstancesOfMemtierPerMachine = 0;
+		int nCT = 0; //nCT_ThreadsPerMemtierInstance
+		int nVC = 0; //nVC_VirtualClients
+		String workload = READONLY;
+		int dataSize = 0;
 		/**
 		 * #-middleware servers
 		 * 1 Implies middleware1
@@ -199,51 +199,65 @@ public class Benchmarks extends ASLJobControlling {
 		 * 2 implies middleware1 and middleware2
 		 */
 		int nMW = 1;
-
-
-		/**
-		 * number of threads in the middleware
-		 */
 		int nWorkerThreads = 8;
+		String suffixForThisRun = "replaceThis";
 
-		int multiGetSize = 0;
 
-		String shardedReading = "";
+		/*
+		 * memtier client arguments config
+		 */
+		String[] clientInTestIPs = null;
+		String argsDifferentFromDefault1stInstance = "";
+		String argsDifferentFromDefault2ndInstance = "";
+		String argsDifferentFromDefault3thInstance = "";
+		boolean start2ndMemtierInstance = false;
+		boolean start3thMemtierInstance = false;
 
-		String experimentFolder = "";
 
-		TestSetting(int _nServer, int _nVirtualMachineClients, int _nVC, int _nCT, String _workload, String _suffixForThisRun, int _nMW, int _nWorkerThreads, int _multiGetSize, String _shardedReading, String _experimentFolder){
+		/*
+		 * middleware arguments config
+		 */
+		String argsMiddleware1 = "";
+		String argsMiddleware2 = "";
+
+		TestSetting(
+				String _experimentFolder,
+				int _nServer,
+				int _nVirtualMachineClients,
+				int memtierInstancesPerClient,  //neu
+				int nCT_ThreadsPerMemtierInstance, //früher _nCT
+				int nVC_VirtualClients, //früher _nVC
+				String _workload,
+				int _dataSize, //neu
+				int _nMW,
+				int _nWorkerThreads,
+				String _suffixForThisRun
+				){
+			experimentFolder = _experimentFolder;
 			nServer = _nServer;
-
 			nVirtualMachineClients = _nVirtualMachineClients;
+			nInstancesOfMemtierPerMachine = memtierInstancesPerClient;
+			nCT = nCT_ThreadsPerMemtierInstance;
+			nVC = nVC_VirtualClients;
+			workload = _workload;
+			dataSize = _dataSize;
+			nMW = _nMW;
+			nWorkerThreads = _nWorkerThreads;
+			suffixForThisRun = _suffixForThisRun;
+
 			clientInTestIPs = new String[nVirtualMachineClients];
 			for(int i = 0; i<nVirtualMachineClients;i++) {
 				clientInTestIPs[i]=ASLJobControlling.clientIPs[i];
 			}
 
-			//connect
-			nInstancesOfMemtierPerMachine = 2 / _nCT;
-
-			nCT = _nCT;
-			if (nCT == 1) {
+			if (nInstancesOfMemtierPerMachine > 1) {
 				start2ndMemtierInstance = true;
 			}
+			if (nInstancesOfMemtierPerMachine == 3) {
+				start3thMemtierInstance = true;
+			}
 
-			nVC = _nVC;
 
-			workload = _workload;
-
-			suffixForThisRun = _suffixForThisRun;
-
-			nMW = _nMW;
-
-			nWorkerThreads = _nWorkerThreads;
-
-			multiGetSize = _multiGetSize;
-
-			shardedReading = _shardedReading;
-
-			experimentFolder = _experimentFolder;
 
 
 			/*
@@ -254,12 +268,10 @@ public class Benchmarks extends ASLJobControlling {
 			argsMiddleware1 = "-tWaitBeforeMeasurements "+ tWAITBEFOREMEASUREMENTS;
 			argsMiddleware1 += " -tTimeForMeasurements "+ tTIMEFORMEASUREMENTS;
 			argsMiddleware1 += " -t "+nWorkerThreads;
-			argsMiddleware1 += " -s "+shardedReading;
 
 			String middlewareServerConnectString = " -m ";
 			for (int s = 0; s<nServer; s++) {
-				//ugly hack needed
-				//middlewareargsDifferentFromDefault += "-m "+serverIpandPorts[0]+ "#"+serverIpandPorts[1] +"#"+serverIpandPorts[2] +" ";
+				//ugly hack: -m ip1:12333#ip2:port2... not really needed
 				if (s==0) {
 					middlewareServerConnectString += serverIpandPorts[s];
 				} else {
@@ -275,7 +287,6 @@ public class Benchmarks extends ASLJobControlling {
 				argsMiddleware2 += " -p "+middlewarePorts[1];
 
 			}
-
 			argsMiddleware1 += " -l "+middlewareIPs[0];
 			argsMiddleware1 += " -p "+middlewarePorts[0];
 
@@ -296,38 +307,55 @@ public class Benchmarks extends ASLJobControlling {
 			//set threads per vm
 			argsDifferentFromDefault1stInstance += " --threads="+nCT;
 
+			//set data size
+			argsDifferentFromDefault1stInstance += " --data-size="+dataSize;
+
+
 			//set workload
 			argsDifferentFromDefault1stInstance += workload;
 
-			//set multiGet if needed
-			if (multiGetSize>0) {
-				argsDifferentFromDefault1stInstance += " --multi-key-get="+multiGetSize;
+
+
+
+
+			//example case: baseline21
+			//connect 1-instance to one memcached-server
+			if (nMW==0 && nServer==1 && nInstancesOfMemtierPerMachine==1) {				
+				argsDifferentFromDefault1stInstance += " --server="+serverIPs[0] + " --port="+serverPorts[0];			
 			}
 
+			//example case: baseline22
+			//connect all-3 instances to a different memcached-server
+			else if (nMW==0 && nServer==3 && nInstancesOfMemtierPerMachine==3) {
 
-			//change the server if needed (default middleware1
-			if (nMW==1 && nCT==2){
-				//default use middleware1 and connect both "Threads" to it
-				argsDifferentFromDefault1stInstance += " --server="+middlewareIPs[0] + " --port="+middlewarePorts[0];
-			}
-
-			if (nMW==0 && nServer==1 && nCT==2) {
-				//Tests without middleware with server1 and two client threads (1x memtier_benchmark)
-				argsDifferentFromDefault1stInstance += " --server="+serverIPs[0] + " --port="+serverPorts[0];
-
-			}
-			//do not change the memtierarguments after this point
-			if (nMW==2 && nCT==1 && start2ndMemtierInstance==true) {
-				//connect memtier with 2 middlewares => start 2 instances per client
 				argsDifferentFromDefault2ndInstance = argsDifferentFromDefault1stInstance;
+				argsDifferentFromDefault3thInstance = argsDifferentFromDefault1stInstance;
+
+				argsDifferentFromDefault1stInstance += " --server="+serverIPs[0] + " --port="+serverPorts[0];
+				argsDifferentFromDefault2ndInstance += " --server="+serverIPs[1] + " --port="+serverPorts[1];
+				argsDifferentFromDefault3thInstance += " --server="+serverIPs[2] + " --port="+serverPorts[2];				
+			}
+
+
+			//example case: baseline31, baseline32
+			//connect 1-instance to 1 MW
+			else if (nMW==1 && nInstancesOfMemtierPerMachine==1) {				
+				argsDifferentFromDefault1stInstance += " --server="+middlewareIPs[0] + " --port="+middlewarePorts[0];			
+			}
+
+			//example case: baseline33, baseline34
+			//connect 2-instance to 2 MW
+			else if (nMW==2 && nInstancesOfMemtierPerMachine==2) {
+				argsDifferentFromDefault2ndInstance = argsDifferentFromDefault1stInstance;
+
 				argsDifferentFromDefault1stInstance += " --server="+middlewareIPs[0] + " --port="+middlewarePorts[0];
 				argsDifferentFromDefault2ndInstance += " --server="+middlewareIPs[1] + " --port="+middlewarePorts[1];
 			}
-			if (nMW==0 && nServer==2 && start2ndMemtierInstance==true) {
-				//Tests without middleware with server 2 && testSetting.nCT==1 (2x memtier_benchmark)
-				argsDifferentFromDefault2ndInstance = argsDifferentFromDefault1stInstance;
-				argsDifferentFromDefault1stInstance += " --server="+serverIPs[0] + " --port="+serverPorts[0];
-				argsDifferentFromDefault2ndInstance += " --server="+serverIPs[1] + " --port="+serverPorts[1];
+
+			else {
+				System.out.println("Error: memtier client arguments config (no case defined)");
+				throw new RuntimeException("This is thrown intentionally");
+
 			}
 
 		}
@@ -383,10 +411,10 @@ public class Benchmarks extends ASLJobControlling {
 		 */
 		for (int i = 0; i < testSetting.nVirtualMachineClients; i++) {
 
-			//always start one instance
+			//always start 1st instance
 			MemtierCommand memtierRun = new MemtierCommand();
-			boolean start2ndInstance = false;
-			memtierRun.setMemtierCommand(testSetting.clientInTestIPs[i], testSetting.argsDifferentFromDefault1stInstance, start2ndInstance);
+			int memtierInstance = 1;
+			memtierRun.setMemtierCommand(testSetting.clientInTestIPs[i], testSetting.argsDifferentFromDefault1stInstance, memtierInstance);
 
 			Thread threadMemtier = new Thread(new RunCommandInThread(memtierRun));
 			clientThreads.add(threadMemtier);
@@ -395,12 +423,23 @@ public class Benchmarks extends ASLJobControlling {
 			//start a second instance if needed
 			if(testSetting.start2ndMemtierInstance==true) {
 				MemtierCommand memtierRun2 = new MemtierCommand();
-				start2ndInstance = true;
-				memtierRun2.setMemtierCommand(testSetting.clientInTestIPs[i], testSetting.argsDifferentFromDefault2ndInstance, start2ndInstance);
+				memtierInstance = 2;
+				memtierRun2.setMemtierCommand(testSetting.clientInTestIPs[i], testSetting.argsDifferentFromDefault2ndInstance, memtierInstance);
 
 				Thread threadMemtier2 = new Thread(new RunCommandInThread(memtierRun2));
 				clientThreads.add(threadMemtier2);
 				threadMemtier2.start();
+			}
+
+			//start a third instance if needed
+			if(testSetting.start3thMemtierInstance==true) {
+				MemtierCommand memtierRun3 = new MemtierCommand();
+				memtierInstance = 3;
+				memtierRun3.setMemtierCommand(testSetting.clientInTestIPs[i], testSetting.argsDifferentFromDefault2ndInstance, memtierInstance);
+
+				Thread threadMemtier3 = new Thread(new RunCommandInThread(memtierRun3));
+				clientThreads.add(threadMemtier3);
+				threadMemtier3.start();
 			}
 		}
 
@@ -424,8 +463,8 @@ public class Benchmarks extends ASLJobControlling {
 		 */
 		int c = 1;
 		for (String clientIP: testSetting.clientInTestIPs) {
-			String completeFileSuffix = testSetting.suffixForThisRun+"_Client"+c;
-			copyFilesback(new String[] {clientIP},completeFileSuffix, testSetting.start2ndMemtierInstance, testSetting.experimentFolder);
+			String completeFileSuffix = testSetting.suffixForThisRun+"_Client="+c;
+			copyFilesback(new String[] {clientIP},completeFileSuffix, testSetting.start2ndMemtierInstance, testSetting.start3thMemtierInstance, testSetting.experimentFolder);
 			c++;
 
 		}
@@ -452,8 +491,8 @@ public class Benchmarks extends ASLJobControlling {
 			 */
 			for (int m = 0; m < testSetting.nMW; m++) {
 				String middlewareIP = ASLJobControlling.middlewareIPs[m];
-				String completeFileSuffix = testSetting.suffixForThisRun+"_Middleware"+(m+1);
-				copyFilesback(new String[] {middlewareIP},completeFileSuffix, false, testSetting.experimentFolder);
+				String completeFileSuffix = testSetting.suffixForThisRun+"_Middleware="+(m+1);
+				copyFilesback(new String[] {middlewareIP},completeFileSuffix, false, false, testSetting.experimentFolder);
 			}
 		}
 
@@ -504,13 +543,17 @@ public class Benchmarks extends ASLJobControlling {
 
 		}
 
-		public void setMemtierCommand(String memtierIP, String argsDifferentFromDefault, boolean start2ndInstance) {
+		public void setMemtierCommand(String memtierIP, String argsDifferentFromDefault, int memtierInstance) {
 			setDefault();
 
 			String memtierCommand = clientScriptTarget;
-			if (start2ndInstance) {
+			if (memtierInstance==2) {
 				memtierCommand = clientScriptTarget2ndInstance;
 				defaultArguments.put("--json-out-file", "--json-out-file=json.txt2ndInst");
+			}
+			else if (memtierInstance==3) {
+				memtierCommand = clientScriptTarget3thInstance;
+				defaultArguments.put("--json-out-file", "--json-out-file=json.txt3thInst");
 			}
 			if (argsDifferentFromDefault!=null) {
 				for (String s: argsDifferentFromDefault.split(" ")) {
@@ -722,6 +765,614 @@ public class Benchmarks extends ASLJobControlling {
 		System.out.print("\n");
 	}
 
+
+
+	//                 EXPERIMENTS
+	//                 EXPERIMENTS
+	//                 EXPERIMENTS
+	//                 EXPERIMENTS
+	//                 EXPERIMENTS
+	//                 EXPERIMENTS
+	//                 EXPERIMENTS
+
+	//Experiment filenames
+	//	outputClient_e=Baseline21_wl=ReadOnly_nVC=8_Rep=2_Client=3
+	/*
+	 * 
+	 * 
+	 * 
+	 */
+
+	// Experiment PARAMETERS
+
+	//  String experimentFolder = "baseline21";
+	//	int nServer=1;
+	//	int nVirtualMachineClients=3;
+	//	int memtierInstancesPerClient=1;
+	//	int nCT_ThreadsPerMemtierInstance = 3;
+
+	//	int nVC_VirtualClients = 4;
+	//  int[] nVCSamples = {4,8,16,32};
+
+	//	String workload = READONLY;
+
+	//	int dataSize=64;
+	//  int[] dataSizeSamples = {64, 256, 512, 1024};
+
+	//	int nMW = 0;
+
+	//	int nWorkerThreads = 0;
+	//  int[] nWorkerThreadsSamples = {8, 32, 64};
+	//	int repetitions = 3;
+
+
+	/**
+	 * Experiment according to section 2.1 of the report outline
+	 */
+	public void baseline21(){
+		long startExperiment = System.currentTimeMillis();
+		int numExperiments = 0;
+
+
+		String experimentFolder = "baseline21";
+		int nServer=1;
+		int nVirtualMachineClients=3;
+		int memtierInstancesPerClient=1;
+		int nCT_ThreadsPerMemtierInstance = 3;
+
+		//int nVC_VirtualClients = 4;
+		int[] nVCSamples = {4,8,16,32};
+
+		String workload = READONLY;
+
+		//int dataSize=64; 
+		int[] dataSizeSamples = {64, 256, 512, 1024};
+
+		int nMW = 0;
+		int nWorkerThreads = 0;
+		int repetitions = 3;
+
+
+		for (int dataSize: dataSizeSamples) {
+			//populate the needed values
+			loadingMemcachedServer(dataSize);
+
+			for (int rep = 1; rep <= repetitions; rep++) {
+
+				for (int nVC_VirtualClients: nVCSamples) {
+
+					String suffixForThisRun =
+							"_e="+experimentFolder
+							+"_nS="+nServer
+							+"_nC="+nVirtualMachineClients
+							+"_nInst="+memtierInstancesPerClient
+							+"_nCT="+nCT_ThreadsPerMemtierInstance
+							+"_nVC="+nVC_VirtualClients
+							+"_wl="+getSimpleWorkloadName(workload)
+							+"_dataSize="+dataSize
+							+"_nMW="+nMW
+							+"_nWT="+nWorkerThreads
+							+"_rep="+rep;
+
+					TestSetting experiment = new TestSetting(
+							experimentFolder,
+							nServer,
+							nVirtualMachineClients,
+							memtierInstancesPerClient,
+							nCT_ThreadsPerMemtierInstance,
+							nVC_VirtualClients,
+							workload,
+							dataSize,
+							nMW,
+							nWorkerThreads,
+							suffixForThisRun
+							);
+
+					numExperiments++;
+					doBenchmarks(experiment);
+				}
+			}
+		}
+
+
+		totalNumberOfexperiments += numExperiments;
+		long experimentDuration = System.currentTimeMillis() - startExperiment;
+		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
+
+	}
+
+
+	/**
+	 * Experiment according to section 2.2 of the report outline
+	 */
+	public void baseline22(){
+		long startExperiment = System.currentTimeMillis();
+		int numExperiments = 0;
+
+
+		String experimentFolder = "baseline22";
+		int nServer=3;
+		int nVirtualMachineClients=3;
+		int memtierInstancesPerClient=3;
+		int nCT_ThreadsPerMemtierInstance = 1;
+
+		//int nVC_VirtualClients = 4;
+		int[] nVCSamples = {4,8,16,32};
+
+		String workload = READONLY;
+
+		//int dataSize=64; 
+		int[] dataSizeSamples = {64, 256, 512, 1024};
+
+		int nMW = 0;
+		int nWorkerThreads = 0;
+		int repetitions = 3;
+
+
+		for (int dataSize: dataSizeSamples) {
+			//populate the needed values
+			loadingMemcachedServer(dataSize);
+
+			for (int rep = 1; rep <= repetitions; rep++) {
+
+				for (int nVC_VirtualClients: nVCSamples) {
+
+					String suffixForThisRun =
+							"_e="+experimentFolder
+							+"_nS="+nServer
+							+"_nC="+nVirtualMachineClients
+							+"_nInst="+memtierInstancesPerClient
+							+"_nCT="+nCT_ThreadsPerMemtierInstance
+							+"_nVC="+nVC_VirtualClients
+							+"_wl="+getSimpleWorkloadName(workload)
+							+"_dataSize="+dataSize
+							+"_nMW="+nMW
+							+"_nWT="+nWorkerThreads
+							+"_rep="+rep;
+
+					TestSetting experiment = new TestSetting(
+							experimentFolder,
+							nServer,
+							nVirtualMachineClients,
+							memtierInstancesPerClient,
+							nCT_ThreadsPerMemtierInstance,
+							nVC_VirtualClients,
+							workload,
+							dataSize,
+							nMW,
+							nWorkerThreads,
+							suffixForThisRun
+							);
+
+					numExperiments++;
+					doBenchmarks(experiment);
+				}
+			}
+		}
+
+
+		totalNumberOfexperiments += numExperiments;
+		long experimentDuration = System.currentTimeMillis() - startExperiment;
+		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
+
+	}
+
+
+
+	/**
+	 * Experiment according to section 3.1 of the report outline
+	 */
+	public void baseline31(){
+		long startExperiment = System.currentTimeMillis();
+		int numExperiments = 0;
+
+
+		String experimentFolder = "baseline31";
+		int nServer=1;
+		int nVirtualMachineClients=3;
+		int memtierInstancesPerClient=1;
+		int nCT_ThreadsPerMemtierInstance = 2;
+
+		//int nVC_VirtualClients = 4;
+		int[] nVCSamples = {4,8,16,32};
+
+		String workload = READONLY;
+
+		//int dataSize=64; 
+		int[] dataSizeSamples = {64, 256, 512, 1024};
+
+		int nMW = 1;
+		//int nWorkerThreads = 0;
+		int[] nWorkerThreadsSamples = {8, 32, 64};
+		int repetitions = 3;
+
+
+		for (int dataSize: dataSizeSamples) {
+			//populate the needed values
+			loadingMemcachedServer(dataSize);
+
+			for (int rep = 1; rep <= repetitions; rep++) {
+
+				for (int nVC_VirtualClients: nVCSamples) {
+
+					for (int nWorkerThreads: nWorkerThreadsSamples) {
+
+						String suffixForThisRun =
+								"_e="+experimentFolder
+								+"_nS="+nServer
+								+"_nC="+nVirtualMachineClients
+								+"_nInst="+memtierInstancesPerClient
+								+"_nCT="+nCT_ThreadsPerMemtierInstance
+								+"_nVC="+nVC_VirtualClients
+								+"_wl="+getSimpleWorkloadName(workload)
+								+"_dataSize="+dataSize
+								+"_nMW="+nMW
+								+"_nWT="+nWorkerThreads
+								+"_rep="+rep;
+
+						TestSetting experiment = new TestSetting(
+								experimentFolder,
+								nServer,
+								nVirtualMachineClients,
+								memtierInstancesPerClient,
+								nCT_ThreadsPerMemtierInstance,
+								nVC_VirtualClients,
+								workload,
+								dataSize,
+								nMW,
+								nWorkerThreads,
+								suffixForThisRun
+								);
+
+						numExperiments++;
+						doBenchmarks(experiment);
+					}
+				}
+			}
+		}
+
+
+		totalNumberOfexperiments += numExperiments;
+		long experimentDuration = System.currentTimeMillis() - startExperiment;
+		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
+
+	}
+
+
+	/**
+	 * Experiment according to section 3.2 of the report outline
+	 */
+	public void baseline32(){
+		long startExperiment = System.currentTimeMillis();
+		int numExperiments = 0;
+
+
+		String experimentFolder = "baseline32";
+		int nServer=3;
+		int nVirtualMachineClients=3;
+		int memtierInstancesPerClient=1;
+		int nCT_ThreadsPerMemtierInstance = 2;
+
+		//int nVC_VirtualClients = 4;
+		int[] nVCSamples = {4,8,16,32};
+
+		String workload = READONLY;
+
+		//int dataSize=64; 
+		int[] dataSizeSamples = {64, 256, 512, 1024};
+
+		int nMW = 1;
+		//int nWorkerThreads = 0;
+		int[] nWorkerThreadsSamples = {8, 32, 64};
+		int repetitions = 3;
+
+
+		for (int dataSize: dataSizeSamples) {
+			//populate the needed values
+			loadingMemcachedServer(dataSize);
+
+			for (int rep = 1; rep <= repetitions; rep++) {
+
+				for (int nVC_VirtualClients: nVCSamples) {
+
+					for (int nWorkerThreads: nWorkerThreadsSamples) {
+
+						String suffixForThisRun =
+								"_e="+experimentFolder
+								+"_nS="+nServer
+								+"_nC="+nVirtualMachineClients
+								+"_nInst="+memtierInstancesPerClient
+								+"_nCT="+nCT_ThreadsPerMemtierInstance
+								+"_nVC="+nVC_VirtualClients
+								+"_wl="+getSimpleWorkloadName(workload)
+								+"_dataSize="+dataSize
+								+"_nMW="+nMW
+								+"_nWT="+nWorkerThreads
+								+"_rep="+rep;
+
+						TestSetting experiment = new TestSetting(
+								experimentFolder,
+								nServer,
+								nVirtualMachineClients,
+								memtierInstancesPerClient,
+								nCT_ThreadsPerMemtierInstance,
+								nVC_VirtualClients,
+								workload,
+								dataSize,
+								nMW,
+								nWorkerThreads,
+								suffixForThisRun
+								);
+
+						numExperiments++;
+						doBenchmarks(experiment);
+					}
+				}
+			}
+		}
+
+
+		totalNumberOfexperiments += numExperiments;
+		long experimentDuration = System.currentTimeMillis() - startExperiment;
+		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
+
+	}
+
+
+	/**
+	 * Experiment according to section 3.3 of the report outline
+	 */
+	public void baseline33(){
+		long startExperiment = System.currentTimeMillis();
+		int numExperiments = 0;
+
+
+		String experimentFolder = "baseline33";
+		int nServer=1;
+		int nVirtualMachineClients=3;
+		int memtierInstancesPerClient=2;
+		int nCT_ThreadsPerMemtierInstance = 1;
+
+		//int nVC_VirtualClients = 4;
+		int[] nVCSamples = {4,8,16,32};
+
+		String workload = READONLY;
+
+		//int dataSize=64; 
+		int[] dataSizeSamples = {64, 256, 512, 1024};
+
+		int nMW = 2;
+		//int nWorkerThreads = 0;
+		int[] nWorkerThreadsSamples = {8, 32, 64};
+		int repetitions = 3;
+
+
+		for (int dataSize: dataSizeSamples) {
+			//populate the needed values
+			loadingMemcachedServer(dataSize);
+
+			for (int rep = 1; rep <= repetitions; rep++) {
+
+				for (int nVC_VirtualClients: nVCSamples) {
+
+					for (int nWorkerThreads: nWorkerThreadsSamples) {
+
+						String suffixForThisRun =
+								"_e="+experimentFolder
+								+"_nS="+nServer
+								+"_nC="+nVirtualMachineClients
+								+"_nInst="+memtierInstancesPerClient
+								+"_nCT="+nCT_ThreadsPerMemtierInstance
+								+"_nVC="+nVC_VirtualClients
+								+"_wl="+getSimpleWorkloadName(workload)
+								+"_dataSize="+dataSize
+								+"_nMW="+nMW
+								+"_nWT="+nWorkerThreads
+								+"_rep="+rep;
+
+						TestSetting experiment = new TestSetting(
+								experimentFolder,
+								nServer,
+								nVirtualMachineClients,
+								memtierInstancesPerClient,
+								nCT_ThreadsPerMemtierInstance,
+								nVC_VirtualClients,
+								workload,
+								dataSize,
+								nMW,
+								nWorkerThreads,
+								suffixForThisRun
+								);
+
+						numExperiments++;
+						doBenchmarks(experiment);
+					}
+				}
+			}
+		}
+
+
+		totalNumberOfexperiments += numExperiments;
+		long experimentDuration = System.currentTimeMillis() - startExperiment;
+		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
+
+	}
+
+
+	/**
+	 * Experiment according to section 3.4 of the report outline
+	 */
+	public void baseline34(){
+		long startExperiment = System.currentTimeMillis();
+		int numExperiments = 0;
+
+
+		String experimentFolder = "baseline34";
+		int nServer=3;
+		int nVirtualMachineClients=3;
+		int memtierInstancesPerClient=2;
+		int nCT_ThreadsPerMemtierInstance = 1;
+
+		//int nVC_VirtualClients = 4;
+		int[] nVCSamples = {4,8,16,32};
+
+		String workload = READONLY;
+
+		//int dataSize=64; 
+		int[] dataSizeSamples = {64, 256, 512, 1024};
+
+		int nMW = 2;
+		//int nWorkerThreads = 0;
+		int[] nWorkerThreadsSamples = {8, 32, 64};
+		int repetitions = 3;
+
+
+		for (int dataSize: dataSizeSamples) {
+			//populate the needed values
+			loadingMemcachedServer(dataSize);
+
+			for (int rep = 1; rep <= repetitions; rep++) {
+
+				for (int nVC_VirtualClients: nVCSamples) {
+
+					for (int nWorkerThreads: nWorkerThreadsSamples) {
+
+						String suffixForThisRun =
+								"_e="+experimentFolder
+								+"_nS="+nServer
+								+"_nC="+nVirtualMachineClients
+								+"_nInst="+memtierInstancesPerClient
+								+"_nCT="+nCT_ThreadsPerMemtierInstance
+								+"_nVC="+nVC_VirtualClients
+								+"_wl="+getSimpleWorkloadName(workload)
+								+"_dataSize="+dataSize
+								+"_nMW="+nMW
+								+"_nWT="+nWorkerThreads
+								+"_rep="+rep;
+
+						TestSetting experiment = new TestSetting(
+								experimentFolder,
+								nServer,
+								nVirtualMachineClients,
+								memtierInstancesPerClient,
+								nCT_ThreadsPerMemtierInstance,
+								nVC_VirtualClients,
+								workload,
+								dataSize,
+								nMW,
+								nWorkerThreads,
+								suffixForThisRun
+								);
+
+						numExperiments++;
+						doBenchmarks(experiment);
+					}
+				}
+			}
+		}
+
+
+		totalNumberOfexperiments += numExperiments;
+		long experimentDuration = System.currentTimeMillis() - startExperiment;
+		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
+
+	}
+
+	/**
+	 * Experiment according to section 4 of the report outline
+	 */
+	public void twoKAnalyse(){
+		long startExperiment = System.currentTimeMillis();
+		int numExperiments = 0;
+
+
+		String experimentFolder = "twoKAnalyse";
+
+		//int nServer=3;
+		int[] nServers = {1, 3};
+
+		int nVirtualMachineClients=3;
+
+		//int memtierInstancesPerClient=2; //special
+		//int nCT_ThreadsPerMemtierInstance = 1; //special
+
+		//int nVC_VirtualClients = 4;
+		int[] nVCSamples = {4,8,16,32};
+
+		String workload = READONLY;
+
+		//int dataSize=64; 
+		int[] dataSizeSamples = {256};
+
+		//int nMW = 2;
+		int[] nMWs = {1, 2};
+
+		//int nWorkerThreads = 0;
+		int[] nWorkerThreadsSamples = {8, 32, 64};
+
+		int repetitions = 3;
+
+
+		for (int dataSize: dataSizeSamples) {
+			//populate the needed values
+			loadingMemcachedServer(dataSize);
+
+			for (int rep = 1; rep <= repetitions; rep++) {
+
+				for (int nVC_VirtualClients: nVCSamples) {
+
+					for (int nWorkerThreads: nWorkerThreadsSamples) {
+
+						for (int nServer: nServers) {
+
+							for (int nMW: nMWs) {
+
+								int memtierInstancesPerClient = nMW;
+								int nCT_ThreadsPerMemtierInstance = (nMW==1 ? 2:1);
+								assert(memtierInstancesPerClient*nCT_ThreadsPerMemtierInstance==2);
+
+								String suffixForThisRun =
+										"_e="+experimentFolder
+										+"_nS="+nServer
+										+"_nC="+nVirtualMachineClients
+										+"_nInst="+memtierInstancesPerClient
+										+"_nCT="+nCT_ThreadsPerMemtierInstance
+										+"_nVC="+nVC_VirtualClients
+										+"_wl="+getSimpleWorkloadName(workload)
+										+"_dataSize="+dataSize
+										+"_nMW="+nMW
+										+"_nWT="+nWorkerThreads
+										+"_rep="+rep;
+
+								TestSetting experiment = new TestSetting(
+										experimentFolder,
+										nServer,
+										nVirtualMachineClients,
+										memtierInstancesPerClient,
+										nCT_ThreadsPerMemtierInstance,
+										nVC_VirtualClients,
+										workload,
+										dataSize,
+										nMW,
+										nWorkerThreads,
+										suffixForThisRun
+										);
+
+								numExperiments++;
+								doBenchmarks(experiment);
+							}
+						}
+					}
+				}
+			}
+		}
+
+
+		totalNumberOfexperiments += numExperiments;
+		long experimentDuration = System.currentTimeMillis() - startExperiment;
+		System.out.println("Experiment "+experimentFolder+" did "+numExperiments+" many experiments and it took "+ experimentDuration /1000 +"sec with a memtiertestime of "+MEMTIERTESTTIME );
+
+	}
 
 
 

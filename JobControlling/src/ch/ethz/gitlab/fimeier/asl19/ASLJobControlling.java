@@ -64,7 +64,7 @@ public class ASLJobControlling {
 	public long STARTUPTIMEMIDDLEWARE = 2000;
 
 	//time in seconds for the memtier_benchmark to be running
-	public int MEMTIERTESTTIME = 11;//64; //Set this to 63 for final experiments
+	public int MEMTIERTESTTIME = 4;//64; //Set this to 63 for final experiments
 	/*
 	 * MyMiddleware parameters: start, measure, kill
 	 */
@@ -242,27 +242,31 @@ public class ASLJobControlling {
 
 	public static String[] clientIPs = new String[] {"10.0.0.11","10.0.0.12","10.0.0.13"};
 	public static String clientScriptTarget = workingFolder+"runMemtierBenchmark.bash";
+	
 	public static String clientScriptTarget2ndInstance = workingFolder+"runMemtierBenchmark2ndInstance.bash";
+	public static String clientScriptTarget3thInstance = workingFolder+"runMemtierBenchmark3thInstance.bash";
+
+	
 	public static String clientScriptSource = scriptsFolder + "runMemtierBenchmark.bash";
+	
 	public static String clientScriptSource2ndInstance = scriptsFolder + "runMemtierBenchmark2ndInstance.bash";
+	public static String clientScriptSource3thInstance = scriptsFolder + "runMemtierBenchmark3thInstance.bash";
+
 
 	public static String clientOutputFile = workingFolder+"outputClient";
 	public static String clientOutputJSONFile = workingFolder+"json.txt";
 	public static String clientErrorFile = workingFolder+"errorClient";
 	public static String[] clientFiles = new String[] {clientOutputFile,clientErrorFile,clientOutputJSONFile};
 	public static String[] clientFilesIncluding2ndInstance = new String[] {clientOutputFile,clientErrorFile,clientOutputJSONFile,clientOutputFile+"2ndInst",clientErrorFile+"2ndInst",clientOutputJSONFile+"2ndInst"};
+	public static String[] clientFilesIncluding3thInstance = new String[] {clientOutputFile,clientErrorFile,clientOutputJSONFile,
+																			clientOutputFile+"2ndInst",clientErrorFile+"2ndInst",clientOutputJSONFile+"2ndInst",
+																			clientOutputFile+"3thInst",clientErrorFile+"3thInst",clientOutputJSONFile+"3thInst"
+																			};
 
+	
 	public static String[] serverIPs = new String[] {"10.0.0.31","10.0.0.32","10.0.0.33"};
 	public static String[] serverPorts = new String[] {"12333","12444","12555"};
 	public static String[] serverIpandPorts = new String[] {serverIPs[0]+":"+serverPorts[0],serverIPs[1]+":"+serverPorts[1],serverIPs[2]+":"+serverPorts[2]};
-
-
-
-
-
-
-
-
 
 
 	public static void main(String[] args) {
@@ -285,7 +289,16 @@ public class ASLJobControlling {
 
 			//create folder for experiments on middleware1
 			String[] ips = {middlewareIPs[0]};
-			String[] experimentFoldersToCreate = {"loadIt","baseline21","fullSystem41"};
+			String[] experimentFoldersToCreate = {
+					"loadIt",
+					"baseline21",
+					"baseline22",
+					"baseline31",
+					"baseline32",
+					"baseline33",
+					"baseline34",
+					"twoKAnalyse"
+					};
 			for (String experimentFolder: experimentFoldersToCreate) {
 				String folderToCreate = ASLJobControlling.experimentsBaseFolder + experimentFolder;
 				createFolders(ips,folderToCreate);
@@ -298,6 +311,7 @@ public class ASLJobControlling {
 		if (deployClientScripts) {
 			deployScripts(clientIPs, clientScriptSource);
 			deployScripts(clientIPs, clientScriptSource2ndInstance);
+			deployScripts(clientIPs, clientScriptSource3thInstance);
 		}
 		if (deployMiddlewareScripts) {
 			deployScripts(middlewareIPs, middlewareScriptSource);
@@ -348,7 +362,7 @@ public class ASLJobControlling {
 
 	}
 
-	public static void copyFilesback(String[] nodesToCollectFrom, String _suffix, boolean copy2ndInstance, String experimentFolder) {
+	public static void copyFilesback(String[] nodesToCollectFrom, String _suffix, boolean copy2ndInstance, boolean copy3thInstance, String experimentFolder) {
 		String suffix = (_suffix!=null)? _suffix : "";
 		List<String[]> scpJobs = new ArrayList<String[]>();
 
@@ -361,6 +375,9 @@ public class ASLJobControlling {
 				absolutePaths=ASLJobControlling.clientFiles;
 				if(copy2ndInstance) {
 					absolutePaths=ASLJobControlling.clientFilesIncluding2ndInstance;
+				}
+				if(copy3thInstance) {
+					absolutePaths=ASLJobControlling.clientFilesIncluding3thInstance;
 				}
 			}
 
