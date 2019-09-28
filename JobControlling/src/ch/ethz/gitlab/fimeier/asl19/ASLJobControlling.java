@@ -1,3 +1,6 @@
+package ch.ethz.gitlab.fimeier.asl19;
+
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -48,7 +51,7 @@ public class ASLJobControlling {
 	public static boolean deployMiddlewareScripts = true;
 	public static boolean deployMiddlewareJava = true;
 
-	//public static boolean deployServerScripts = false; //überlege ob das nötig ist
+	//public static boolean deployServerScripts = false; //!!!??????überlege ob das nötig ist
 
 
 	/*
@@ -61,7 +64,7 @@ public class ASLJobControlling {
 	public long STARTUPTIMEMIDDLEWARE = 2000;
 
 	//time in seconds for the memtier_benchmark to be running
-	public int MEMTIERTESTTIME = 10;//64; //Set this to 63 for final experiments
+	public int MEMTIERTESTTIME = 11;//64; //Set this to 63 for final experiments
 	/*
 	 * MyMiddleware parameters: start, measure, kill
 	 */
@@ -84,27 +87,27 @@ public class ASLJobControlling {
 	 */
 	static String WRITEONLY = " --ratio=1:0";
 	static String READONLY = " --ratio=0:1";
-	static String RATIO11 = " --ratio=1:1";
-	static String RATIO13 = " --ratio=1:3";
-	static String RATIO16 = " --ratio=1:6";
-	static String RATIO19 = " --ratio=1:9";
+//	static String RATIO11 = " --ratio=1:1";
+//	static String RATIO13 = " --ratio=1:3";
+//	static String RATIO16 = " --ratio=1:6";
+//	static String RATIO19 = " --ratio=1:9";
 	static String getSimpleWorkloadName(String wl) { 
 		if (wl.equals(WRITEONLY))
 			return "WriteOnly";
 		if (wl.equals(READONLY))
 			return "ReadOnly";
 
-		if (wl.equals(RATIO11))
-			return "ratio=1t1";
-
-		if (wl.equals(RATIO13))
-			return "ratio=1t3";
-
-		if (wl.equals(RATIO16))
-			return "ratio=1t6";
-
-		if (wl.equals(RATIO19))
-			return "ratio=1t9";
+//		if (wl.equals(RATIO11))
+//			return "ratio=1t1";
+//
+//		if (wl.equals(RATIO13))
+//			return "ratio=1t3";
+//
+//		if (wl.equals(RATIO16))
+//			return "ratio=1t6";
+//
+//		if (wl.equals(RATIO19))
+//			return "ratio=1t9";
 
 		return "UnknownWorkload";
 	}

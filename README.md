@@ -15,6 +15,13 @@
 # TODO
 * ~~prüfe loadIt... sollte es eigentlich intelligent laden... prüfe ob alle keys geladen (statistik wert?)~~
     * ~~passe Paremeter für load an~~
+* Benchmarks
+    * implemetiere tests insbesonder wahl data-size parameter
+    * ~~Prüfe ob es second Instanz gibt bei Tests/Benchmarks~~ JA!!! es gibt 1 bis 3
+    * prüfe ob meine Memtierparameter noch stimmen (#instanzen, #threads.... die automatische Rechnung!!!!)
+      * wird für 2.1 / 2.2 nicht mehr stimmen, da dort 1-Instanz<->3-CT und 3-Instanzen<->1-CT verglichen werden
+      * zuvor hatte ich dass CT kummuliert über alle Instanzen pro Client immer 2 ist (stimmt für restliche Experimente noch immer!!!)
+
 
 * DataProcessing
     * wichtig: allenfalls gibt es probleme, da ich die classe nicht richtig resete
