@@ -13,9 +13,12 @@
 - [memtier_benchmark --help](#memtierbenchmark---help)
 
 # TODO
+
 * ~~prüfe loadIt... sollte es eigentlich intelligent laden... prüfe ob alle keys geladen (statistik wert?)~~
     * ~~passe Paremeter für load an~~
 * Benchmarks
+    * prüfe ob logfiles augeschalten sind auf azure für memcached bzw vv option
+    * histogram file kopieren deaktivieren
     * ~~implemetiere tests insbesonder wahl data-size parameter~~ erledigt
     * ~~Prüfe ob es second Instanz gibt bei Tests/Benchmarks~~ JA!!! es gibt 1 bis 3
     * ~~prüfe ob meine Memtierparameter noch stimmen (#instanzen, #threads.... die automatische Rechnung!!!!)~~ erledigt
