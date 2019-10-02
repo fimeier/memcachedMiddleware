@@ -1,4 +1,4 @@
-package ch.ethz.asltest;
+package ch.ethz.fimeier;
 
 import java.io.BufferedReader;
 import java.io.IOException;

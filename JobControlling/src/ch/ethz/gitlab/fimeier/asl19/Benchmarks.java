@@ -23,6 +23,8 @@ public class Benchmarks extends ASLJobControlling {
 	 * do the benchmarks
 	 */
 	public void runBenchmarks() {
+		
+		System.out.println("******************New Version*********************");
 
 		long startExperiment = System.currentTimeMillis();
 		totalNumberOfexperiments = 0;
@@ -31,31 +33,31 @@ public class Benchmarks extends ASLJobControlling {
 
 		System.out.println("*****************************************************************************************************************\n");
 		System.out.println("***************************************** starting baseline21() *****************************\n");
-		baseline21();
+		//baseline21();
 
 		System.out.println("*****************************************************************************************************************\n");
 		System.out.println("***************************************** starting baseline22() *****************************\n");
-		baseline22();
+		//baseline22();
 
 		System.out.println("*****************************************************************************************************************\n");
 		System.out.println("***************************************** starting baseline31() *****************************\n");
-		baseline31();
+		//baseline31();
 
 		System.out.println("*****************************************************************************************************************\n");
 		System.out.println("***************************************** starting baseline32() *****************************\n");
-		baseline32();
+		//baseline32();
 
 		System.out.println("*****************************************************************************************************************\n");
 		System.out.println("***************************************** starting baseline33() *****************************\n");
-		baseline33();
+		//baseline33();
 
 		System.out.println("*****************************************************************************************************************\n");
 		System.out.println("***************************************** starting baseline34() *****************************\n");
-		baseline34();
+		//baseline34();
 		
 		System.out.println("*****************************************************************************************************************\n");
 		System.out.println("***************************************** starting twoKAnalyse() ****************************\n");
-		twoKAnalyse();
+		//twoKAnalyse();
 
 
 

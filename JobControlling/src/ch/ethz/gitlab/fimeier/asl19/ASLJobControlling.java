@@ -1,5 +1,7 @@
 package ch.ethz.gitlab.fimeier.asl19;
 
+//olee
+
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -38,8 +40,8 @@ public class ASLJobControlling {
 	 */
 	//public static boolean loadIt = false;
 	public static int MEMTIERLOADIterations = 1;
-	public static int MEMTIERLOADTIMEWriteOnly = 3;
-	public static int MEMTIERLOADTIMEReadOnly = 6;
+	public static int MEMTIERLOADTIMEWriteOnly = 6;
+	public static int MEMTIERLOADTIMEReadOnly = 3;
 
 	/*
 	 * deployment of needed "software" for individual task's
@@ -64,7 +66,7 @@ public class ASLJobControlling {
 	public long STARTUPTIMEMIDDLEWARE = 2000;
 
 	//time in seconds for the memtier_benchmark to be running
-	public int MEMTIERTESTTIME = 4;//64; //Set this to 63 for final experiments
+	public int MEMTIERTESTTIME = 64;//64; //Set this to 63 for final experiments
 	/*
 	 * MyMiddleware parameters: start, measure, kill
 	 */

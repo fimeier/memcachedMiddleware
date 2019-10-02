@@ -4,18 +4,22 @@ import java.util.*;
 
 import ch.ethz.fimeier.MyMiddleware;
 
-public class RunMW {
+public class RunMW_template {
 
-	static String myIp = null; 
+	static String myIp = null;
 	static int myPort = 0;
 	static List<String> mcAddresses = null;
 	static int numThreadsPTP = -1;
 	static boolean readSharded = false;
-	
-	static long tWaitBeforeMeasurements = 1000;
-	static long tTimeForMeasurements = 75000;
-	
+
 	public static void main(String[] args) throws Exception {
+
+		// -----------------------------------------------------------------------------
+		// Prepare middleware to shutdown gracefully
+		// -----------------------------------------------------------------------------
+
+		//installShutdownHook(); innside of MyMiddleware implemented
+        //Thread.sleep(100000);
 
 		// -----------------------------------------------------------------------------
 		// Parse and prepare arguments
@@ -26,13 +30,22 @@ public class RunMW {
 		// -----------------------------------------------------------------------------
 		// Start the Middleware
 		// -----------------------------------------------------------------------------
-		
-		//!!! two additional arguments
-		new MyMiddleware(myIp, myPort, mcAddresses, numThreadsPTP, readSharded, tWaitBeforeMeasurements, tTimeForMeasurements).run();
+
+		//new MyMiddleware(myIp, myPort, mcAddresses, numThreadsPTP, readSharded).run();
 
 	}
 
-	private static void parseArguments(String[] args) {
+	/*
+	private static void installShutdownHook() {
+		Runtime.getRuntime().addShutdownHook(new Thread(){
+		    @Override
+		    public void run(){
+                // TODO - Shutdown middleware...
+		    }
+		});
+	}*/
+
+	private static void parseArguments(String[] args) throws InterruptedException {
 		Map<String, List<String>> params = new HashMap<>();
 
 		List<String> options = null;
@@ -64,14 +77,14 @@ public class RunMW {
 			myIp = params.get("l").get(0);
 		else {
 			printUsageWithError("Provide this machine's external IP! (see ifconfig or your VM setup)");
-			System.exit(1);			
+			System.exit(1);
 		}
 
 		if (params.get("p") != null)
 			myPort = Integer.parseInt(params.get("p").get(0));
 		else {
 			printUsageWithError("Provide the port, that the middleware listens to (e.g. 11212)!");
-			System.exit(1);			
+			System.exit(1);
 		}
 
 		if (params.get("m") != null) {
@@ -95,20 +108,6 @@ public class RunMW {
 			printUsageWithError("Provide true/false to enable sharded reads!");
 			System.exit(1);
 		}
-		
-		if (params.get("tWaitBeforeMeasurements") != null)
-			tWaitBeforeMeasurements = Long.parseLong(params.get("tWaitBeforeMeasurements").get(0));
-		/*else {
-			printUsageWithError("Provide tWaitBeforeMeasurements in milliseconds!");
-			System.exit(1);
-		}*/
-		
-		if (params.get("tTimeForMeasurements") != null)
-			tTimeForMeasurements = Long.parseLong(params.get("tTimeForMeasurements").get(0));
-		/*else {
-			printUsageWithError("Provide tTimeForMeasurements in milliseconds!");
-			System.exit(1);
-		}*/
 
 	}
 

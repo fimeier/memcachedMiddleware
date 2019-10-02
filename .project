@@ -16,12 +16,21 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1569433007481</id>
+			<id>1570017392793</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-JobControlling</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1570017392795</id>
+			<name></name>
+			<type>14</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-ASLJobControlling.jar</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>
