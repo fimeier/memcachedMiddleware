@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -617,8 +618,9 @@ public class Benchmarks extends ASLJobControlling {
 			scpJopsExecutor(scpJobs);
 			
 			//create entry in logfile
-			String isoDateStart = testSetting.nmonStartDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-			String isoDateStop = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+			String zoneOffest = ZonedDateTime.now().getOffset().toString();
+			String isoDateStart = testSetting.nmonStartDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME).replace("Z", zoneOffest);
+			String isoDateStop = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME).replace("Z", zoneOffest);
 
 			nmonExperimentNumber++;
 			//testCompleteSystem nS=3 nC=3 nInst=2 nCT=1 nVC=8 wl=ReadOnly_dataSize=64_nMW=2_nWT=8_rep=3
