@@ -50,11 +50,11 @@ public class ASLJobControlling {
 	 * deployment of needed "software" for individual task's
 	 */
 	public static boolean createFolders = true;
-	public static boolean deployNMONScript = false;
+	public static boolean deployNMONScript = true;
 
-	public static boolean deployClientScripts = false;
+	public static boolean deployClientScripts = true;
 
-	public static boolean deployMiddlewareScripts = false;
+	public static boolean deployMiddlewareScripts = true;
 	public static boolean deployMiddlewareJava = true;
 
 	//public static boolean deployServerScripts = false; //!!!??????überlege ob das nötig ist
