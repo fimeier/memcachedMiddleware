@@ -961,12 +961,12 @@ public class Benchmarks extends ASLJobControlling {
 		int nCT_ThreadsPerMemtierInstance = 3;
 
 		//int nVC_VirtualClients = 4;
-		int[] nVCSamples = {4,8,16,32};
+		int[] nVCSamples = {2, 4, 8, 12, 16, 24, 32};//{4,8,16,32};
 
 		String workload = READONLY;
 
 		//int dataSize=64; 
-		int[] dataSizeSamples = {64, 256, 512, 1024};
+		int[] dataSizeSamples = {64, 128, 256, 384, 512, 768, 1024};
 
 		int nMW = 0;
 		int nWorkerThreads = 0;
@@ -1050,12 +1050,12 @@ public class Benchmarks extends ASLJobControlling {
 		int nCT_ThreadsPerMemtierInstance = 1;
 
 		//int nVC_VirtualClients = 4;
-		int[] nVCSamples = {4,8,16,32};
+		int[] nVCSamples = {2, 4, 8, 12, 16, 24, 32};
 
 		String workload = READONLY;
 
 		//int dataSize=64; 
-		int[] dataSizeSamples = {64, 256, 512, 1024};
+		int[] dataSizeSamples = {64, 128, 256, 384, 512, 768, 1024};
 
 		int nMW = 0;
 		int nWorkerThreads = 0;
@@ -1140,12 +1140,12 @@ public class Benchmarks extends ASLJobControlling {
 		int nCT_ThreadsPerMemtierInstance = 2;
 
 		//int nVC_VirtualClients = 4;
-		int[] nVCSamples = {4,8,16,32};
+		int[] nVCSamples = {2, 4, 8, 12, 16, 24, 32};
 
 		String workload = READONLY;
 
 		//int dataSize=64; 
-		int[] dataSizeSamples = {64, 256, 512, 1024};
+		int[] dataSizeSamples = {64, 128, 256, 384, 512, 768, 1024};
 
 		int nMW = 1;
 		//int nWorkerThreads = 0;
@@ -1233,12 +1233,12 @@ public class Benchmarks extends ASLJobControlling {
 		int nCT_ThreadsPerMemtierInstance = 2;
 
 		//int nVC_VirtualClients = 4;
-		int[] nVCSamples = {4,8,16,32};
+		int[] nVCSamples = {2, 4, 8, 12, 16, 24, 32};
 
 		String workload = READONLY;
 
 		//int dataSize=64; 
-		int[] dataSizeSamples = {64, 256, 512, 1024};
+		int[] dataSizeSamples = {64, 128, 256, 384, 512, 768, 1024};
 
 		int nMW = 1;
 		//int nWorkerThreads = 0;
@@ -1326,12 +1326,12 @@ public class Benchmarks extends ASLJobControlling {
 		int nCT_ThreadsPerMemtierInstance = 1;
 
 		//int nVC_VirtualClients = 4;
-		int[] nVCSamples = {4,8,16,32};
+		int[] nVCSamples = {2, 4, 8, 12, 16, 24, 32};
 
 		String workload = READONLY;
 
 		//int dataSize=64; 
-		int[] dataSizeSamples = {64, 256, 512, 1024};
+		int[] dataSizeSamples = {64, 128, 256, 384, 512, 768, 1024};
 
 		int nMW = 2;
 		//int nWorkerThreads = 0;
@@ -1419,12 +1419,12 @@ public class Benchmarks extends ASLJobControlling {
 		int nCT_ThreadsPerMemtierInstance = 1;
 
 		//int nVC_VirtualClients = 4;
-		int[] nVCSamples = {4,8,16,32};
+		int[] nVCSamples = {2, 4, 8, 12, 16, 24, 32};
 
 		String workload = READONLY;
 
 		//int dataSize=64; 
-		int[] dataSizeSamples = {64, 256, 512, 1024};
+		int[] dataSizeSamples = {64, 128, 256, 384, 512, 768, 1024};
 
 		int nMW = 2;
 		//int nWorkerThreads = 0;
@@ -1515,7 +1515,7 @@ public class Benchmarks extends ASLJobControlling {
 		//int nCT_ThreadsPerMemtierInstance = 1; //special
 
 		//int nVC_VirtualClients = 4;
-		int[] nVCSamples = {4,8,16,32};
+		int[] nVCSamples = {2, 4, 8, 12, 16, 24, 32};
 
 		String workload = READONLY;
 
@@ -1623,12 +1623,12 @@ public class Benchmarks extends ASLJobControlling {
 		int nCT_ThreadsPerMemtierInstance = 1;
 
 		//int nVC_VirtualClients = 4;
-		int[] nVCSamples = {4,8,16,32};
+		int[] nVCSamples = {2, 4, 8, 12, 16, 24, 32};
 
 		String workload = READONLY;
 
 		//int dataSize=64; 
-		int[] dataSizeSamples = {64, 256, 512, 1024};
+		int[] dataSizeSamples = {64, 128, 256, 384, 512, 768, 1024};
 
 		int nMW = 2;
 		//int nWorkerThreads = 0;

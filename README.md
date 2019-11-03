@@ -112,6 +112,7 @@ memcached -p 12333 -vv
 
 
 # Commands for Job Controlling
+
 screen -S jobcontrolling
 java -jar ASLJobControlling.jar > outputASLJOB 2>errorASLJOB 
 
