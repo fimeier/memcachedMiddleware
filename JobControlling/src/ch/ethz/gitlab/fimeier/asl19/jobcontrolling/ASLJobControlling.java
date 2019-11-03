@@ -70,7 +70,7 @@ public class ASLJobControlling {
 	public long STARTUPTIMEMIDDLEWARE = 2000;
 
 	//time in seconds for the memtier_benchmark to be running
-	public int MEMTIERTESTTIME = 2;//80 for final experiments
+	public int MEMTIERTESTTIME = 80;//80 for final experiments
 	/*
 	 * MyMiddleware parameters: start, measure, kill
 	 */
