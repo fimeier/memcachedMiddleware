@@ -349,7 +349,7 @@ public class ASLJobControlling {
 		/*
 		 * do DataProcessing (plots,...)
 		 */
-		DataProcessing dataprocessing = new DataProcessing();
+		//DataProcessing dataprocessing = new DataProcessing();
 		//dataprocessing.runDataProcessing();
 
 		System.out.println("the E N D of ASLJobControlling!!!!");

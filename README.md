@@ -23,7 +23,7 @@
     * ~~passe Paremeter für load an~~
     * ev prüfen dass in der CLoud die Parameter auch passend sind... d.h. 0 misses
 * Benchmarks
-    * prüfe ob logfiles augeschalten sind auf azure für memcached bzw vv option
+    * ~~prüfe ob logfiles augeschalten sind auf azure für memcached bzw vv option~~ bei allen entfernt
     * histogram file kopieren deaktivieren
     * ~~implemetiere tests insbesonder wahl data-size parameter~~ erledigt
     * ~~Prüfe ob es second Instanz gibt bei Tests/Benchmarks~~ JA!!! es gibt 1 bis 3
@@ -113,7 +113,7 @@ memcached -p 12333 -vv
 
 # Commands for Job Controlling
 screen -S jobcontrolling
-java -jar ~/asl-fall18-project/dist/ASLJobControlling.jar > outputASLJOB 2>errorASLJOB 
+java -jar ASLJobControlling.jar > outputASLJOB 2>errorASLJOB 
 
 screen -dR jobcontrolling
 

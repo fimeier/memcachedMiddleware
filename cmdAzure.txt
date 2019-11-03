@@ -1,0 +1,7 @@
+# Commands for Job Controlling
+
+screen -S jobcontrolling
+java -jar ASLJobControlling.jar > outputASLJOB 2>errorASLJOB 
+
+#reattach the screen
+screen -dR jobcontrolling
