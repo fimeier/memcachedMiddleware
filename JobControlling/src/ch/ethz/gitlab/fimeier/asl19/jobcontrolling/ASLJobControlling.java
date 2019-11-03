@@ -312,6 +312,8 @@ public class ASLJobControlling {
 					"testCompleteSystem",
 					"NMON"
 					};
+			//create the experiment Base folder
+			createFolders(ips,ASLJobControlling.experimentsBaseFolder);
 			for (String experimentFolder: experimentFoldersToCreate) {
 				String folderToCreate = ASLJobControlling.experimentsBaseFolder + experimentFolder;
 				createFolders(ips,folderToCreate);
