@@ -619,6 +619,8 @@ public class Benchmarks extends ASLJobControlling {
 			
 			//create entry in logfile
 			String zoneOffest = ZonedDateTime.now().getOffset().toString();
+			if (zoneOffest.contentEquals("Z"));
+				zoneOffest = "-02:00";
 			System.out.println("zoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzone= " +zoneOffest);
 			String isoDateStart = testSetting.nmonStartDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME).replace("Z", zoneOffest);
 			String isoDateStop = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME).replace("Z", zoneOffest);
