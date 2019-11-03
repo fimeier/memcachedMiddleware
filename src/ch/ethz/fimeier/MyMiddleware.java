@@ -26,7 +26,7 @@ public class MyMiddleware{
 	static final Level LOGLEVEL = Level.ALL;//Level.ALL;
 	static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	static final Handler handler = new ConsoleHandler();*/
-	static public Level LOGLEVEL = Level.ALL; //Level.WARNING;
+	static public Level LOGLEVEL = Level.WARNING; //Level.WARNING; Level.ALL;
 	static public Logger logger;// = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	static public Handler handler;// = new ConsoleHandler();
 
@@ -60,17 +60,37 @@ public class MyMiddleware{
 	 */
 	//    !!!!!!!!!!!!!!!!!!!!!!!! Achtung ant clean!!! nötig wenn dieser Wert geändert wird!!!
 	static final int BUCKETS = 1000 * 10; //assuming longest command takes 1000 ms.. per millisecond 10 buckets (100us steps)
-	static long tWaitBeforeMeasurements = 0; //start values set through constructor
-	static long tTimeForMeasurements = 50000; //start values set through constructor
+	static long tWaitBeforeMeasurements = 0; //start values set through constructor 1'500ms
+	static long tTimeForMeasurements = 50000; //start values set through constructor ....
 	public static final long windowSizeInMilliSeconds = 1000; //should be in the same size unit as the time measurements //TODO change this... problem provided parameters are in millisecond
 	public static final long windowSizeInNanoSeconds = windowSizeInMilliSeconds*1000000;
 	public static int nWindows;// = (int) Math.ceil((double) tTimeForMeasurements / (double) windowSize);
+	public static int firstWinToUse = 15;
+	public static int lastWinToUse = 74;
 
 	static boolean startMeasuring = false;
 	static public int nActiveWindow = 0; //created windows (depends on clients sending data)
 
 	static MyMiddlewareStatisticsPerWindow[] overallStatisticWindows;
 	static MyMiddlewareStatisticsPerWindow overallStatistic;
+	
+	
+	//Queuing Theory: Inter Arrival Time
+	static public long tClientArrivalCum = 0;
+	static public long nClientArrival = 0;
+	static private long lastClientArrivalTime = 0;
+	static private void clientInterArrivalTime(long arrivalTime) {
+		//implies 1 request
+		if (lastClientArrivalTime==0) {
+			lastClientArrivalTime = arrivalTime;
+			return;
+		}
+		//nClientArrival  tClientArrivalCum
+		tClientArrivalCum += (arrivalTime - lastClientArrivalTime);
+		nClientArrival++;
+		lastClientArrivalTime = arrivalTime;
+	}; 
+	
 
 	//todo set this while starting measureing to system time
 	static private long oldWindow = 0;
@@ -195,7 +215,7 @@ public class MyMiddleware{
 
 				try {
 					while(!closeEverything) {
-						Thread.sleep(100);
+						Thread.sleep(300);
 					}
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -263,8 +283,8 @@ public class MyMiddleware{
 		long startOutputStatistic = System.currentTimeMillis();
 		//wieso nicht <??....  nActiveWindow is index of active window (not #activeWindows)
 		for (int i=0; i<=nActiveWindow; i++) {
-			//warm up cool down... do not use first 2 windows... win0, win1... start with win2-win61=60wins total
-			if (i<2 || 61<i) {
+			//warm up cool down... do not use first 5 windows... win0, win1,win2,win3,win4... start with win5-win64=60wins total
+			if (i<firstWinToUse || lastWinToUse<i) {
 				continue;
 			}
 			System.out.println("*******************************BEGIN: Output statistic for window "+i+"*******************************");
@@ -290,7 +310,8 @@ public class MyMiddleware{
 		MyMiddleware.logger.info("**********MyMiddlewareStatisticsPerWindow.finalStats()**********");
 
 		System.out.println("**********MyMiddlewareStatisticsPerWindow.finalStats()**********");
-		System.out.println(MyMiddlewareStatisticsPerWindow.finalStats());
+		System.out.println(MyMiddlewareStatisticsPerWindow.finalStats(memtierConnectionsQueue));
+		System.out.println("ACHTUNG sind in file finalStats");
 		System.out.println("****************************************************************");
 
 
@@ -462,6 +483,10 @@ public class MyMiddleware{
 
 					long temp = System.nanoTime(); 
 					activeClient.tClientAddedToQueue = temp;// / 1000000;
+					
+					//Queuing Theory: inter arrival rate
+					clientInterArrivalTime(temp);	
+					
 
 					/*
 					 * also set during in window change
@@ -543,7 +568,7 @@ public class MyMiddleware{
 						protocolPerThread.getStatistics = true;
 						protocolPerThread.threadStatistic.startPerThreadStatistics(activeClient, currentTimeInNansoseconds);
 						protocolPerThread.threadStatistic.addQueueLength(memtierRequestsQueue.size());
-
+						activeClient.clientThinkTime();
 					} else {
 						protocolPerThread.getStatistics = false;
 					}
@@ -554,6 +579,11 @@ public class MyMiddleware{
 					 * @returns false re-add client to memtierConnectionsQueue
 					 */
 					boolean closeConnection = protocolPerThread.processCommand();
+					
+					/* 
+					 * clientThinkTime: set send back time
+					 */
+					activeClient.tClientResponseSent = System.nanoTime();
 
 
 					if (!closeConnection) {

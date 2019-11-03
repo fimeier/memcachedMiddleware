@@ -15,6 +15,8 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
+import ch.ethz.gitlab.fimeier.asl19.jobcontrolling.evaluation.DataProcessing;
+
 public class deleteThis extends DataProcessing {
 
 

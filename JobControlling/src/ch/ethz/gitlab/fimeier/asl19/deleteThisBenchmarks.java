@@ -1,5 +1,7 @@
 package ch.ethz.gitlab.fimeier.asl19;
 
+import ch.ethz.gitlab.fimeier.asl19.jobcontrolling.measuring.Benchmarks;
+
 public class deleteThisBenchmarks extends Benchmarks{
 	
 	

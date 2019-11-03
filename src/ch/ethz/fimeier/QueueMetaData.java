@@ -26,6 +26,17 @@ public class QueueMetaData {
 	/*
 	 * Statistics per client
 	 */
+	
+	public void clientThinkTime() {
+		//implies 1 request
+		if (tClientResponseSent==0)
+			return;
+		
+		// tClientAddedToQueue is the "current" time
+		// tClientResponseSent is the time the last responmse has been sent
+		tClientThinkTimeCum += (tClientAddedToQueue - tClientResponseSent);
+		tClientRequestsCum++;
+	}
 
 	/**
 	 * use this to define the window the request will be processed in
@@ -33,6 +44,11 @@ public class QueueMetaData {
 	public int windowNumber = 0;
 	public boolean getStatistics = false;
 	public long tClientAddedToQueue = 0; //now in nano seconds //wird durch main.run() gesetzt und durch MyMiddleware.startPerThreadStatistics ausgelesen wenn cmd process beginnt
+	public long tClientResponseSent = 0; //wird durch workerthread gesetzt nachdem Response an Client gesendet wurde
+	public long tClientThinkTimeCum = 0;
+	public long tClientRequestsCum = 0;
+
+	
 	public long nBytesSent = 0; //mefi84 could be used for data throughput
 
 	public QueueMetaData(Socket _clientSocket) {

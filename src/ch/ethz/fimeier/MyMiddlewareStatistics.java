@@ -2,6 +2,8 @@ package ch.ethz.fimeier;
 
 public class MyMiddlewareStatistics {
 	
+	
+	
 	public MyMiddlewareStatistics(int _nWindowNumber) {
 		this.nWindowNumber = _nWindowNumber;
 		//this.windowDataStore = new ThreadStatisticWindowData[nWindows];
@@ -16,8 +18,7 @@ public class MyMiddlewareStatistics {
 	 */
 	public int nWindowNumber = 0;
 	
-	
-	
+
 	
 	
 	/*
@@ -127,7 +128,7 @@ public class MyMiddlewareStatistics {
 		nCommands++;
 		this.activeClient = _activeClient;
 	}
-
+	
 	public void stopAvgQueueWaitingTimeInNanoSeconds(long currentTimeInNansoseconds) {
 		tClientPickedFromQueueInNanoSeconds = currentTimeInNansoseconds;//System.currentTimeMillis();
 		tcumulatedInQueueInNanoSeconds += tClientPickedFromQueueInNanoSeconds - tClientAddedToQueueInNanoSeconds;
@@ -263,9 +264,9 @@ public class MyMiddlewareStatistics {
 			avgWTServiceTimeSetInNanoSeconds = (double) tcumulatedWTServiceTimeSetInNanoSeconds / (double) nSet;
 	}
 
-	public void calculateMiddlewareFinalValues() {
-
-	}
+//	public void calculateMiddlewareFinalValues() {
+//
+//	}
 
 	/*
 	 * NOT THREADSAFE.... call this method per thread to read out the "final" values
@@ -300,6 +301,7 @@ public class MyMiddlewareStatistics {
 	public double totalAvgSetInNanoSeconds = 0;
 	public double totalAvgGetInNanoSeconds = 0;
 	public double totalAvgMultiGetInNanoSeconds = 0;
+	
 
 
 }

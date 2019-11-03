@@ -3,6 +3,7 @@
 - [asl-fall19-project (fimeier@student.ethz.ch)](#asl-fall19-project-fimeierstudentethzch)
 - [Content](#content)
 - [TODO](#todo)
+- [HW Messungen](#hw-messungen)
 - [Scratchpad](#scratchpad)
 - [loadIt procedure](#loadit-procedure)
 - [Runcommands](#runcommands)
@@ -13,9 +14,14 @@
 - [memtier_benchmark --help](#memtierbenchmark---help)
 
 # TODO
-
+* Für zweiter Run der Experimente in der Cloud
+    * ev mehr Runs
+    * ~~ev weitere Datenpukte hinzufügen (momentan sind es ja offiziell nur 4)~~
+    * ev länger als 1 Minuten effektiv Messen
+    * ev nach loadIt prüfen dass cache miss ratio wirklich 0 ist 
 * ~~prüfe loadIt... sollte es eigentlich intelligent laden... prüfe ob alle keys geladen (statistik wert?)~~
     * ~~passe Paremeter für load an~~
+    * ev prüfen dass in der CLoud die Parameter auch passend sind... d.h. 0 misses
 * Benchmarks
     * prüfe ob logfiles augeschalten sind auf azure für memcached bzw vv option
     * histogram file kopieren deaktivieren
@@ -24,7 +30,8 @@
     * ~~prüfe ob meine Memtierparameter noch stimmen (#instanzen, #threads.... die automatische Rechnung!!!!)~~ erledigt
       * ~~wird für 2.1 / 2.2 nicht mehr stimmen, da dort 1-Instanz<->3-CT und 3-Instanzen<->1-CT verglichen werden~~
       * ~~zuvor hatte ich dass CT kummuliert über alle Instanzen pro Client immer 2 ist (stimmt für restliche Experimente noch immer!!!)~~
-    * implementiere Performance Messung (HW) für Client/Server/MW
+    * ~~implementiere Performance Messung (HW) für Client/Server/MW~~
+
 
 
 
@@ -32,6 +39,12 @@
     * wichtig: allenfalls gibt es probleme, da ich die classe nicht richtig resete
     * prüfe ob bei den statistiken die "alte variante" überhaupt noch benötigt wird
       * ich vermute ich habe alles ersetzt durch die Konfig files welche noch im alten git sind
+
+# HW Messungen
+* asl-fall19-project/webserver/httproot$ python3 -m http.server 8080
+* benutze jar und passe servernamen so an, dass das gewünschte herauskommt :-)
+* nmon -F messung1.nmon -s1 -c70 -h
+* ~/asl-fall19-project/webserver/nmonchart38$ ./nmonchart ../nmonsource/messung1.nmon ../httproot/messung1.html
 
 
 
