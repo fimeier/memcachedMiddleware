@@ -23,7 +23,7 @@
             <manifest>
 	            <addClasspath>true</addClasspath>
 	            <classpathPrefix>lib/</classpathPrefix>
-	            <mainClass>ch.ethz.gitlab.fimeier.asl19.ASLJobControlling</mainClass>
+	            <mainClass>ch.ethz.gitlab.fimeier.asl19.jobcontrolling.ASLJobControlling</mainClass>
           	</manifest>
           </archive>
           <finalName>ASLJobControlling</finalName>
