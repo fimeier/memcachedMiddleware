@@ -3,6 +3,7 @@
 - [asl-fall19-project (fimeier@student.ethz.ch)](#asl-fall19-project-fimeierstudentethzch)
 - [Content](#content)
 - [TODO](#todo)
+- [Benchmarks mit IPERF und ping](#benchmarks-mit-iperf-und-ping)
 - [HW Messungen](#hw-messungen)
 - [Scratchpad](#scratchpad)
 - [loadIt procedure](#loadit-procedure)
@@ -40,11 +41,93 @@
     * prüfe ob bei den statistiken die "alte variante" überhaupt noch benötigt wird
       * ich vermute ich habe alles ersetzt durch die Konfig files welche noch im alten git sind
 
+# Benchmarks mit IPERF und ping
+* pro client
+  * ping middleware1/2 server1/2/3
+  * iperf -c middleware1 -d Do a bidirectional test simultaneously (gleichzeitig in beide richtungen testen)
+  * iperf -c middleware1 -r  Do a bidirectional test individually
+  * -t testtime... man kann so z.b abschätzen wie lange ein test dauert
+  * starte überall nmon und führe dies tests aus.... merke jeweils startzeit stopzeit....
+   dann ein grosses file erstellen
+
+
+ping -c10 server1 >> ping.txt;ping -c10 server2 >> ping.txt;ping -c10 server3 >> ping.txt;ping -c10 middleware1 >> ping.txt;ping -c10 middleware2 >> ping.txt
+
+
+nmon -F iperfClient1.nmon -s1 -c3000
+nmon -F iperfClient2.nmon -s1 -c3000
+nmon -F iperfClient3.nmon -s1 -c3000
+
+nmon -F iperfServer1.nmon -s1 -c3000
+nmon -F iperfServer2.nmon -s1 -c3000
+nmon -F iperfServer3.nmon -s1 -c3000
+
+nmon -F mw1.nmon -s1 -c3000
+nmon -F mw2.nmon -s1 -c3000
+
+
+auf allen Servern/MW starten
+iperf -s >> iperf.txt
+
+alle clients testen
+
+
+echo `date` "d-test Client1 -> Server1" >>iperf.txt
+iperf -c server1 -d >> iperf.txt
+echo `date` "r-test Client1 -> Server1" >>iperf.txt
+iperf -c server1 -r >> iperf.txt
+
+echo `date` "d-test Client1 -> Server2" >>iperf.txt
+iperf -c server2 -d >> iperf.txt
+echo `date` "r-test Client1 -> Server2" >>iperf.txt
+iperf -c server2 -r >> iperf.txt
+
+echo `date` "d-test Client3 -> Server3" >>iperf.txt
+iperf -c server3 -d >> iperf.txt
+echo `date` "r-test Client3 -> Server3" >>iperf.txt
+iperf -c server3 -r >> iperf.txt
+
+
+echo `date` "d-test Client2 -> Server1" >>iperf.txt; iperf -c server1 -d >> iperf.txt
+echo `date` "r-test Client2 -> Server1" >>iperf.txt;iperf -c server1 -r >> iperf.txt
+
+echo `date` "d-test Client2 -> Server2" >>iperf.txt;iperf -c server2 -d >> iperf.txt
+echo `date` "r-test Client2 -> Server2" >>iperf.txt;iperf -c server2 -r >> iperf.txt
+
+echo `date` "d-test Client2 -> Server3" >>iperf.txt;iperf -c server3 -d >> iperf.txt
+echo `date` "r-test Client2 -> Server3" >>iperf.txt;iperf -c server3 -r >> iperf.txt
+
+
+echo `date` "d-test Client3 -> Server1" >>iperf.txt; iperf -c server1 -d >> iperf.txt;echo `date` "r-test Client3 -> Server1" >>iperf.txt;iperf -c server1 -r >> iperf.txt
+echo `date` "d-test Client3 -> Server2" >>iperf.txt;iperf -c server2 -d >> iperf.txt;echo `date` "r-test Client3 -> Server2" >>iperf.txt;iperf -c server2 -r >> iperf.txt
+echo `date` "d-test Client3 -> Server3" >>iperf.txt;iperf -c server3 -d >> iperf.txt;echo `date` "r-test Client3 -> Server3" >>iperf.txt;iperf -c server3 -r >> iperf.txt
+
+
+echo `date` "d-test Client1 -> MW1" >>iperf.txt; iperf -c middleware1 -d >> iperf.txt;echo `date` "r-test Client1 -> MW1" >>iperf.txt;iperf -c middleware1 -r >> iperf.txt
+echo `date` "d-test Client1 -> MW2" >>iperf.txt;iperf -c middleware2 -d >> iperf.txt;echo `date` "r-test Client1 -> MW2" >>iperf.txt;iperf -c middleware2 -r >> iperf.txt
+
+
+echo `date` "d-test Client2 -> MW1" >>iperf.txt; iperf -c middleware1 -d >> iperf.txt;echo `date` "r-test Client2 -> MW1" >>iperf.txt;iperf -c middleware1 -r >> iperf.txt
+echo `date` "d-test Client2 -> MW2" >>iperf.txt;iperf -c middleware2 -d >> iperf.txt;echo `date` "r-test Client2 -> MW2" >>iperf.txt;iperf -c middleware2 -r >> iperf.txt
+
+echo `date` "d-test Client3 -> MW1" >>iperf.txt; iperf -c middleware1 -d >> iperf.txt;echo `date` "r-test Client3 -> MW1" >>iperf.txt;iperf -c middleware1 -r >> iperf.txt;echo `date` "d-test Client3 -> MW2" >>iperf.txt;iperf -c middleware2 -d >> iperf.txt;echo `date` "r-test Client3 -> MW2" >>iperf.txt;iperf -c middleware2 -r >> iperf.txt
+
+
+
+
+echo `date` "d-test MW1 -> Server1" >>iperf.txt; iperf -c server1 -d >> iperf.txt;echo `date` "r-test MW1 -> Server1" >>iperf.txt;iperf -c server1 -r >> iperf.txt
+echo `date` "d-test MW1 -> Server2" >>iperf.txt;iperf -c server2 -d >> iperf.txt;echo `date` "r-test MW1 -> Server2" >>iperf.txt;iperf -c server2 -r >> iperf.txt;echo `date` "d-test MW1 -> Server3" >>iperf.txt;iperf -c server3 -d >> iperf.txt;echo `date` "r-test MW1 -> Server3" >>iperf.txt;iperf -c server3 -r >> iperf.txt
+
+
+echo `date` "d-test MW2 -> Server1" >>iperf.txt; iperf -c server1 -d >> iperf.txt;echo `date` "r-test MW2 -> Server1" >>iperf.txt;iperf -c server1 -r >> iperf.txt;echo `date` "d-test MW2 -> Server2" >>iperf.txt;iperf -c server2 -d >> iperf.txt;echo `date` "r-test MW2 -> Server2" >>iperf.txt;iperf -c server2 -r >> iperf.txt;echo `date` "d-test MW2 -> Server3" >>iperf.txt;iperf -c server3 -d >> iperf.txt;echo `date` "r-test MW2 -> Server3" >>iperf.txt;iperf -c server3 -r >> iperf.txt
+
+
 # HW Messungen
 * asl-fall19-project/webserver/httproot$ python3 -m http.server 8080
 * benutze jar und passe servernamen so an, dass das gewünschte herauskommt :-)
-* nmon -F messung1.nmon -s1 -c70 -h
+* nmon -F iperfClient1.nmon -s1 -c3000
 * ~/asl-fall19-project/webserver/nmonchart38$ ./nmonchart ../nmonsource/messung1.nmon ../httproot/messung1.html
+
 
 
 

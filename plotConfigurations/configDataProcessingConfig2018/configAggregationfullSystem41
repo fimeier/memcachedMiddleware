@@ -1,0 +1,138 @@
+####Stuff fix for all keys
+mode:=middleware
+
+#Files
+experimentFolder:=fullSystem41/
+experimentSubfolder:=WriteOnly
+experimentName:=fullSystem41
+filterInnerLoopPrefix:=finalStatsfullSystem41WriteOnly
+expectedNumberOfFiles:=2
+
+
+
+#Loop-Stuff
+xAxisDataPointsInput:=1,4,8,12,16,20,24,28,32
+ratioXaxis:=6
+xFilterPrefix:=_nVC=
+
+linesToPlotInput:=8,16,32,64
+linesFilterPrefix:=nWorkerThreads
+
+numberOfRepetitions:=1,2,3,4,5,6
+repetitionFilterPrefix:=_Rep=
+
+##all keys
+middlewareDataKeys:=throughputSet,avgMiddlewareResponseTimeSet,avgQueueLength,avgQueueWaitingTime,avgMemcachedResponseTimeSet,avgWorkerThreadResponseTimeSet,throughputAllCommands
+
+#optional title for all keys in this file
+defaultTitle:=Datasource Middleware: ../fullSystem41/WriteOnly
+
+#####details for keys
+
+##############################################################################get
+
+
+
+##############################################################################ALL COMMANDS OR NO single operation
+#middlewareDataKeys.add(new KeyProperties("throughputAllCommands","sum","tp","tbd"));
+##throughputAllCommands
+throughputAllCommands:=throughputAllCommands
+aggregationType:=sum
+mainType:=tp
+operation:=tbd
+colorsToUse:=tbd
+linePrefix:=3C-2MW-3S #WT=
+
+##avgQueueWaitingTime
+avgQueueWaitingTime:=avgQueueWaitingTime
+aggregationType:=avg
+mainType:=latency
+operation:=tbd
+colorsToUse:=defaultColorsLatencyWrite
+linePrefix:=3C-2MW-3S #WT=
+
+##avgQueueLength
+avgQueueLength:=avgQueueLength
+aggregationType:=sum
+mainType:=QueueLength
+operation:=set
+colorsToUse:=tbd
+linePrefix:=3C-2MW-3S #WT=
+
+##all keys throughputMultiGet,avgMemcachedResponseTimeMultiGet,avgWorkerThreadResponseTimeMultiGet,avgMiddlewareResponseTimeMultiGet
+##############################################################################multi-get
+##throughputMultiGet
+throughputMultiGet:=throughputMultiGet
+aggregationType:=sum
+mainType:=tp
+operation:=multi-get
+colorsToUse:=defaultColorsThroughputRead
+linePrefix:=#WT=
+
+##avgMemcachedResponseTimeMultiGet
+avgMemcachedResponseTimeMultiGet:=avgMemcachedResponseTimeMultiGet
+aggregationType:=avg
+mainType:=latency
+operation:=multi-get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=#WT=
+
+##avgWorkerThreadResponseTimeMultiGet
+avgWorkerThreadResponseTimeMultiGet:=avgWorkerThreadResponseTimeMultiGet
+aggregationType:=avg
+mainType:=latency
+operation:=multi-get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=#WT=
+
+
+##avgMiddlewareResponseTimeMultiGet
+avgMiddlewareResponseTimeMultiGet:=avgMiddlewareResponseTimeMultiGet
+aggregationType:=avg
+mainType:=latency
+operation:=multi-get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=#WT=
+
+##all keys throughputSet,avgMemcachedResponseTimeSet,avgWorkerThreadResponseTimeSet,avgMiddlewareResponseTimeSet
+##############################################################################set
+##throughputSet
+throughputSet:=throughputSet
+aggregationType:=sum
+mainType:=tp
+operation:=set
+colorsToUse:=defaultColorsThroughputWrite
+linePrefix:=3C-2MW-3S #WT=
+
+
+##avgMemcachedResponseTimeSet
+avgMemcachedResponseTimeSet:=avgMemcachedResponseTimeSet
+aggregationType:=avg
+mainType:=latency
+operation:=set
+colorsToUse:=defaultColorsLatencyWrite
+linePrefix:=3C-2MW-3S #WT=
+
+
+##avgWorkerThreadResponseTimeSet
+avgWorkerThreadResponseTimeSet:=avgWorkerThreadResponseTimeSet
+aggregationType:=avg
+mainType:=latency
+operation:=set
+colorsToUse:=defaultColorsLatencyWrite
+linePrefix:=3C-2MW-3S #WT=
+
+
+##avgMiddlewareResponseTimeSet
+avgMiddlewareResponseTimeSet:=avgMiddlewareResponseTimeSet
+aggregationType:=avg
+mainType:=latency
+operation:=set
+colorsToUse:=defaultColorsLatencyWrite
+linePrefix:=3C-2MW-3S #WT=
+#optional
+yRange:=[0:50]
+
+
+
+

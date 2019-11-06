@@ -1,0 +1,46 @@
+####Stuff fix for all keys
+mode:=percentiles
+#Files
+experimentFolder:=shardedCase51/
+experimentSubfolder:=ReadOnly
+experimentName:=shardedCase51
+filterInnerLoopPrefix:=json.txt
+expectedNumberOfFiles:=6
+
+
+#optional title for all keys in this file... can be overriden with local defs
+defaultTitle:=Datasource Client: ../shardedCase51/ReadOnly
+defaultxLabel:=Multi-Get Key size 1:x
+
+#is absolut... ignore all other linesFilterPrefix
+fixedLinesFilterPrefix:=_nWorkerThreads64
+
+#json.txt2ndInstshardedCase51ratio=1t6_nWorkerThreads64_Rep=5_Client1
+
+#Loop-Stuff
+xAxisDataPointsInput:=1,3,6,9
+ratioXaxis:=1
+xFilterPrefix:=ratio=1t
+
+linesToPlotInput:=avg,25,50,75,90,99
+linesFilterPrefix:=UseFixedLinesFilterPrefix
+
+numberOfRepetitions:=1,2,3,4,5,6
+repetitionFilterPrefix:=_Rep=
+
+##use all keys because it also does sets
+middlewareDataKeys:=GETpercentilesLatency
+
+#####details for keys
+
+#percentilesSharded
+##############################################################################get
+##GETpercentilesLatency
+GETpercentilesLatency:=GETpercentilesLatency
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=3C-2MW-3S #WT=
+lineTitles:=sharded avg;sharded 25th;sharded 50th;sharded 75th;sharded 90th;sharded 99th;
+yRange:=[0:14]

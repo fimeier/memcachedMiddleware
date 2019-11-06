@@ -215,7 +215,7 @@ public class MyMiddleware{
 
 				try {
 					while(!closeEverything) {
-						Thread.sleep(300);
+						Thread.sleep(100);
 					}
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block

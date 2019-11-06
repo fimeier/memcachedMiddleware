@@ -1,0 +1,74 @@
+####Stuff fix for all keys
+mode:=histogram
+submode:=histogramMiddleware
+
+#Files
+experimentFolder:=shardedCase51/
+experimentSubfolder:=ReadOnly
+experimentName:=shardedCase51
+filterInnerLoopPrefix:=histogram
+expectedNumberOfFiles:=2
+
+#optional title for all keys in this file
+#defaultTitle:=Datasource Middleware: ../shardedCase51/ReadOnly HISTOGRAM
+defaultTitle:=ACHTUNG: Willkürliche Auswahl der Werte
+#defaultxLabel:=Buckets tbd
+
+#histogramshardedCase51ratio=1t6_nWorkerThreads64_Rep=6_Middleware2
+
+#Bucket Stuff
+nBucketsSource:=10000
+#bucket size in us
+bucketSizeUsSource:=100
+
+#comment buckets output
+
+#Loop-Stuff
+#xAxisDataPointsInput:=100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,2100,2200,2300,2400,2500,2600,2700,2800,2900,3000,3100,3200,3300,3400,3500,4000,4500,5000,5500,6000,6500,6600,6700,6800,6900,7000,7100,7200,7300,7400,7500,7600,7700,7800,7900,8000,8100,8200,8300,8400,8500,8900,8700,8800,8900,9000,9100,9200,9300,9400,9500,10000,11000,12000,13000,15000,20000,25000
+xAxisDataPointsInput:=100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,2100,2200,2300,2400,2500,2600,2700,2800,2900,3000,3100,3200,3300,3400,3500,4000,4500,5000
+
+ratioXaxis:=1
+xFilterPrefix:=UsefixedXFilterPrefix
+#is absolut... ignore all other xFilterPrefixes
+fixedXFilterPrefix:=ratio=1t6
+
+linesToPlotInput:=64
+linesFilterPrefix:=_nWorkerThreads
+
+numberOfRepetitions:=1,2,3,4,5,6
+repetitionFilterPrefix:=_Rep=
+
+middlewareDataKeys:=histogramMultiGetLatency,histogramSetLatency
+
+##############################################################################
+##histogramMultiGetLatency
+histogramMultiGetLatency:=histogramMultiGetLatency
+aggregationType:=sum
+mainType:=histogram
+operation:=multi-Get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Sharded (Multi-Get)  3C-2MW-3S #WT=
+#optional
+#yRange:=[0:5000]
+#xRange:=[0:500]
+#keyPosition:=left bottom
+#xLabel:=Latency in us
+#yLabel:=Number of Clients served in this time
+#title:=ein bildli das schön ist vom Experiment baseline31
+#lineTitles:=Lineli 1 #wt8;Lineli 2 #wt28;Lineli 3 #wt38;Lineli 4 #wt48
+
+##histogramSetLatency
+histogramSetLatency:=histogramSetLatency
+aggregationType:=sum
+mainType:=histogram
+operation:=Set
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Sharded (set) 3C-2MW-3S #WT=
+#optional
+#yRange:=[0:5000]
+#xRange:=[0:500]
+#keyPosition:=left bottom
+#xLabel:=Latency in us
+#yLabel:=Number of Clients served in this time
+#title:=ein bildli das schön ist vom Experiment baseline31
+#lineTitles:=Lineli 1 #wt8;Lineli 2 #wt28;Lineli 3 #wt38;Lineli 4 #wt48

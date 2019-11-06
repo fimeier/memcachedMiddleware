@@ -1,0 +1,76 @@
+#json.txt_e=baseline21_nS=1_nC=3_nInst=1_nCT=3_nVC=2_wl=ReadOnly_dataSize=64_nMW=0_nWT=0_rep=1_Client=1
+
+####Stuff fix for all keys
+mode:=client
+#Files
+experimentFolder:=baseline21/
+experimentSubfolder:=valueSize
+experimentName:=Baseline21ValueSize
+filterInnerLoopPrefix:=json.txt
+expectedNumberOfFiles:=3
+
+#optional title for all keys in this file
+defaultTitle:=Datasource Client: ../baseline21/valueSize
+
+#json.txtBaseline21_ReadOnly_nVC=1_Rep=3_Client1
+
+#Loop-Stuff
+xAxisDataPointsInput:=64,128,256,384,512,768,1024
+ratioXaxis:=1
+xFilterPrefix:=_dataSize=
+
+linesToPlotInput:=2,4,8,12,16,24,32
+linesFilterPrefix:=_nVC=
+
+numberOfRepetitions:=1,2,3
+repetitionFilterPrefix:=_rep=
+
+##ReadOnly Client Keys not null
+middlewareDataKeys:=throughputGet,latencyGet,KBget
+#throughputTotal,latencyTotal,KBget,KBtotal
+
+##all keys
+#throughputGet,latencyGet
+#throughputSet,latencySet
+#throughputTotal,latencyTotal
+#KBget
+#KBset 
+#KBtotal
+
+
+#####details for keys
+
+#throughputGet,latencyGet,KBget
+##############################################################################get
+
+##throughputGet
+throughputGet:=throughputGet
+aggregationType:=sum
+mainType:=tp
+operation:=get
+colorsToUse:=defaultColorsThroughputRead
+linePrefix:=Value-Size=
+#lineTitles:=
+
+
+##latencyGet
+latencyGet:=latencyGet
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+
+##KBget
+KBget:=KBget
+aggregationType:=sum
+mainType:=kb
+operation:=get
+colorsToUse:=defaultColorsThroughputRead
+linePrefix:=Value-Size=
+#lineTitles:=
+
+
+
+

@@ -1,0 +1,267 @@
+middlewareDataKeys:=chapter5ThroughputSharded,chapter5LatencyVsQueueSharded,chapter5ThroughputNonSharded,chapter5LatencyVsQueueNonSharded,MultiGets,MultiGetsSets,multigetsShardedVSNonShardedThroughputClient,multigetsClientVSMWThroughput,baseline21And22GetSetThroughput,baseline21And22GetSetLatency,fullSystem41LatencyVsQueueAndTP,fullsystem41ClientVSMW,multigetsPercentilesShardedVSNonSharded,histogramsMWshardedVSnonsharded,histogramsCLIENTshardedVSnonsharded,histogramsShardedMWvsCLIENT,histogramsShardedMWvsCLIENTSeeeeet
+suffixForOutputFiles:=SomeTests
+##chapter5ThroughputSharded
+chapter5ThroughputSharded:=chapter5ThroughputSharded
+pdfFileName:=chapter5ThroughputSharded
+id:=261,263,265
+title:=Hinweis: Get/Multi-Gets [ops/sec], GetAllKeys [keys/sec]
+#optional
+#use this to define all colors... otherwise use already defined colors
+colorsToUse:=defaultColorsThroughputRead
+yRange:=[0:5500]
+#xRange:=[0:10]
+xLabel:=Number of Clients
+yLabel:=Throughput [1/sec]
+keyPosition:=top left
+##use this optional... if defined us this as prefix for the line tile allready in the plot
+linePrefixPerLine:=GetAllKeys TP MW sharded,Get TP MW sharded,Multi-Get TP MW sharded
+##use this optional, when defined directly use it
+#lineTitles:=Lineli 1 #wt8;Lineli 2 #wt28;Lineli 3 #wt38;Lineli 4 #wt48
+
+
+##chapter5LatencyVsQueueSharded
+chapter5LatencyVsQueueSharded:=chapter5LatencyVsQueueSharded
+pdfFileName:=chapter5LatencyVsQueueSharded
+id:=262,267,272
+title:=avgMiddlewareResponseTimeAllKeys is a virtual key
+#optional
+#use this to define all colors... otherwise use already defined colors
+colorsToUse:=defaultColorsLatencyRead
+yRange:=[0:10]
+#xRange:=[0:10]
+xLabel:=Number of Clients
+yLabel:=Latency [ms]
+keyPosition:=top left
+##use this optional... if defined us this as prefix for the line tile allready in the plot
+linePrefixPerLine:=MW GetAllKeys Latency sharded:,Queue Waiting Time sharded:,Memcached Waiting Time sharded:
+##use this optional, when defined directly use it
+#lineTitles:=Lineli 1 #wt8;Lineli 2 #wt28;Lineli 3 #wt38;Lineli 4 #wt48
+
+##chapter5ThroughputNonSharded
+chapter5ThroughputNonSharded:=chapter5ThroughputNonSharded
+pdfFileName:=chapter5ThroughputNonSharded
+id:=289,291,293
+title:=Hinweis: Get/Multi-Gets [ops/sec], GetAllKeys [keys/sec]
+#optional
+#use this to define all colors... otherwise use already defined colors
+colorsToUse:=defaultColorsThroughputRead
+yRange:=[0:5500]
+#xRange:=[0:10]
+xLabel:=Number of Clients
+yLabel:=Throughput [1/sec]
+keyPosition:=top left
+##use this optional... if defined us this as prefix for the line tile allready in the plot
+linePrefixPerLine:=GetAllKeys TP MW Non-sharded,Get TP MW Non-sharded,Multi-Get TP MW Non-Sharded
+##use this optional, when defined directly use it
+#lineTitles:=Lineli 1 #wt8;Lineli 2 #wt28;Lineli 3 #wt38;Lineli 4 #wt48
+
+
+##chapter5LatencyVsQueueNonSharded
+chapter5LatencyVsQueueNonSharded:=chapter5LatencyVsQueueNonSharded
+pdfFileName:=chapter5LatencyVsQueueNonSharded
+id:=290,295,300
+title:=avgMiddlewareResponseTimeAllKeys is a virtual key
+#optional
+#use this to define all colors... otherwise use already defined colors
+colorsToUse:=defaultColorsLatencyRead
+yRange:=[0:10]
+#xRange:=[0:10]
+xLabel:=Number of Clients
+yLabel:=Latency [ms]
+keyPosition:=top left
+##use this optional... if defined us this as prefix for the line tile allready in the plot
+linePrefixPerLine:=MW GetAllKeys Latency Nsharded:,Queue Time Nsharded:,Memcached Time Nsharded:
+##use this optional, when defined directly use it
+#lineTitles:=Lineli 1 #wt8;Lineli 2 #wt28;Lineli 3 #wt38;Lineli 4 #wt48
+
+
+
+##MultiGets
+MultiGets:=MultiGets
+pdfFileName:=MultiGets
+id:=289,261,290,262
+linePrefixPerLine:=nonSharded-GetAllKeys:,Sharded-GetAllKeys:,nonSharded-MW-GetAllK-Latency:,Sharded-Get Latency:
+colorsToUse:=#33ccff,#33cc33,#cc3300,#000066,#33ccff,#33cc33,#cc3300,#000066
+xLabel:=Key-Size 1:x
+yLabel:=Latency [ms]
+yRange:=[0:20] 
+x2y2:=289,261
+x2y2PT:=9
+x2Range:=[0:*] 
+y2Range:=[0:*] 
+y2Label:=Throughput [1/sec]
+title:=get vs latency
+keyPosition:=top left
+
+##MultiGetsSets
+MultiGetsSets:=MultiGetsSetsMultiGets
+pdfFileName:=MultiGetsSets
+id:=289,261,270,298,290,262,271,299
+linePrefixPerLine:=nonSharded-Get:,Sharded-Get:,Sharded-Set:,nonSharded-Set:,nonSharded-Get Latency:,Sharded-Get Latency:,Sharded-Set Latency:,nonSharded-Set Latency:
+colorsToUse:=#33ccff,#33cc33,#cc3300,#000066,#33ccff,#33cc33,#cc3300,#000066
+xLabel:=Key-Size 1:x
+yLabel:=Latency [ms]
+yRange:=[0:15] 
+x2y2:=289,261,270,298
+x2y2PT:=9
+x2Range:=[0:*] 
+y2Range:=[0:*] 
+y2Label:=Throughput [1/sec]
+title:=set vs latency
+keyPosition:=top left
+
+
+
+##multigetsShardedVSNonShardedThroughputClient
+multigetsShardedVSNonShardedThroughputClient:=multigetsShardedVSNonShardedThroughputClient
+pdfFileName:=multigetsShardedVSNonShardedThroughputClient
+id:=280,308
+title:=(Client+MultiGet)-mode the gets are multiplied by key-Size
+colorsToUse:=defaultColorsThroughputRead
+linePrefixPerLine:=sharded TP CLIENT:,non-sharded TP CLIENT:
+yRange:=[0:5500]
+keyPosition:=top left
+xLabel:=Key-Size 1:x
+yLabel:=Throughput [1/sec]
+keyPosition:=top left
+
+##multigetsClientVSMWThroughput
+multigetsClientVSMWThroughput:=multigetsClientVSMWThroughput
+pdfFileName:=multigetsClientVSMWThroughput
+id:=280,308,261,289
+title:=(Client+MultiGet)-mode the gets are multiplied by key-Size
+colorsToUse:=defaultColorsThroughputRead
+#linePrefixPerLine:=sharded TP CLIENT:,non-sharded TP CLIENT:,sharded TP MW:,non-sharded TP MW:
+yRange:=[0:5500]
+keyPosition:=top left
+xLabel:=Key-Size 1:x
+yLabel:=Throughput [1/sec]
+keyPosition:=top left
+
+
+
+
+
+##baseline21And22GetSetThroughput
+baseline21And22GetSetThroughput:=baseline21And22GetSetThroughput
+pdfFileName:=baseline21And22GetSetThroughput
+id:=1,4,7,10
+linePrefixPerLine:=Get:,Set:,Get:,Set
+colorsToUse:=#33ccff,#33cc33,#cc3300,#000066
+xLabel:=Number of Clients
+yLabel:=Throughput [1/sec]
+keyPosition:=top left
+
+
+##baseline21And22GetSetLatency
+baseline21And22GetSetLatency:=baseline21And22GetSetLatency
+pdfFileName:=baseline21And22GetSetLatency
+id:=2,5,8,11
+linePrefixPerLine:=Get:,Set:,Get:,Set
+colorsToUse:=#33ccff,#33cc33,#cc3300,#000066
+xLabel:=Number of Clients
+yLabel:=Latency [ms]
+keyPosition:=top left
+
+
+##fullSystem41LatencyVsQueueAndTP
+fullSystem41LatencyVsQueueAndTP:=fullSystem41LatencyVsQueueAndTP
+pdfFileName:=fullSystem41LatencyVsQueueAndTP
+id:=220,228,232,216
+linePrefixPerLine:=Middleware:,Queue Waiting Time:,Memcached:,Throughput:
+colorsToUse:=#33ccff,#33cc33,#cc3300,#000066
+xLabel:=Number of Clients
+yLabel:=Latency [ms]
+yRange:=[0:30] 
+x2y2:=216
+x2Range:=[0:*] 
+y2Range:=[0:8000] 
+y2Label:=Throughput [1/sec]
+keyPosition:=top left
+
+
+
+
+##prüfe ob keys korrekt zugeordnet... 
+##fullsystem41ClientVSMW
+fullsystem41ClientVSMW:=fullsystem41ClientVSMW
+pdfFileName:=fullsystem41ClientVSMW
+id:=220,228,232,216,244,248
+linePrefixPerLine:=Middleware:,Queue Waiting Time:,Memcached:,Throughput:,Throughput CLient:,Latency Client:
+colorsToUse:=#33ccff,#33cc33,#cc3300,#000066,#ababab,#ababab
+xLabel:=Number of Clients
+yLabel:=Latency [ms]
+yRange:=[0:30] 
+x2y2:=216,244
+x2Range:=[0:*] 
+y2Range:=[0:8000] 
+y2Label:=Throughput [1/sec]
+keyPosition:=top left
+
+
+##multigetsPercentilesShardedVSNonSharded
+multigetsPercentilesShardedVSNonSharded:=multigetsPercentilesShardedVSNonSharded
+pdfFileName:=multigetsPercentilesShardedVSNonSharded
+id:=317,319,321,323,325,327
+title:=tbd
+colorsToUse:=defaultColorsLatencyRead
+#linePrefixPerLine:=sharded avg;sharded 50th;sharded 90th;non-sharded avg;non-sharded 50th;non-sharded 90th;
+yRange:=[0:15]
+keyPosition:=top left
+xLabel:=Key-Size 1:x
+yLabel:=Latency [ms]
+keyPosition:=top left
+
+#######################histograms
+#histogramsMWshardedVSnonsharded
+histogramsMWshardedVSnonsharded:=histogramsMWshardedVSnonsharded
+pdfFileName:=histogramsMWshardedVSnonsharded
+id:=329,331
+xLabel:=Latency in us
+yLabel:=Number of Clients served in this time
+colorsToUse:=defaultColorsLatencyRead
+#title:=tbd
+#linePrefixPerLine:=sharded avg;sharded 50th;sharded 90th;non-sharded avg;non-sharded 50th;non-sharded 90th;
+#yRange:=[0:15]
+keyPosition:=top left
+
+#######################histograms
+#histogramsCLIENTshardedVSnonsharded
+histogramsCLIENTshardedVSnonsharded:=histogramsCLIENTshardedVSnonsharded
+pdfFileName:=histogramsCLIENTshardedVSnonsharded
+id:=333,335
+xLabel:=Latency in us
+yLabel:=Number of Clients served in this time
+colorsToUse:=defaultColorsLatencyRead
+title:=Scaling CLient Werte willkürlich
+#linePrefixPerLine:=sharded avg;sharded 50th;sharded 90th;non-sharded avg;non-sharded 50th;non-sharded 90th;
+#yRange:=[0:15]
+keyPosition:=top left
+
+#######################histograms
+#histogramsShardedMWvsCLIENT
+histogramsShardedMWvsCLIENT:=histogramsShardedMWvsCLIENT
+pdfFileName:=histogramsShardedMWvsCLIENT
+id:=329,331,333,335
+xLabel:=Latency in us
+yLabel:=Number of Clients served in this time
+colorsToUse:=defaultColorsLatencyRead
+title:=Scaling CLient Werte willkürlich
+#linePrefixPerLine:=sharded avg;sharded 50th;sharded 90th;non-sharded avg;non-sharded 50th;non-sharded 90th;
+#yRange:=[0:15]
+keyPosition:=top left
+
+
+#######################histograms
+#histogramsShardedMWvsCLIENTSeeeeet
+histogramsShardedMWvsCLIENTSeeeeet:=histogramsShardedMWvsCLIENTSeeeeet
+pdfFileName:=histogramsShardedMWvsCLIENTSeeeeet
+id:=330,332,334,336
+xLabel:=Latency in us
+yLabel:=Number of Clients served in this time
+colorsToUse:=defaultColorsLatencyWrite
+title:=Scaling CLient Werte willkürlich
+#linePrefixPerLine:=sharded avg;sharded 50th;sharded 90th;non-sharded avg;non-sharded 50th;non-sharded 90th;
+#yRange:=[0:15]
+keyPosition:=top left
+

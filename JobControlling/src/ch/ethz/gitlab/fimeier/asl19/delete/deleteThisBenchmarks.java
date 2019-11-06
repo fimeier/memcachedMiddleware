@@ -1,4 +1,4 @@
-package ch.ethz.gitlab.fimeier.asl19;
+package ch.ethz.gitlab.fimeier.asl19.delete;
 
 import ch.ethz.gitlab.fimeier.asl19.jobcontrolling.measuring.Benchmarks;
 

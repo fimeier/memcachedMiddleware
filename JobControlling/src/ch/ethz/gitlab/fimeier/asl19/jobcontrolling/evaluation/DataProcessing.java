@@ -11,6 +11,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.json.Json;
@@ -28,51 +29,41 @@ public class DataProcessing extends ASLJobControlling {
 
 		if (consolidateStatistics) {
 			if(consolidateStatisticsBaseline21) {
-				//TODO prüfe wofür ich diese Aufrufe jeweils benutzt habe
-				//consolidateStatisticsBaseline21();
 				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline21/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline21Client";
+				System.out.println("***************************************** creating CLIENT baseline21/numClients plots **************************************\n");
+				String configAggregation=plotConfigBaseFolder+"Baseline21numClients_MemtierClient";
 				createPlots(configAggregation);
-
+				
 				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline21/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline21Client";
+				System.out.println("***************************************** creating CLIENT baseline21/valueSize plots **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline21valueSize_MemtierClient";
 				createPlots(configAggregation);
 			}
 			if(consolidateStatisticsBaseline22) {
-				//consolidateStatisticsBaseline22();
 				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline22/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline22Client";
+				System.out.println("***************************************** creating CLIENT baseline22/numClients plots **************************************\n");
+				String configAggregation=plotConfigBaseFolder+"Baseline22numClients_MemtierClient";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating CLIENT baseline22/valueSize plots **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline22valueSize_MemtierClient";
 				createPlots(configAggregation);
 
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline22/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline22Client";
-				createPlots(configAggregation);
+			
 			}
 
 			if(consolidateStatisticsBaseline31) {
 				//consolidateStatisticsBaseline31();
 				System.out.println("\n*****************************************************************************************************************");
 				System.out.println("***************************************** creating baseline31/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline31";
+				String configAggregation=plotConfigBaseFolder+"configAggregationReadOnlyBaseline31";
 				createPlots(configAggregation);
 
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating baseline31/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline31";
-				createPlots(configAggregation);
-
+			
 				System.out.println("\n*****************************************************************************************************************");
 				System.out.println("***************************************** creating CLIENT baseline31/ReadOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline31Client";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline31/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline31Client";
+				configAggregation=plotConfigBaseFolder+"configAggregationReadOnlyBaseline31Client";
 				createPlots(configAggregation);
 
 
@@ -82,23 +73,14 @@ public class DataProcessing extends ASLJobControlling {
 				//consolidateStatisticsBaseline31();
 				System.out.println("\n*****************************************************************************************************************");
 				System.out.println("***************************************** creating baseline32/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline32";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating baseline32/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline32";
+				String configAggregation=plotConfigBaseFolder+"configAggregationReadOnlyBaseline32";
 				createPlots(configAggregation);
 
 				System.out.println("\n*****************************************************************************************************************");
 				System.out.println("***************************************** creating CLIENT baseline32/ReadOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationReadOnlyBaseline32Client";
+				configAggregation=plotConfigBaseFolder+"configAggregationReadOnlyBaseline32Client";
 				createPlots(configAggregation);
 
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline32/WriteOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationWriteOnlyBaseline32Client";
-				createPlots(configAggregation);
 
 
 			}
@@ -106,66 +88,19 @@ public class DataProcessing extends ASLJobControlling {
 				//consolidateStatisticsfullSystem41();
 				System.out.println("\n*****************************************************************************************************************");
 				System.out.println("***************************************** creating fullSystem41 plots *******************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationfullSystem41";
+				String configAggregation=plotConfigBaseFolder+"configAggregationfullSystem41";
 				createPlots(configAggregation);
 
 				System.out.println("\n*****************************************************************************************************************");
 				System.out.println("***************************************** creating CLIENT fullSystem41 plots *******************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationfullSystem41Client";
+				configAggregation=plotConfigBaseFolder+"configAggregationfullSystem41Client";
 				createPlots(configAggregation);				
 			}
 
-			if(consolidateStatisticsshardedCase51) {
-				//consolidateStatisticsshardedCase51();
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating shardedCase51/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationshardedCase51";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT shardedCase51/ReadOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationshardedCase51Client";
-				createPlots(configAggregation);
-			}
-			if(consolidateStatisticsnonshardedCase52) {
-				//consolidateStatisticsnonshardedCase52();
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating nonshardedCase52/ReadOnly plots **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationnonshardedCase52";
-				createPlots(configAggregation);
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT nonshardedCase52/ReadOnly plots **************************************\n");
-				configAggregation=experimentsBaseFolder+"configAggregationnonshardedCase52Client";
-				createPlots(configAggregation);
-			}
-			if(consolidateStatisticsMultiGetsPercentiles) {
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating special plots Multi-Gets sharded and non-sharded **************************************\n");
-				//configAggregationshardedCase51PercentilesClient
-				String configAggregation=experimentsBaseFolder+"configAggregationshardedCase51Percentiles";
-				createPlots(configAggregation);                        
-				configAggregation=experimentsBaseFolder+"configAggregationnonshardedCase52Percentiles";
-				createPlots(configAggregation);
-			}
-			if(createHistogramsMultiGets) {
-
-				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating Histograms Multi-Gets sharded and non-sharded **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationshardedCase51Histogram";		
-				createPlots(configAggregation); 
-
-
-				configAggregation=experimentsBaseFolder+"configAggregationNonshardedCase52Histogram";		
-				createPlots(configAggregation); 
-
-				configAggregation=experimentsBaseFolder+"configAggregationshardedCase51HistogramClient";		
-				createPlots(configAggregation); 
-
-				configAggregation=experimentsBaseFolder+"configAggregationNonshardedCase52HistogramClient";		
-				createPlots(configAggregation);
-			}
-
+			
+			
+			
+			
 
 			/**
 			 * create special plots
@@ -173,7 +108,7 @@ public class DataProcessing extends ASLJobControlling {
 			if (createConsolitatedPlots) {
 				System.out.println("\n*****************************************************************************************************************");
 				System.out.println("***************************************** consolidate PLOTS **************************************\n");
-				String configAggregation=experimentsBaseFolder+"configAggregationAllLines";
+				String configAggregation=plotConfigBaseFolder+"configAggregationAllLines";
 				createSpecialPlots(configAggregation,"special Plot: allLines ");
 
 
@@ -207,14 +142,16 @@ public class DataProcessing extends ASLJobControlling {
 
 
 	public void callGnuPlotAndPDFLatex(String plotConfigFile, String texFile) {
+		//call gnuplot
 		String[] cmd = new String[]{"/usr/bin/gnuplot","-c", plotConfigFile};
 		executeSimpleLocalCmd(cmd);
 
+		//call latex
 		String c ="/usr/bin/pdflatex";
 		String arg1 = "-synctex=1";
 		String arg2 ="-interaction=nonstopmode";
-		String oF ="-output-directory=/home/fimeier/Dropbox/00ETH/HS18/05_Advanced_Systems_Lab/git/asl-fall18-project/JobControlling/experiments/generatedPlots";
-
+		//String oF ="-output-directory=/home/fimeier/Dropbox/00ETH/HS18/05_Advanced_Systems_Lab/git/asl-fall18-project/JobControlling/experiments/generatedPlots";
+		String oF ="-output-directory="+experimentsBaseFolder+"generatedPlots";
 		cmd = new String[] {c,arg1,arg2,oF,texFile};
 		executeSimpleLocalCmd(cmd);
 	}
@@ -404,10 +341,10 @@ public class DataProcessing extends ASLJobControlling {
 		String gnuPlotConfigOutputFile = experimentsBaseFolder+experimentFolder+"aggregation/PlotConfigMiddleware"+experimentSubfolder;
 
 		if (clientMode) {
-			aggregationFolder = experimentsBaseFolder+experimentFolder+"aggregationClient/";
-			aggregatedDataOutputFile = experimentsBaseFolder+experimentFolder+experimentSubfolder+"AggregatedClient";
-			latexOutputFile = experimentsBaseFolder+experimentFolder+experimentName+"Client.tex";
-			gnuPlotConfigOutputFile = experimentsBaseFolder+experimentFolder+"aggregationClient/PlotConfigClient"+experimentSubfolder;
+			aggregationFolder = experimentsBaseFolder+experimentFolder+"aggregationMemtierClient/";
+			aggregatedDataOutputFile = experimentsBaseFolder+experimentFolder+experimentSubfolder+"MemtierClient";
+			latexOutputFile = experimentsBaseFolder+experimentFolder+experimentName+"_MemtierClient.tex";
+			gnuPlotConfigOutputFile = experimentsBaseFolder+experimentFolder+"aggregationMemtierClient/PlotConfigMemtierClient"+experimentSubfolder;
 		}
 		if (percentilesMode) {
 			aggregationFolder = experimentsBaseFolder+experimentFolder+"aggregationPercentiles/";
@@ -441,6 +378,17 @@ public class DataProcessing extends ASLJobControlling {
 		//where are the data files... should be okay without changes
 		String collectFolderInputString = experimentsBaseFolder+experimentFolder+experimentSubfolder;
 		File folderContainingInputData = new File(collectFolderInputString);
+		
+		
+		/*
+		 * create folders:
+		 * aggregationFolder
+		 */
+		String[] foldersToCreate = {aggregationFolder, experimentsBaseFolder+"generatedPlots", experimentsBaseFolder+"generatedPlots/allLines/source"};
+		for (String folder: foldersToCreate) {
+			new File(folder).mkdirs();
+		}
+
 
 
 		/*
@@ -511,21 +459,15 @@ public class DataProcessing extends ASLJobControlling {
 
 
 		/*
-		 * finalStatsBaseline31_ReadOnly _nVC=1nWorkerThreads8_Rep=3_Middleware1
-		 * json.txtBaseline31_ReadOnly   _nVC=28nWorkerThreads8_Rep=1_Client1
-		 * 
+		 * Filter to select the files
 		 * Used in the loop.. compare the containsTemp String
-		 * String containsTemp = filterInnerLoopContains.get(i);
-		 * String[] contains = {containsTemp}; //add here other strings that should be in the filename....
 		 */
-		//use this as default and change it if needed (complete for for...
-		ArrayList<String> filterInnerLoopContains = new ArrayList<>();
+		List<String[]> filterInnerLoopContains = new ArrayList<>();
 		for (String x: xAxisFilter) {
 			for (String line: linesFilter) {
 				for (String rep: repetitionFilter) {
-					String temp = x + line + rep; //change this if needed
+					String[] temp = {x+"_",line+"_",rep+"_"};
 					filterInnerLoopContains.add(temp);
-					//System.out.println(temp);
 				}
 			}
 		}
@@ -639,8 +581,27 @@ public class DataProcessing extends ASLJobControlling {
 		 */
 
 
+		
+		/*
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * START aggregation aggregation aggregation aggregation aggregation aggregation aggregation aggregation aggregation
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		StringBuilder output = new StringBuilder();
-
 		/**
 		 * ganze logik ist oben in filterInnerLoopContains drin, weshalb hier viele Werte irrelevant sind		
 		 */
@@ -660,9 +621,10 @@ public class DataProcessing extends ASLJobControlling {
 				int repIndex = 0;
 				for (int rep: numberOfRepetitions) {
 
-					String containsTemp = filterInnerLoopContains.get(i);
+					//String containsTemp = filterInnerLoopContains.get(i);
 					//add here other strings that should be in the filename....
-					String[] contains = {containsTemp};
+					//String[] contains = {containsTemp};
+					String[] contains = filterInnerLoopContains.get(i);
 					ArrayList<String> filesFoundMiddleware = getFilesByFilter(folderContainingInputData, filterInnerLoopPrefix, contains, expectedNumberOfFiles);
 
 					/*
@@ -837,7 +799,8 @@ public class DataProcessing extends ASLJobControlling {
 					double avgValues = allStats.get(1);
 					double stdevValues = allStats.get(2);
 
-					//add the runs if needed for plotting
+					//add the runs if needed for plotting => meint dass Werte der Runs hinzugefügt werden,
+					//auch wenn eigentlich nur avg über alle runs geplottet wird
 					for (double valueRun: aggregatedRunValuesAllKeys.get(k))
 						outputOneLineInDataFile += " " + String.format("%.2f", valueRun);
 
@@ -856,6 +819,26 @@ public class DataProcessing extends ASLJobControlling {
 
 		//write the data
 		writeFile(aggregatedDataOutputFile,output.toString());
+		
+		/*
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * ENDE aggregation aggregation aggregation aggregation aggregation aggregation aggregation aggregation aggregation
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 
 
 		/*
@@ -879,7 +862,7 @@ public class DataProcessing extends ASLJobControlling {
 
 			//outputfile
 			gnuPlotConfig += "set terminal pdf \n";
-			String pdfFileName = aggregationFolder+middlewareDataKeys.get(k).key+".pdf";
+			String pdfFileName = aggregationFolder+experimentSubfolder+"_"+middlewareDataKeys.get(k).key+".pdf";
 
 			gnuPlotConfig += "set output \""+pdfFileName+"\" \n";
 			pdfOutputFiles.add(pdfFileName);
@@ -1421,7 +1404,7 @@ public class DataProcessing extends ASLJobControlling {
 				//change key if it is not itself middlewareDataKey
 				//assuming all key are at the end of the config file
 				else {
-					key = prefixKeyProperties + key;
+					key = prefixKeyProperties + key; //???
 				}
 
 				String valueString = line.split(":=")[1];
@@ -1800,12 +1783,13 @@ public class DataProcessing extends ASLJobControlling {
 
 		ArrayList<String> filesFound = new ArrayList<>();
 
-		String contAsString = "";
-		if (contains != null) {
-			for (int i = 0; i < contains.length; i++) {
-				contAsString += contains[i] +", ";
-			}
-		}
+		//Nur debugging
+//		String contAsString = "";
+//		if (contains != null) {
+//			for (int i = 0; i < contains.length; i++) {
+//				contAsString += contains[i] +", ";
+//			}
+//		}
 
 		File[] filesForAggregation = folder.listFiles(getFilter(startsWith, contains));
 		//debugg
@@ -1814,7 +1798,7 @@ public class DataProcessing extends ASLJobControlling {
 
 		//System.out.println("Found "+filesForAggregation.length +" many files with this filter startsWith="+startsWith +" contains="+contAsString);
 		if (filesForAggregation.length !=expectedNumberOfFiles) {
-			System.out.println("ERROR expectedNumberOfFiles....="+expectedNumberOfFiles+" vs "+filesForAggregation.length );
+			System.out.println("ERRRRRRRRRRRRRRRRRRRRRRROR expectedNumberOfFiles....="+expectedNumberOfFiles+" vs "+filesForAggregation.length );
 		}
 
 		for (final File fileEntry: filesForAggregation) {

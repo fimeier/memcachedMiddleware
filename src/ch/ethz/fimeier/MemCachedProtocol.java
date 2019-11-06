@@ -150,9 +150,11 @@ public class MemCachedProtocol {
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				MyMiddleware.logger.severe("ERROR Opening Connection with "+ mcAddress +" on port "+port + " generated: "+e.getMessage());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				MyMiddleware.logger.severe("ERROR Opening Connection with "+ mcAddress +" on port "+port + " generated: "+e.getMessage());
 			}
 
 

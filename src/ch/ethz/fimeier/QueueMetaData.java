@@ -105,7 +105,7 @@ public class QueueMetaData {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			in.append("");
+			in.append(""); //?
 		}
 	}
 

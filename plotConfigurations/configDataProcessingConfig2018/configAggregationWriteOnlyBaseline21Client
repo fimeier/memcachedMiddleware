@@ -1,0 +1,68 @@
+####Stuff fix for all keys
+mode:=client
+#Files
+experimentFolder:=baseline21/
+experimentSubfolder:=WriteOnly
+experimentName:=baseline21WriteOnly
+filterInnerLoopPrefix:=json.txt
+expectedNumberOfFiles:=3
+
+#optional title for all keys in this file
+defaultTitle:=Datasource Client: ../baseline21/WriteOnly
+
+#json.txtBaseline21_ReadOnly_nVC=1_Rep=3_Client1
+
+#Loop-Stuff
+xAxisDataPointsInput:=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32
+ratioXaxis:=6
+xFilterPrefix:=_nVC=
+
+linesToPlotInput:=1
+linesFilterPrefix:=DoNotUseAnyFilter
+
+numberOfRepetitions:=1,2,3
+repetitionFilterPrefix:=_Rep=
+
+##ReadOnly Client Keys not null
+middlewareDataKeys:=throughputSet,latencySet,KBset
+
+##all keys
+#throughputGet,latencyGet
+#throughputSet,latencySet
+#throughputTotal,latencyTotal
+#KBget
+#KBset 
+#KBtotal
+
+
+#####details for keys
+##throughputSet,latencySet,KBset
+##############################################################################set
+##throughputSet
+throughputSet:=throughputSet
+aggregationType:=sum
+mainType:=tp
+operation:=set
+colorsToUse:=defaultColorsThroughputWrite
+linePrefix:=not used....
+lineTitles:=3C-1S
+
+##latencySet
+latencySet:=latencySet
+aggregationType:=avg
+mainType:=latency
+operation:=set
+colorsToUse:=defaultColorsLatencyWrite
+linePrefix:=not used....
+lineTitles:=3C-1S
+
+##KBset
+KBset:=KBset
+aggregationType:=sum
+mainType:=kb
+operation:=set
+colorsToUse:=defaultColorsThroughputWrite
+linePrefix:=not used....
+lineTitles:=3C-1S
+
+

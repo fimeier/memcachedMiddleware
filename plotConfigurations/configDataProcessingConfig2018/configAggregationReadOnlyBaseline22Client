@@ -1,0 +1,80 @@
+####Stuff fix for all keys
+mode:=client
+#Files
+experimentFolder:=baseline22/
+experimentSubfolder:=ReadOnly
+experimentName:=baseline22ReadOnly
+filterInnerLoopPrefix:=json.txt
+expectedNumberOfFiles:=2
+
+#optional title for all keys in this file
+defaultTitle:=Datasource Client: ../baseline22/ReadOnly
+
+#json.txt2ndInstBaseline22_ReadOnly_nVC=32_Rep=3_Client1
+
+#Loop-Stuff
+xAxisDataPointsInput:=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32
+ratioXaxis:=2
+xFilterPrefix:=_nVC=
+
+linesToPlotInput:=1
+linesFilterPrefix:=DoNotUseAnyFilter
+
+numberOfRepetitions:=1,2,3
+repetitionFilterPrefix:=_Rep=
+
+##ReadOnly Client Keys not null
+middlewareDataKeys:=throughputGet,latencyGet,KBget
+#throughputTotal,latencyTotal,KBget,KBtotal
+
+##all keys
+#throughputGet,latencyGet
+#throughputSet,latencySet
+#throughputTotal,latencyTotal
+#KBget
+#KBset 
+#KBtotal
+
+
+#####details for keys
+
+#throughputGet,latencyGet,KBget
+##############################################################################get
+
+##throughputGet
+throughputGet:=throughputGet
+aggregationType:=sum
+mainType:=tp
+operation:=get
+colorsToUse:=defaultColorsThroughputRead
+linePrefix:=do not use this because
+lineTitles:=1C-2S
+#optional
+#yRange:=[-1000:5000]
+#xRange:=[0:500]
+#keyPosition:=left bottom
+#xLabel:=Anzahl von Klienten
+#yLabel:=thruuuputli in kb
+#title:=ein bildli das schön ist vom Experiment baseline31
+#lineTitles:=Lineli 1 #wt8;Lineli 2 #wt28;Lineli 3 #wt38;Lineli 4 #wt48
+
+##latencyGet
+latencyGet:=latencyGet
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=not used....
+lineTitles:=1C-2S
+
+##KBget
+KBget:=KBget
+aggregationType:=sum
+mainType:=kb
+operation:=get
+colorsToUse:=defaultColorsThroughputRead
+lineTitles:=1C-2S
+
+
+
+

@@ -25,6 +25,11 @@ public class ASLJobControlling {
 	 * HERE IS THE WHOLE CONFIGURATION
 	 * TODO: Parse parameters from configfile 1:1
 	 */
+	
+	public static boolean dataProcessingMode = true;
+	public static String experimentsBaseFolderDataProcessing = "/home/fimeier/asl-fall19-project/dataSource/benchmarksAzure_3_11_2019/experiments/";
+	public static String plotConfigBaseFolder = "/home/fimeier/asl-fall19-project/plotConfigurations/";
+
 
 	/*
 	 * 
@@ -151,19 +156,22 @@ public class ASLJobControlling {
 	 * Colors for plots
 	 * TODO: reuse Write Colors... or find better ones
 	 */
-	static public String[] defaultColorsThroughputRead = {"#33ccff", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"}; 
+	static public String[] defaultColorsThroughputRead = {"#33ccff", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068", "#FFAAFF"}; 
 	static public String[] defaultColorsThroughputWrite = {"#33ccff", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"};
-	static public String[] defaultColorsLatencyRead = {"#ffcc99", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"};
+	static public String[] defaultColorsLatencyRead = {"#ffcc99", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068", "#FFAAFF"};
 	static public String[] defaultColorsLatencyWrite = {"#661400", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"};
 	static public String[] unknownTypeColors = {"#D30FAF", "#D30FAF","#D30FAF", "#D30FAF", "#D30FAF", "#D30FAF"};
 
 
+	public static boolean consolidateStatistics = true;
+	public static boolean consolidateStatisticsBaseline21 = true;
+	public static boolean consolidateStatisticsBaseline22 = true;
+
+	
 	/*
 	 * what pictures should be generate (from ASL2018)
 	 */
-	public static boolean consolidateStatistics = false;
-	public static boolean consolidateStatisticsBaseline21 = false;
-	public static boolean consolidateStatisticsBaseline22 = false;
+
 	public static boolean consolidateStatisticsBaseline31 = false;
 	public static boolean consolidateStatisticsBaseline32 = false;
 	public static boolean consolidateStatisticsfullSystem41 = false;
@@ -178,6 +186,7 @@ public class ASLJobControlling {
 	 * Helper for Statistics
 	 */
 	//used in createAllStatistics&createSpecialPlots
+	//Shows a unique ID per run... to easily copy lines together (my assumption, cool what I did last year)
 	public static boolean showIdInLineTitle = true;
 
 
@@ -281,6 +290,22 @@ public class ASLJobControlling {
 
 
 	public static void main(String[] args) {
+		
+		/*
+		 * do DataProcessing (plots,...)
+		 */
+		if (dataProcessingMode) {
+			
+			experimentsBaseFolder = experimentsBaseFolderDataProcessing;
+			allLinesBaseFolder = experimentsBaseFolder+"generatedPlots/allLines/";
+			allLinesOutputFolderSource = allLinesBaseFolder+"source/";
+			
+			DataProcessing dataprocessing = new DataProcessing();
+			dataprocessing.runDataProcessing();
+			
+			return;
+		}
+			
 
 		/*
 		 * create folders
@@ -348,11 +373,7 @@ public class ASLJobControlling {
 		Benchmarks benchmark = new Benchmarks();
 		benchmark.runBenchmarks();
 
-		/*
-		 * do DataProcessing (plots,...)
-		 */
-		//DataProcessing dataprocessing = new DataProcessing();
-		//dataprocessing.runDataProcessing();
+		
 
 		System.out.println("the E N D of ASLJobControlling!!!!");
 
