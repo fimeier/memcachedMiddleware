@@ -50,51 +50,147 @@ public class DataProcessing extends ASLJobControlling {
 				configAggregation=plotConfigBaseFolder+"Baseline22valueSize_MemtierClient";
 				createPlots(configAggregation);
 
-			
 			}
-
+			
 			if(consolidateStatisticsBaseline31) {
-				//consolidateStatisticsBaseline31();
+				
 				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating baseline31/ReadOnly plots **************************************\n");
-				String configAggregation=plotConfigBaseFolder+"configAggregationReadOnlyBaseline31";
+				System.out.println("***************************************** creating Baseline31NumClients_WorkerThreads_8 **************************************\n");
+				String configAggregation=plotConfigBaseFolder+"Baseline31numClients_WorkerThreads_8";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline31NumClients_WorkerThreads_32 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline31numClients_WorkerThreads_32";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline31NumClients_WorkerThreads_64 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline31numClients_WorkerThreads_64";
 				createPlots(configAggregation);
 
 			
 				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline31/ReadOnly plots **************************************\n");
-				configAggregation=plotConfigBaseFolder+"configAggregationReadOnlyBaseline31Client";
+				System.out.println("***************************************** creating Baseline31ValueSize_WorkerThreads_8 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline31valueSize_WorkerThreads_8";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline31ValueSize_WorkerThreads_32 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline31valueSize_WorkerThreads_32";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline31ValueSize_WorkerThreads_64 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline31valueSize_WorkerThreads_64";
 				createPlots(configAggregation);
 
 
 			}
 			if(consolidateStatisticsBaseline32) {
-				//consolidateStatisticsBaseline32();
-				//consolidateStatisticsBaseline31();
+				
 				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating baseline32/ReadOnly plots **************************************\n");
-				String configAggregation=plotConfigBaseFolder+"configAggregationReadOnlyBaseline32";
+				System.out.println("***************************************** creating Baseline32NumClients_WorkerThreads_8 **************************************\n");
+				String configAggregation=plotConfigBaseFolder+"Baseline32numClients_WorkerThreads_8";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline32NumClients_WorkerThreads_32 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline32numClients_WorkerThreads_32";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline32NumClients_WorkerThreads_64 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline32numClients_WorkerThreads_64";
 				createPlots(configAggregation);
 
+			
 				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT baseline32/ReadOnly plots **************************************\n");
-				configAggregation=plotConfigBaseFolder+"configAggregationReadOnlyBaseline32Client";
+				System.out.println("***************************************** creating Baseline32ValueSize_WorkerThreads_8 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline32valueSize_WorkerThreads_8";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline32ValueSize_WorkerThreads_32 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline32valueSize_WorkerThreads_32";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline32ValueSize_WorkerThreads_64 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline32valueSize_WorkerThreads_64";
 				createPlots(configAggregation);
 
 
 
 			}
-			if(consolidateStatisticsfullSystem41) {
-				//consolidateStatisticsfullSystem41();
+			if(consolidateStatisticsBaseline33) {
+				
 				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating fullSystem41 plots *******************************************\n");
-				String configAggregation=plotConfigBaseFolder+"configAggregationfullSystem41";
+				System.out.println("***************************************** creating Baseline33NumClients_WorkerThreads_8 **************************************\n");
+				String configAggregation=plotConfigBaseFolder+"Baseline33numClients_WorkerThreads_8";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline33NumClients_WorkerThreads_32 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline33numClients_WorkerThreads_32";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline33NumClients_WorkerThreads_64 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline33numClients_WorkerThreads_64";
 				createPlots(configAggregation);
 
+			
 				System.out.println("\n*****************************************************************************************************************");
-				System.out.println("***************************************** creating CLIENT fullSystem41 plots *******************************************\n");
-				configAggregation=plotConfigBaseFolder+"configAggregationfullSystem41Client";
-				createPlots(configAggregation);				
+				System.out.println("***************************************** creating Baseline33ValueSize_WorkerThreads_8 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline33valueSize_WorkerThreads_8";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline33ValueSize_WorkerThreads_32 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline33valueSize_WorkerThreads_32";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline33ValueSize_WorkerThreads_64 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline33valueSize_WorkerThreads_64";
+				createPlots(configAggregation);
+			}
+			
+			if(consolidateStatisticsBaseline34) {
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline34NumClients_WorkerThreads_8 **************************************\n");
+				String configAggregation=plotConfigBaseFolder+"Baseline34numClients_WorkerThreads_8";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline34NumClients_WorkerThreads_32 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline34numClients_WorkerThreads_32";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline34NumClients_WorkerThreads_64 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline34numClients_WorkerThreads_64";
+				createPlots(configAggregation);
+
+			
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline34ValueSize_WorkerThreads_8 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline34valueSize_WorkerThreads_8";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline34ValueSize_WorkerThreads_32 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline34valueSize_WorkerThreads_32";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline34ValueSize_WorkerThreads_64 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline34valueSize_WorkerThreads_64";
+				createPlots(configAggregation);
+
+
 			}
 
 			
@@ -325,6 +421,10 @@ public class DataProcessing extends ASLJobControlling {
 		//String filterInnerLoopPrefix = 
 		String filterInnerLoopPrefix = confAggregation.get("filterInnerLoopPrefix");//"finalStatsBaseline31_ReadOnly";
 		int expectedNumberOfFiles = Integer.parseInt(confAggregation.get("expectedNumberOfFiles")); //1-middleware => 1 file
+		
+//		String experimentDetail = "";
+//		if (confAggregation.containsKey("experimentDetail"))
+//			experimentDetail = confAggregation.get("experimentDetail");
 
 
 		/*
@@ -336,21 +436,22 @@ public class DataProcessing extends ASLJobControlling {
 			defaultTitle = confAggregation.get("defaultTitle");
 
 		String aggregationFolder = experimentsBaseFolder+experimentFolder+"aggregation/";
-		String aggregatedDataOutputFile = experimentsBaseFolder+experimentFolder+experimentSubfolder+"Aggregated";
-		String latexOutputFile = experimentsBaseFolder+experimentFolder+experimentName+"Middleware.tex";
-		String gnuPlotConfigOutputFile = experimentsBaseFolder+experimentFolder+"aggregation/PlotConfigMiddleware"+experimentSubfolder;
+		//String aggregatedDataOutputFile = experimentsBaseFolder+experimentFolder+experimentSubfolder+experimentDetail+"Aggregated";
+		String aggregatedDataOutputFile = experimentsBaseFolder+experimentFolder+experimentName+"_Aggregated";
+		String latexOutputFile = experimentsBaseFolder+experimentFolder+experimentName+"_Middleware.tex";
+		String gnuPlotConfigOutputFile = aggregationFolder+experimentName+"_PlotConfigMiddleware";
 
 		if (clientMode) {
 			aggregationFolder = experimentsBaseFolder+experimentFolder+"aggregationMemtierClient/";
-			aggregatedDataOutputFile = experimentsBaseFolder+experimentFolder+experimentSubfolder+"MemtierClient";
+			aggregatedDataOutputFile = experimentsBaseFolder+experimentFolder+experimentName+"MemtierClient";
 			latexOutputFile = experimentsBaseFolder+experimentFolder+experimentName+"_MemtierClient.tex";
-			gnuPlotConfigOutputFile = experimentsBaseFolder+experimentFolder+"aggregationMemtierClient/PlotConfigMemtierClient"+experimentSubfolder;
+			gnuPlotConfigOutputFile = experimentsBaseFolder+experimentFolder+"aggregationMemtierClient/PlotConfigMemtierClient"+experimentName;
 		}
 		if (percentilesMode) {
 			aggregationFolder = experimentsBaseFolder+experimentFolder+"aggregationPercentiles/";
-			aggregatedDataOutputFile = experimentsBaseFolder+experimentFolder+experimentSubfolder+"AggregatedPerentiles";
+			aggregatedDataOutputFile = experimentsBaseFolder+experimentFolder+experimentName+"_AggregatedPerentiles";
 			latexOutputFile = experimentsBaseFolder+experimentFolder+experimentName+"Percentiles.tex";
-			gnuPlotConfigOutputFile = experimentsBaseFolder+experimentFolder+"aggregationPercentiles/PlotConfigPercentiles"+experimentSubfolder;
+			gnuPlotConfigOutputFile = experimentsBaseFolder+experimentFolder+"aggregationPercentiles/PlotConfigPercentiles"+experimentName;
 		}
 
 		int nBuckets = 0;
@@ -862,7 +963,7 @@ public class DataProcessing extends ASLJobControlling {
 
 			//outputfile
 			gnuPlotConfig += "set terminal pdf \n";
-			String pdfFileName = aggregationFolder+experimentSubfolder+"_"+middlewareDataKeys.get(k).key+".pdf";
+			String pdfFileName = aggregationFolder+experimentName+"_"+middlewareDataKeys.get(k).key+".pdf";
 
 			gnuPlotConfig += "set output \""+pdfFileName+"\" \n";
 			pdfOutputFiles.add(pdfFileName);

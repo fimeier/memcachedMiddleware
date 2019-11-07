@@ -48,8 +48,8 @@ aggregationType:=sum
 mainType:=tp
 operation:=get
 colorsToUse:=defaultColorsThroughputRead
-linePrefix:=Value-Size=
-#lineTitles:=
+#linePrefix:=Num-Clients=
+lineTitles:=Num-Clients=18;Num-Clients=36;Num-Clients=72;Num-Clients=108;Num-Clients=144;Num-Clients=216;Num-Clients=288
 
 
 ##latencyGet
@@ -58,8 +58,8 @@ aggregationType:=avg
 mainType:=latency
 operation:=get
 colorsToUse:=defaultColorsLatencyRead
-linePrefix:=Value-Size=
-#lineTitles:=
+#linePrefix:=Num-Clients=
+lineTitles:=Num-Clients=18;Num-Clients=36;Num-Clients=72;Num-Clients=108;Num-Clients=144;Num-Clients=216;Num-Clients=288
 
 ##KBget
 KBget:=KBget
@@ -67,8 +67,8 @@ aggregationType:=sum
 mainType:=kb
 operation:=get
 colorsToUse:=defaultColorsThroughputRead
-linePrefix:=Value-Size=
-#lineTitles:=
+#linePrefix:=Num-Clients=
+lineTitles:=Num-Clients=18;Num-Clients=36;Num-Clients=72;Num-Clients=108;Num-Clients=144;Num-Clients=216;Num-Clients=288
 
 
 

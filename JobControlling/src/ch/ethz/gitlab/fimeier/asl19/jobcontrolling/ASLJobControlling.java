@@ -166,15 +166,17 @@ public class ASLJobControlling {
 	public static boolean consolidateStatistics = true;
 	public static boolean consolidateStatisticsBaseline21 = true;
 	public static boolean consolidateStatisticsBaseline22 = true;
+	public static boolean consolidateStatisticsBaseline31 = true;
+	public static boolean consolidateStatisticsBaseline32 = true;
+	public static boolean consolidateStatisticsBaseline33 = true;
+	public static boolean consolidateStatisticsBaseline34 = true;
+
 
 	
 	/*
 	 * what pictures should be generate (from ASL2018)
 	 */
 
-	public static boolean consolidateStatisticsBaseline31 = false;
-	public static boolean consolidateStatisticsBaseline32 = false;
-	public static boolean consolidateStatisticsfullSystem41 = false;
 	public static boolean consolidateStatisticsshardedCase51 = false;
 	public static boolean consolidateStatisticsnonshardedCase52 = false;
 	public static boolean consolidateStatisticsMultiGetsPercentiles = false;

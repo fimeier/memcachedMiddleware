@@ -1,0 +1,109 @@
+#finalStats_e=baseline33_nS=1_nC=3_nInst=2_nCT=1_nVC=2_wl=ReadOnly_dataSize=64_nMW=2_nWT=8_rep=1_Middleware=1
+#
+# HINWEIS: Habe worker threads in rep-filter integriert
+#   _nWT=8_rep=1
+#
+#
+####Stuff fix for all keys
+mode:=middleware
+
+#Files
+experimentFolder:=baseline33/
+experimentSubfolder:=numClients
+experimentName:=Baseline33NumClients_WorkerThreads_8
+filterInnerLoopPrefix:=finalStats_e=baseline33
+expectedNumberOfFiles:=2
+
+experimentDetail:=WT=8
+
+
+
+#Loop-Stuff
+xAxisDataPointsInput:=2,4,8,12,16,24,32
+ratioXaxis:=6
+xFilterPrefix:=_nVC=
+
+linesToPlotInput:=64,128,256,384,512,768,1024
+linesFilterPrefix:=_dataSize=
+
+numberOfRepetitions:=1,2,3
+repetitionFilterPrefix:=_nWT=8_rep=
+
+##read-only case
+middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedResponseTimeGet,avgWorkerThreadResponseTimeGet,avgQueueWaitingTime,avgQueueLength
+
+##all keys
+#middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedResponseTimeGet,avgMemcachedResponseTimeGet,avgWorkerThreadResponseTimeGet,throughputAllCommands,avgQueueWaitingTime,avgQueueLength,throughputMultiGet,avgMemcachedResponseTimeMultiGet,avgWorkerThreadResponseTimeMultiGet,avgMiddlewareResponseTimeMultiGet,throughputSet,avgMemcachedResponseTimeSet,avgWorkerThreadResponseTimeSet,avgMiddlewareResponseTimeSet
+
+#optional title for all keys in this file
+defaultTitle:=Datasource Middleware: ../baseline33/numClients (WorkerThreads_8)
+
+#####details for keys
+
+##############################################################################get
+##throughputGet
+throughputGet:=throughputGet
+aggregationType:=sum
+mainType:=tp
+operation:=get
+colorsToUse:=defaultColorsThroughputRead
+linePrefix:=Value-Size=
+#lineTitles:=
+#optional
+#yRange:=[-1000:5000]
+#xRange:=[0:500]
+#keyPosition:=left bottom
+#xLabel:=Anzahl von Klienten
+#yLabel:=thruuuputli in kb
+#title:=ein bildli das schön ist vom Experiment baseline33
+#lineTitles:=Lineli 1 #wt8;Lineli 2 #wt28;Lineli 3 #wt38;Lineli 4 #wt48
+
+##avgMiddlewareResponseTimeGet
+avgMiddlewareResponseTimeGet:=avgMiddlewareResponseTimeGet
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+
+##avgMemcachedResponseTimeGet
+avgMemcachedResponseTimeGet:=avgMemcachedResponseTimeGet
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+
+##avgWorkerThreadResponseTimeGet
+avgWorkerThreadResponseTimeGet:=avgWorkerThreadResponseTimeGet
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+
+
+##############################################################################ALL COMMANDS OR NO single operation
+
+##avgQueueWaitingTime
+avgQueueWaitingTime:=avgQueueWaitingTime
+aggregationType:=avg
+mainType:=latency
+operation:=tbd
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+
+##avgQueueLength
+avgQueueLength:=avgQueueLength
+aggregationType:=sum
+mainType:=QueueLength
+operation:=tbd
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+
+
