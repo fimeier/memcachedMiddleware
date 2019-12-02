@@ -20,13 +20,13 @@ import ch.ethz.gitlab.fimeier.asl19.jobcontrolling.measuring.Benchmarks;
  * @author fimeier
  *
  */
-public class ASLJobControlling {
+public class ASLJobControlling { 
 	/*
 	 * HERE IS THE WHOLE CONFIGURATION
 	 * TODO: Parse parameters from configfile 1:1
 	 */
 	
-	public static boolean dataProcessingMode = true;
+	public static boolean dataProcessingMode = false;
 	public static String experimentsBaseFolderDataProcessing = "/home/fimeier/asl-fall19-project/dataSource/benchmarksAzure_3_11_2019/experiments/";
 	public static String plotConfigBaseFolder = "/home/fimeier/asl-fall19-project/plotConfigurations/";
 
@@ -152,6 +152,7 @@ public class ASLJobControlling {
 	 * 
 	 * 
 	 */
+	public static String bigRelativeStandardDeviation = "";
 	/*
 	 * Colors for plots
 	 * TODO: reuse Write Colors... or find better ones
@@ -163,7 +164,7 @@ public class ASLJobControlling {
 	static public String[] unknownTypeColors = {"#D30FAF", "#D30FAF","#D30FAF", "#D30FAF", "#D30FAF", "#D30FAF"};
 
 
-	public static boolean consolidateStatistics = true;
+	public static boolean consolidateStatistics = false;
 	public static boolean consolidateStatisticsBaseline21 = true;
 	public static boolean consolidateStatisticsBaseline22 = true;
 	public static boolean consolidateStatisticsBaseline31 = true;
@@ -298,12 +299,13 @@ public class ASLJobControlling {
 		 */
 		if (dataProcessingMode) {
 			
-			experimentsBaseFolder = experimentsBaseFolderDataProcessing;
+			experimentsBaseFolder = experimentsBaseFolderDataProcessing; 
 			allLinesBaseFolder = experimentsBaseFolder+"generatedPlots/allLines/";
 			allLinesOutputFolderSource = allLinesBaseFolder+"source/";
 			
 			DataProcessing dataprocessing = new DataProcessing();
 			dataprocessing.runDataProcessing();
+			
 			
 			return;
 		}

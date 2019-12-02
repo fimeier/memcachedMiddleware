@@ -23,8 +23,8 @@ public class Benchmarks extends ASLJobControlling {
 
 
 	public static int totalNumberOfexperiments = 0;
-	
-	public static int nmonExperimentNumber = 800; //ACHTUNG!!!!!
+
+	public static int nmonExperimentNumber = 1600; //ACHTUNG!!!!!
 
 	//SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
@@ -37,25 +37,25 @@ public class Benchmarks extends ASLJobControlling {
 	 */
 	public void runBenchmarks() {
 
-		System.out.println("******************New Version*********************");
+		System.out.println("******************ACHTUNG!!!! abseline34 angepasst*********************");
 
 		long startExperiment = System.currentTimeMillis();
 		totalNumberOfexperiments = 0;
 
-		//System.out.println("*****************************************************************************************************************\n");
-		//System.out.println("***************************************** starting testCompleteSystem() *****************************\n");
-		//testCompleteSystem();
-
-
-
 //		System.out.println("*****************************************************************************************************************\n");
-//		System.out.println("***************************************** starting baseline21() *****************************\n");
-//		baseline21();
-//
-//		System.out.println("*****************************************************************************************************************\n");
-//		System.out.println("***************************************** starting baseline22() *****************************\n");
-//		baseline22();
-//
+//		System.out.println("***************************************** starting testCompleteSystem() *****************************\n");
+//		testCompleteSystem();
+
+
+
+		//		System.out.println("*****************************************************************************************************************\n");
+		//		System.out.println("***************************************** starting baseline21() *****************************\n");
+		//		baseline21();
+		//
+		//		System.out.println("*****************************************************************************************************************\n");
+		//		System.out.println("***************************************** starting baseline22() *****************************\n");
+		//		baseline22();
+		//
 //		System.out.println("*****************************************************************************************************************\n");
 //		System.out.println("***************************************** starting baseline31() *****************************\n");
 //		baseline31();
@@ -124,7 +124,7 @@ public class Benchmarks extends ASLJobControlling {
 			//loadTime = MEMTIERLOADTIMEReadOnly;
 			//loadIt(READONLY, loadTime, i, dataSize);
 		}
-		
+
 		System.out.print("loadingMemcachedServer(): Waiting 30 seconds....");
 		try {
 			Thread.sleep(30000);
@@ -218,7 +218,7 @@ public class Benchmarks extends ASLJobControlling {
 		boolean nmonStop = false;
 		int nmonCaptureTime = 1000;
 		public ZonedDateTime nmonStartDate = null;
-		
+
 		//Testsettings
 		String experimentFolder = "";
 		int nServer = 0;
@@ -288,7 +288,7 @@ public class Benchmarks extends ASLJobControlling {
 			nmonStop = _nmonStop;
 			nmonCaptureTime = _nmonCaptureTime;
 			nmonStartDate = _nmonStartDate;
-			
+
 			clientInTestIPs = new String[nVirtualMachineClients];
 			for(int i = 0; i<nVirtualMachineClients;i++) {
 				clientInTestIPs[i]=ASLJobControlling.clientIPs[i];
@@ -410,7 +410,7 @@ public class Benchmarks extends ASLJobControlling {
 
 
 	public void doBenchmarks(TestSetting testSetting) {
-		
+
 		//create list of all devices used in this Benchmark for NMON
 		List<String> allDevicesNmon = new ArrayList<String>();
 		//add clients
@@ -436,18 +436,18 @@ public class Benchmarks extends ASLJobControlling {
 			//create entry in logfile
 			//testSetting.nmonStartDate = LocalDate.now();
 
-//			String isoDate = date.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-//
-//			//TODO Intervals File
-//			//The value given for -i should be a valid CSV file that contains at least one interval.
-//			//The format of this file is interval name, start, end. The interval name is optional. Both the start and end must be a valid ISO 8601 datetime string.
-//			//ISO_OFFSET_DATE_TIME 2011-12-03T10:15:30+01:00'
-//			//Experimentxyz,2019-11-02T23:30:00+01,2019-11-02T23:34:00+01
-//			//String logOutput = formatter.format(date) +" " + "START "+testSetting.experimentFolder+ testSetting.suffixForThisRun;
-//			String logOutput = formatter.format(date) +" " + "START "+testSetting.experimentFolder+ testSetting.suffixForThisRun;
-//			String destinationFile = ASLJobControlling.nmonCaptureDir + "00logfile.txt";
-//			appendFile(destinationFile,logOutput+"\n");
-			
+			//			String isoDate = date.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+			//
+			//			//TODO Intervals File
+			//			//The value given for -i should be a valid CSV file that contains at least one interval.
+			//			//The format of this file is interval name, start, end. The interval name is optional. Both the start and end must be a valid ISO 8601 datetime string.
+			//			//ISO_OFFSET_DATE_TIME 2011-12-03T10:15:30+01:00'
+			//			//Experimentxyz,2019-11-02T23:30:00+01,2019-11-02T23:34:00+01
+			//			//String logOutput = formatter.format(date) +" " + "START "+testSetting.experimentFolder+ testSetting.suffixForThisRun;
+			//			String logOutput = formatter.format(date) +" " + "START "+testSetting.experimentFolder+ testSetting.suffixForThisRun;
+			//			String destinationFile = ASLJobControlling.nmonCaptureDir + "00logfile.txt";
+			//			appendFile(destinationFile,logOutput+"\n");
+
 			String cmd = nmonScriptTarget +" start nmonoutput "+testSetting.nmonCaptureTime;
 			List<String[]> sshJobs = new ArrayList<String[]>(); 
 			for(String ip: allDevicesNmon) {
@@ -592,19 +592,19 @@ public class Benchmarks extends ASLJobControlling {
 				copyFilesback(new String[] {middlewareIP},completeFileSuffix, false, false, testSetting.experimentFolder);
 			}
 		}
-		
-		
-		
+
+
+
 		/*
 		 * Stop NMON on all machines and copy files back
 		 */
 		if (testSetting.nmonStop) {
 			//CLients
-			
+
 			//Servers
-			
+
 			//Middlewares
-			
+
 			System.out.println("*****************************************************************************************************************");
 			System.out.println("******************************stopping NMON on all devices*******************************************************");
 			System.out.println("*****************************************************************************************************************");
@@ -615,7 +615,7 @@ public class Benchmarks extends ASLJobControlling {
 			for(String ip: allDevicesNmon) {
 				String[] sshJob = {"ssh", ip, cmd};
 				sshJobs.add(sshJob);
-				
+
 				//prepare copyback
 				String hostFileSource = ip + ":" + ASLJobControlling.workingFolder+"nmonoutput.nmon";
 				String destinationFile = ASLJobControlling.nmonCaptureDir + testSetting.experimentFolder+"_"+ip+ "_"+testSetting.suffixForThisRun+".nmon";
@@ -626,12 +626,12 @@ public class Benchmarks extends ASLJobControlling {
 			}
 			sshJopsExecutor(sshJobs);				
 			scpJopsExecutor(scpJobs);
-			
+
 			//create entry in logfile
 			String zoneOffest = ZonedDateTime.now().getOffset().toString();
 			//FUCK YOU AZURE TIME::: FUCK..... YOU
 			if (zoneOffest.contentEquals("Z"));
-				zoneOffest = "+01:00";
+			zoneOffest = "+01:00";
 			//System.out.println("zoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzoneOffestzone= " +zoneOffest);
 			String isoDateStart = testSetting.nmonStartDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME).replace("Z", zoneOffest);
 			String isoDateStop = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME).replace("Z", zoneOffest);
@@ -639,8 +639,8 @@ public class Benchmarks extends ASLJobControlling {
 			nmonExperimentNumber++;
 			//testCompleteSystem nS=3 nC=3 nInst=2 nCT=1 nVC=8 wl=ReadOnly_dataSize=64_nMW=2_nWT=8_rep=3
 			String experimentName = nmonExperimentNumber +" "+testSetting.suffixForThisRun.replace("_e=", "")
-																						.replace("_", " ")
-																						.replace("wl=ReadOnly", "");
+			.replace("_", " ")
+			.replace("wl=ReadOnly", "");
 			String logOutput = experimentName+","+isoDateStart+","+isoDateStop;
 			String destinationFile = ASLJobControlling.nmonCaptureDir + "00logfile.txt";
 			appendFile(destinationFile,logOutput+"\n");
@@ -1078,7 +1078,7 @@ public class Benchmarks extends ASLJobControlling {
 
 
 			for (int nVC_VirtualClients: nVCSamples) {
-				
+
 				ZonedDateTime nmonStartDate = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS);
 				for (int rep = 1; rep <= repetitions; rep++) {
 					//NMON stuff
@@ -1161,6 +1161,7 @@ public class Benchmarks extends ASLJobControlling {
 		//int nWorkerThreads = 0;
 		int[] nWorkerThreadsSamples = {8, 32, 64};
 		int repetitions = 3;
+
 
 
 		for (int dataSize: dataSizeSamples) {
@@ -1254,7 +1255,6 @@ public class Benchmarks extends ASLJobControlling {
 		//int nWorkerThreads = 0;
 		int[] nWorkerThreadsSamples = {8, 32, 64};
 		int repetitions = 3;
-
 
 		for (int dataSize: dataSizeSamples) {
 			//populate the needed values
@@ -1434,7 +1434,7 @@ public class Benchmarks extends ASLJobControlling {
 		String workload = READONLY;
 
 		//int dataSize=64; 
-		int[] dataSizeSamples = {64, 128, 256, 384, 512, 768, 1024};
+		int[] dataSizeSamples = {512, 768, 1024};//{64, 128, 256, 384, 512, 768, 1024};
 
 		int nMW = 2;
 		//int nWorkerThreads = 0;
@@ -1450,6 +1450,7 @@ public class Benchmarks extends ASLJobControlling {
 			for (int nVC_VirtualClients: nVCSamples) {
 
 				for (int nWorkerThreads: nWorkerThreadsSamples) {
+
 
 					ZonedDateTime nmonStartDate = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS);
 					for (int rep = 1; rep <= repetitions; rep++) {
@@ -1655,7 +1656,7 @@ public class Benchmarks extends ASLJobControlling {
 
 				for (int nWorkerThreads: nWorkerThreadsSamples) {
 
-					
+
 					ZonedDateTime nmonStartDate = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS);
 					for (int rep = 1; rep <= repetitions; rep++) {
 						boolean nmonStart = false;

@@ -16,7 +16,7 @@ expectedNumberOfFiles:=2
 
 experimentDetail:=WT=64
 
-
+defaultxLabel:=Value Size
 
 #Loop-Stuff
 xAxisDataPointsInput:=64,128,256,384,512,768,1024

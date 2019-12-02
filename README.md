@@ -122,6 +122,19 @@ echo `date` "d-test MW1 -> Server2" >>iperf.txt;iperf -c server2 -d >> iperf.txt
 echo `date` "d-test MW2 -> Server1" >>iperf.txt; iperf -c server1 -d >> iperf.txt;echo `date` "r-test MW2 -> Server1" >>iperf.txt;iperf -c server1 -r >> iperf.txt;echo `date` "d-test MW2 -> Server2" >>iperf.txt;iperf -c server2 -d >> iperf.txt;echo `date` "r-test MW2 -> Server2" >>iperf.txt;iperf -c server2 -r >> iperf.txt;echo `date` "d-test MW2 -> Server3" >>iperf.txt;iperf -c server3 -d >> iperf.txt;echo `date` "r-test MW2 -> Server3" >>iperf.txt;iperf -c server3 -r >> iperf.txt
 
 
+MW1 -> MW2
+iperf -s
+iperf -c middleware2 -r
+
+client1 -> client2
+iperf -s
+iperf -c client2 -r
+
+server1 -> server2
+iperf -s
+iperf -c server2 -r
+
+
 # HW Messungen
 * asl-fall19-project/webserver/httproot$ python3 -m http.server 8080
 * benutze jar und passe servernamen so an, dass das gewünschte herauskommt :-)

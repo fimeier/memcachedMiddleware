@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 
 
@@ -23,7 +24,7 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 	 * global static stuff
 	 */
 	static int nGoodWindows = 0;
-		
+
 	static void addArrayAtoB(int[] arrayA, int[] arrayB) {
 		if (arrayA.length!=arrayB.length) {
 			MyMiddleware.logger.severe("ERROR: arrayA.length!=arrayB.length");
@@ -35,7 +36,7 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 
 
 	static private ArrayList<MemCachedProtocol> workingThreadMemcachedProtocols = new ArrayList<>();
-	
+
 	/**
 	 * call this once
 	 * This method collects all the MemCachedProtocols for the WorkerThreads
@@ -98,7 +99,7 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 	 * 
 	 */
 	public boolean iAmAGoodWindow = false;
-	
+
 	private int[] histogramForCompleteWindowGet = new int[MyMiddleware.BUCKETS];
 	private int[] histogramForCompleteWindowMultiGet = new int[MyMiddleware.BUCKETS];
 	private int[] histogramForCompleteWindowSet = new int[MyMiddleware.BUCKETS];
@@ -117,7 +118,7 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 	}
 
 	private long tEndTimeWindow = 0; // setze diese Zeit durch run pick queuer ;-debugging 
-	
+
 	/**
 	 * call this for the last client in the window (or for all)
 	 * Used to calculate the overall runtime of the client
@@ -204,7 +205,7 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 	double tAvgServiceTimeMemcachedGetInNanoSeconds = 0;
 	double tAvgServiceTimeMemcachedMultiGetInNanoSeconds = 0;
 	double tAvgServiceTimeMemcachedForAllCommandsInNanoSeconds = 0;
-	
+
 	// WorkerThread cumulated service time
 	double tCumulatedTimeWorkerThreadServedSetInNanoSeconds = 0;
 	double tCumulatedTimeWorkerThreadServedGetInNanoSeconds = 0;
@@ -240,12 +241,12 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 		 * finished time will be zero)\n");
 		 */
 		stats.append("\nBEGIN: Middleware runtimes (for window="+nWindowNumber+")\n");
-	
+
 		stats.append("startTimeFirstMeasurementInWindow=" + tStartTimeWindow + "\n");
 		stats.append("stopTimeLastMeasurementInWindow=" + tEndTimeWindow + "\n");
 		stats.append("runTimeWindow=" + runTimeWindow + " ("+runTimeWindow/1000000+"ms)\n");
 		stats.append("nTotalOpenedClientSockets="+MyMiddleware.nTotalOpenedClientSockets+ "\n");
-		
+
 		stats.append("MyMiddleware.nActiveWindow="+MyMiddleware.nActiveWindow+ "\n");
 		stats.append("nWindowNumber="+nWindowNumber+"\n");
 		stats.append("nGoodWindows="+nGoodWindows+"\n");
@@ -299,7 +300,7 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 			 * here I choose the window
 			 */
 			MyMiddlewareStatistics wTStats = workingThread.threadStatisticWindows[nWindowNumber];
-			
+
 			wTStats.calculateFinalValues();
 
 			/*
@@ -353,7 +354,7 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 			tAvgServiceTimeMemcachedMultiGetInNanoSeconds += wTStats.avgMCServiceTimeMultiGetInNanoSeconds;
 			tCumulatedTimeMemcachedServedMultiGetInNanoSeconds += wTStats.tcumulatedMCServiceTimeMultiGetInNanoSeconds;
 			nMultiGetProcessedByWorkers += wTStats.nMultiGet;
-			
+
 			//cumulated time workerthreads served get, set or multiget
 			tCumulatedTimeWorkerThreadServedSetInNanoSeconds += wTStats.tcumulatedWTServiceTimeSetInNanoSeconds;
 			tCumulatedTimeWorkerThreadServedGetInNanoSeconds += wTStats.tcumulatedWTServiceTimeGetInNanoSeconds;
@@ -368,7 +369,7 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 		/*
 		 * workerThreadsLoop ENDE
 		 */
-		
+
 		tAvgWaitingTimeInQueueInNanoSeconds /= MyMiddleware.numThreadsPTP;
 
 
@@ -499,16 +500,16 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 	}
 
 
-	static private List<Pair<String,Long>> calculateClientThinkTime(ConcurrentLinkedQueue<QueueMetaData> memtierConnectionsQueue){
+	static private List<Pair<String,Long>> calculateClientThinkTime(LinkedBlockingQueue<QueueMetaData> memtierconnectionsqueue){
 		List<Pair<String,Long>> clientThinkTime = new ArrayList<Pair<String,Long>>();
-		
+
 		// IP #conn cumTinkTime
 		HashMap<String,Pair<Integer,Long>> allClients = new HashMap<>();
 
 		int numberConnectionsAllClients = 0;
 		long thinkTimeAllClients = 0;
-		
-		for (QueueMetaData virtualClient: memtierConnectionsQueue) {
+
+		for (QueueMetaData virtualClient: memtierconnectionsqueue) {
 			String clientIP = virtualClient.clientSocket.getInetAddress().toString();
 			int numberConnections = 0;
 			long thinkTime = 0;
@@ -518,70 +519,70 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 			}
 			numberConnections += virtualClient.tClientRequestsCum;
 			thinkTime += virtualClient.tClientThinkTimeCum;
-			
+
 			numberConnectionsAllClients += virtualClient.tClientRequestsCum;
 			thinkTimeAllClients += virtualClient.tClientThinkTimeCum;
 
 			allClients.put(clientIP, new Pair<Integer,Long>(numberConnections,thinkTime));
 		}
-		
-		
+
+
 		for (String clientIP: allClients.keySet()) {
 			int count = allClients.get(clientIP).getKey();
 			long avgThinkTime = allClients.get(clientIP).getValue() / (long) count;
 			clientThinkTime.add(new Pair<String,Long>(clientIP,avgThinkTime));
 		}
-		
+
 		clientThinkTime.add(new Pair<String,Long>("AllClients",thinkTimeAllClients / (long) numberConnectionsAllClients));
-		
+
 		return clientThinkTime;
 	}
-	
 
-	
-	
+
+
+
 	/*
 	 * FINAL AGGREGATED OUTPUT OVER ALL WINDOWS
 	 */
-	static public String finalStats(ConcurrentLinkedQueue<QueueMetaData> memtierConnectionsQueue) {
+	static public String finalStats(LinkedBlockingQueue<QueueMetaData> memtierconnectionsqueue) {
 		//for clientThinkTime
-		List<Pair<String,Long>> calculateClientThinkTime = calculateClientThinkTime(memtierConnectionsQueue);
-	
+		List<Pair<String,Long>> calculateClientThinkTime = calculateClientThinkTime(memtierconnectionsqueue);
+
 		StringBuilder output = new StringBuilder();
-		
+
 		StringBuilder finalStatsFile = new StringBuilder();
 		StringBuilder histogramFile = new StringBuilder();
-		
-		
+
+
 		long runTimeAllWindows = 0; //ok
-		
+
 		//cache miss ratio
 		double cacheMissRatioFinal = 0.0;
 		double keysSentToServerFinal = 0.0;
 		double keysReturnedFromServerFinal = 0.0;
 		double keysNotReturnedFinal = 0.0;
-		
-		
+
+
 		double throughputSet = 0; //ok
 		double throughputGet = 0; //ok
 		//double throughputGetNEW = 0;
 		double throughputMultiGet = 0; //ok
 		double throughputAllCommands = 0; //ok
 		double throughputGetAllKeys = 0; //ok
-		
+
 		double avgQueueLength = 0; //ok
 		double avgQueueLengthNumberOfChecks = 0; //ok
-		
+
 		//avg time in queue fehlt noch in statistik
-		
+
 		// Queue Time in Queue
 		double avgQueueWaitingTime = 0.0;
-		
+
 		//memcached ResponseTime
 		double avgMemcachedResponseTimeGet = 0.0;
 		double avgMemcachedResponseTimeMultiGet = 0.0;
 		double avgMemcachedResponseTimeSet = 0.0;
-		
+
 		double numberSetCommands = 0.0;
 		double numberGetCommands = 0.0;
 		double numberMultiGetCommands = 0.0;
@@ -592,80 +593,80 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 		double avgWorkerThreadResponseTimeGet = 0.0;
 		double avgWorkerThreadResponseTimeMultiGet = 0.0;
 		double avgWorkerThreadResponseTimeSet = 0.0;
-		
+
 		double avgMiddlewareResponseTimeGet = 0.0;
 		double avgMiddlewareResponseTimeMultiGet = 0.0;
 		double avgMiddlewareResponseTimeSet = 0.0;
 
-		
+
 		long nCommandsAddedToQueueOverRun = 0;
 		long nCommandsProcessedByWorkersOverRun = 0;
 		long checkDiffCmdInQueueInWorkerThreadsOverRun = 0;
-		
+
 		int[] threadHistogramOverRunGet = new int[MyMiddleware.BUCKETS];
 		int[] threadHistogramOverRunMultiGet = new int[MyMiddleware.BUCKETS];
 		int[] threadHistogramOverRunSet = new int[MyMiddleware.BUCKETS];
 
 
 		int nWindowsUsedForAggregation = 0;
-		
+
 		for (int i = 0; i<nGoodWindows; i++) {
 			//warm up cool down... do not use first 5 windows... win0, win1,win2,win3,win4... start with win5-win64=60wins total
 			if (i<MyMiddleware.firstWinToUse || MyMiddleware.lastWinToUse<i) {
 				continue;
 			}
 			nWindowsUsedForAggregation++;
-			
+
 			MyMiddlewareStatisticsPerWindow windowStats = MyMiddleware.overallStatisticWindows[i];		
 			runTimeAllWindows += windowStats.runTimeWindow; //ok
-			
+
 			//cache miss ratio
 			keysSentToServerFinal += windowStats.nMWGetKeysSent;
 			keysReturnedFromServerFinal += windowStats.nMWGetKeysReturned;
-						
+
 			throughputSet += windowStats.setOPperSecWindow; 
 			//throughputSet += (double) windowStats.nSetCmdProcessedByWorkers;
-			
+
 			throughputGet += windowStats.getOPperSecWindow; 
 			//throughputGetNEW += windowStats.nGetProcessedByWorkers;
 			throughputMultiGet += windowStats.multigetOPperSecWindow; 
 			throughputAllCommands += windowStats.totalOPperSecWindow; 
 			throughputGetAllKeys += windowStats.keyGetOPperSecWindow; //neu und hinweis dass die primär throughput sein soll
-			
+
 			avgQueueWaitingTime +=	windowStats.tCumulatedTimeCmdsWaitedInQueueInNanoSeconds; 
-			
+
 			//memcachedResponseTime
 			avgMemcachedResponseTimeGet += windowStats.tCumulatedTimeMemcachedServedGetInNanoSeconds;
 			avgMemcachedResponseTimeMultiGet += windowStats.tCumulatedTimeMemcachedServedMultiGetInNanoSeconds;
 			avgMemcachedResponseTimeSet += windowStats.tCumulatedTimeMemcachedServedSetInNanoSeconds;
-			
+
 			//workerThreadResponseTime
 			avgWorkerThreadResponseTimeGet += windowStats.tCumulatedTimeWorkerThreadServedGetInNanoSeconds;
 			avgWorkerThreadResponseTimeMultiGet += windowStats.tCumulatedTimeWorkerThreadServedMultiGetInNanoSeconds;
 			avgWorkerThreadResponseTimeSet += windowStats.tCumulatedTimeWorkerThreadServedSetInNanoSeconds;
-			
+
 			numberSetCommands += windowStats.nSetCmdProcessedByWorkers;
 			numberGetCommands += windowStats.nGetProcessedByWorkers;
 			numberMultiGetCommands += windowStats.nMultiGetProcessedByWorkers;
 
-			
+
 			avgQueueLengthNumberOfChecks += windowStats.tcumQueueLengthChecksWindow;
 			avgQueueLength += windowStats.tcumQueueLengthWindow;
 
-				
+
 
 			nCommandsAddedToQueueOverRun += windowStats.nCommandsAddedToQueue;
 			nCommandsProcessedByWorkersOverRun += windowStats.nCommandsProcessedByWorkers;
 			checkDiffCmdInQueueInWorkerThreadsOverRun +=windowStats.checkDiffCmdInQueueInWorkerThreads;
-			
+
 			//threadHistogramOverRun
 			//collect histogram
 			addArrayAtoB(windowStats.histogramForCompleteWindowGet, threadHistogramOverRunGet);
 			addArrayAtoB(windowStats.histogramForCompleteWindowMultiGet, threadHistogramOverRunMultiGet);
 			addArrayAtoB(windowStats.histogramForCompleteWindowSet, threadHistogramOverRunSet);
-			
+
 		}
-		
+
 		//cache miss ratio
 		keysNotReturnedFinal = keysSentToServerFinal - keysReturnedFromServerFinal;
 		cacheMissRatioFinal = (double) keysNotReturnedFinal / (double) keysSentToServerFinal;
@@ -676,9 +677,9 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 		throughputMultiGet /= nWindowsUsedForAggregation;
 		throughputAllCommands /= nWindowsUsedForAggregation;
 		throughputGetAllKeys /= nWindowsUsedForAggregation;
-		
+
 		avgQueueWaitingTime = avgQueueWaitingTime / nCommandsProcessedByWorkersOverRun*timeUnitToMilSec;
-		
+
 		//memcached ResponseTime
 		if(numberGetCommands!=0)
 			avgMemcachedResponseTimeGet = avgMemcachedResponseTimeGet / numberGetCommands *timeUnitToMilSec;
@@ -686,7 +687,7 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 			avgMemcachedResponseTimeMultiGet = avgMemcachedResponseTimeMultiGet / numberMultiGetCommands *timeUnitToMilSec;
 		if(numberSetCommands !=0)
 			avgMemcachedResponseTimeSet = avgMemcachedResponseTimeSet / numberSetCommands *timeUnitToMilSec;
-		
+
 		//workerthreads ResponseTime
 		if(numberGetCommands!=0)
 			avgWorkerThreadResponseTimeGet = avgWorkerThreadResponseTimeGet / numberGetCommands *timeUnitToMilSec;
@@ -694,19 +695,19 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 			avgWorkerThreadResponseTimeMultiGet = avgWorkerThreadResponseTimeMultiGet / numberMultiGetCommands *timeUnitToMilSec;
 		if(numberSetCommands !=0)
 			avgWorkerThreadResponseTimeSet = avgWorkerThreadResponseTimeSet / numberSetCommands *timeUnitToMilSec;
-		
+
 		if(avgWorkerThreadResponseTimeGet!=0)
 			avgMiddlewareResponseTimeGet = avgQueueWaitingTime + avgWorkerThreadResponseTimeGet;
 		if(avgWorkerThreadResponseTimeMultiGet!=0)
 			avgMiddlewareResponseTimeMultiGet = avgQueueWaitingTime + avgWorkerThreadResponseTimeMultiGet;
 		if(avgWorkerThreadResponseTimeSet!=0)
 			avgMiddlewareResponseTimeSet = avgQueueWaitingTime + avgWorkerThreadResponseTimeSet;
-		
+
 		avgQueueLength /= avgQueueLengthNumberOfChecks;
 
-		
-			
-		
+
+
+
 		finalStatsFile.append("BEGIN: FINAL STATS\n");
 		finalStatsFile.append("nWindows="+MyMiddleware.nWindows+"\n");
 		finalStatsFile.append("nGoodWindows="+nGoodWindows+"\n");
@@ -714,34 +715,34 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 
 		finalStatsFile.append("runTimeOverall="+runTimeMeasuringInNanoSeconds*timeUnitToMilSec + " ms (wrong value if threadstopMeasuring didn't had the chance to stop everything... interrupt?)\n");
 		finalStatsFile.append("runTimeWindowCumulatedOverRun="+runTimeAllWindows+" ("+((double) runTimeAllWindows)/1000000+"ms)\n");
-		
+
 		finalStatsFile.append("cacheMissRatioFinal="+cacheMissRatioFinal+" Assert=0.0\n");
 		finalStatsFile.append("keysSentToServerFinal="+keysSentToServerFinal+"\n");
 		finalStatsFile.append("keysReturnedFromServerFinal="+keysReturnedFromServerFinal+"\n");
 		finalStatsFile.append("keysNotReturnedFinal="+keysNotReturnedFinal+" Assert=0.0\n");
-		
+
 		//finalStatsFile.append("numberSetCommands="+numberSetCommands+"\n");
 		finalStatsFile.append("numberGetCommands="+numberGetCommands+"\n");
 		//finalStatsFile.append("numberMultiGetCommands="+numberMultiGetCommands+"\n");
 
-		
+
 		//finalStatsFile.append("throughputSet=" + throughputSet+"\n");
 
-		
+
 		finalStatsFile.append("throughputGet=" + throughputGet+"\n");
 		//finalStatsFile.append("throughputGetNEW=" + throughputGetNEW+"\n");
 
 		//finalStatsFile.append("throughputMultiGet=" + throughputMultiGet+"\n");
 		finalStatsFile.append("throughputAllCommands=" + throughputAllCommands+"\n");
 		finalStatsFile.append("throughputGetAllKeys=" + throughputGetAllKeys + "\n");
-		
+
 		finalStatsFile.append("avgQueueWaitingTime="+avgQueueWaitingTime+"\n");
 		finalStatsFile.append("avgQueueLength=" + avgQueueLength+"\n");
-		
+
 		//finalStatsFile.append("avgMemcachedResponseTimeSet="+avgMemcachedResponseTimeSet+"\n");
 		finalStatsFile.append("avgMemcachedResponseTimeGet="+avgMemcachedResponseTimeGet+"\n");
 		//finalStatsFile.append("avgMemcachedResponseTimeMultiGet="+avgMemcachedResponseTimeMultiGet+"\n");
-		
+
 		//finalStatsFile.append("avgWorkerThreadResponseTimeSet="+avgWorkerThreadResponseTimeSet+"\n");
 		finalStatsFile.append("avgWorkerThreadResponseTimeGet="+avgWorkerThreadResponseTimeGet+"\n");
 		//finalStatsFile.append("avgWorkerThreadResponseTimeMultiGet="+avgWorkerThreadResponseTimeMultiGet+"\n");
@@ -750,18 +751,18 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 		finalStatsFile.append("avgMiddlewareResponseTimeGet="+ avgMiddlewareResponseTimeGet+"\n");
 		//finalStatsFile.append("avgMiddlewareResponseTimeMultiGet="+ avgMiddlewareResponseTimeMultiGet+"\n");
 
-	
+
 
 		finalStatsFile.append("nCommandsAddedToQueueOverRun=" + nCommandsAddedToQueueOverRun + "\n");
 		finalStatsFile.append("nCommandsProcessedByWorkersOverRun=" + nCommandsProcessedByWorkersOverRun + "\n");
 		finalStatsFile.append("Total-set-get-multiget=" + checkDiffCmdInQueueInWorkerThreadsOverRun + " Assert=0\n");
-		
+
 		for (Pair<String,Long> clientIP_ThinkTime: calculateClientThinkTime) {
 			String clientIP = clientIP_ThinkTime.getKey();
 			long avgThinkTime = clientIP_ThinkTime.getValue();
 			finalStatsFile.append("ClientThinkTime_"+clientIP+"=" + avgThinkTime*timeUnitToMilSec + " ms\n");
 		}
-		
+
 		long interArrivalTime = MyMiddleware.tClientArrivalCum / MyMiddleware.nClientArrival;
 		finalStatsFile.append("InterArrivalTime=" + interArrivalTime*timeUnitToMilSec + " ms\n");
 		finalStatsFile.append("ArrivalRate=" + 1 / (interArrivalTime*timeUnitToMilSec) + " 1/ms and not per sec!!!\n");
@@ -770,18 +771,41 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 		//finalStatsFile.append("ArrivalRate=" + MyMiddleware.nClientArrival + " ms\n");
 
 
+		/* work balancing proof */
+		long s[] = {0,0,0};
+		for (MemCachedProtocol p: workingThreadMemcachedProtocols) {
+			int i = 0;
+			for (long c: p.requestsSentToServer) {
+				s[i] += c;
+				i++;
+			}
+		}
+		double sTot = s[0] + s[1] + s[2];
+		if (sTot==0)
+			sTot += 1; //avoid 0
+		double s1p = s[0] / sTot *100;
+		double s2p = s[1] / sTot *100;
+		double s3p = s[2] / sTot *100;
+
+		finalStatsFile.append("WorkBalance server1=" + s1p + "% ("+s[0]+" from a total of "+sTot+" for all windows!)\n");
+		finalStatsFile.append("WorkBalance server2=" + s2p + "% ("+s[1]+" from a total of "+sTot+" for all windows!)\n");
+		finalStatsFile.append("WorkBalance server3=" + s3p + "% ("+s[2]+" from a total of "+sTot+" for all windows!)\n");
+
 		
-		
+
+
+
+
 		finalStatsFile.append("END: FINAL STATS");
-				
+
 		/*
 		 * TODO: save histogram directly into a file
 		 */
-		
-		
+
+
 		histogramFile.append("BEGIN: Histogram (response time <;#-Get;#-MultiGet;#-Set)\n");
 
-		
+
 		long check = nCommandsProcessedByWorkersOverRun;
 		for(int i = 0; i< MyMiddleware.BUCKETS; i++) {
 			//habe das wie oben hinzugefügt... sollte jetzt stimmen!!
@@ -809,12 +833,12 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 			writer.print(finalStatsFile);
 			writer.flush();
 			writer.close();
-			
+
 			writer = new PrintWriter(fileNameHistogram, "UTF-8");
 			writer.print(histogramFile);
 			writer.flush();
 			writer.close();
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

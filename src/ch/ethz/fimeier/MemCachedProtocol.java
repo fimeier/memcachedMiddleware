@@ -30,6 +30,8 @@ public class MemCachedProtocol {
 	int nMemcachedServers = 0;
 
 	private QueueMetaData memCachedServers[];
+	//work balancing experimental result
+	public long requestsSentToServer[];
 
 
 	StringBuilder inString = new StringBuilder(MyMiddleware.CAPACITYBUFFER);//); //
@@ -117,6 +119,8 @@ public class MemCachedProtocol {
 		mcAddresses = _mcAddresses;
 		nMemcachedServers = mcAddresses.size();
 		memCachedServers = new QueueMetaData[nMemcachedServers];
+		requestsSentToServer = new long[nMemcachedServers];
+
 		threadStatisticWindows = new MyMiddlewareStatistics[nWindows];
 		MyMiddleware.logger.info(Thread.currentThread().getName()+": MyMiddlewareStatistics["+nWindows+"]" );
 

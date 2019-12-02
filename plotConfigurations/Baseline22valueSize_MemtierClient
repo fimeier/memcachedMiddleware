@@ -12,6 +12,8 @@ expectedNumberOfFiles:=9
 #optional title for all keys in this file
 defaultTitle:=Datasource Client: ../baseline22/valueSize
 
+defaultxLabel:=Value Size
+
 
 #Loop-Stuff
 xAxisDataPointsInput:=64,128,256,384,512,768,1024

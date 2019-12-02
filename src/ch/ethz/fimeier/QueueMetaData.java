@@ -19,8 +19,10 @@ public class QueueMetaData {
 
 	private PrintWriter outPrintWriter;
 	private BufferedReader inBufferedReader;
-
+	
+	
 	public int prefferedMemcachedServer = 0;
+
 
 
 	/*

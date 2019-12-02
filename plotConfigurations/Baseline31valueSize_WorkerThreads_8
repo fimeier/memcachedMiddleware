@@ -16,6 +16,7 @@ expectedNumberOfFiles:=1
 
 experimentDetail:=WT=8
 
+defaultxLabel:=Value Size
 
 
 #Loop-Stuff

@@ -39,7 +39,7 @@ public class MyMiddleware{
 
 	static private ServerSocket serverSocket;
 	static final private int backLogServerSocket = 1024;
-	static final private ConcurrentLinkedQueue<QueueMetaData> memtierConnectionsQueue = new ConcurrentLinkedQueue<QueueMetaData>();
+	static final private LinkedBlockingQueue<QueueMetaData> memtierConnectionsQueue = new LinkedBlockingQueue<QueueMetaData>();
 	//static final private BlockingQueue<QueueMetaData> memtierConnectionsQueue = new LinkedBlockingQueue<QueueMetaData>();
 	static final private BlockingQueue<QueueMetaData> memtierRequestsQueue = new LinkedBlockingQueue<QueueMetaData>();
 	//static private ThreadPoolExecutor executor;
@@ -569,6 +569,9 @@ public class MyMiddleware{
 						protocolPerThread.threadStatistic.startPerThreadStatistics(activeClient, currentTimeInNansoseconds);
 						protocolPerThread.threadStatistic.addQueueLength(memtierRequestsQueue.size());
 						activeClient.clientThinkTime();
+						//work balancing experimental result
+						protocolPerThread.requestsSentToServer[activeClient.prefferedMemcachedServer]++;
+
 					} else {
 						protocolPerThread.getStatistics = false;
 					}

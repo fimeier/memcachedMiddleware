@@ -27,7 +27,7 @@ public class DataProcessing extends ASLJobControlling {
 
 	public void runDataProcessing() {
 
-		if (consolidateStatistics) {
+		if (consolidateStatistics) { 
 			if(consolidateStatisticsBaseline21) {
 				System.out.println("\n*****************************************************************************************************************");
 				System.out.println("***************************************** creating CLIENT baseline21/numClients plots **************************************\n");
@@ -38,6 +38,9 @@ public class DataProcessing extends ASLJobControlling {
 				System.out.println("***************************************** creating CLIENT baseline21/valueSize plots **************************************\n");
 				configAggregation=plotConfigBaseFolder+"Baseline21valueSize_MemtierClient";
 				createPlots(configAggregation);
+
+				
+
 			}
 			if(consolidateStatisticsBaseline22) {
 				System.out.println("\n*****************************************************************************************************************");
@@ -211,8 +214,13 @@ public class DataProcessing extends ASLJobControlling {
 			}
 
 
-			return;
+			System.out.println("************************************bigRelativeStandardDeviation***************\n"+bigRelativeStandardDeviation);
+			writeFile("failstuff.txt",bigRelativeStandardDeviation);
+
 		}
+
+
+
 
 
 
@@ -234,6 +242,7 @@ public class DataProcessing extends ASLJobControlling {
 		String plotConfig = jobResult.split(" ")[0];
 		String texFile = jobResult.split(" ")[1];
 		callGnuPlotAndPDFLatex(plotConfig,texFile);
+
 	}
 
 
@@ -870,7 +879,16 @@ public class DataProcessing extends ASLJobControlling {
 						ArrayList<Double> allStats = calculateStats(runValuesAllKeys.get(k));
 						double sumValues = allStats.get(0);
 						double avgValues = allStats.get(1);
-						//double stdevValues = allStats.get(2);
+
+						// if (allStats.get(3)>0.1){
+						// 	bigRelativeStandardDeviation += "ONERUN  "
+						// 	+ filterInnerLoopPrefix +"  " //"finalStats_e=baseline31"
+						// 	+ xAxisFilter[rawXIndex]+"  "
+						// 	+ linesFilterPrefix+linesFilter[linesToPlotRawIndex]
+						// 	+ " rsd=" +allStats.get(3)
+						// 	+ " avg="+avgValues +" "
+						// 	+ middlewareDataKeys.get(k).key+ "\n";
+						// }
 
 						String aggregationType = middlewareDataKeys.get(k).aggregationType;
 						double valueRunAggregated = 0.0;
@@ -899,6 +917,27 @@ public class DataProcessing extends ASLJobControlling {
 					//double sumValues = allStats.get(0);
 					double avgValues = allStats.get(1);
 					double stdevValues = allStats.get(2);
+
+					if (allStats.get(3)>0.1){
+						//finalStats_e=baseline31 _nS=1_nC=3_nInst=1_nCT=2_nVC=2_wl=ReadOnly_dataSize=64_nMW=1_nWT=8_rep=3_Middleware=1
+						bigRelativeStandardDeviation += "ALLRUNS "
+													+  experimentName +" "
+													+ filterInnerLoopPrefix +"  " //"finalStats_e=baseline31"
+													+ xAxisFilter[rawXIndex]+"  "
+													+ linesFilterPrefix+linesFilter[linesToPlotRawIndex]
+													+ " rsd=" +allStats.get(3)
+													+ " avg="+avgValues +" "
+													+ middlewareDataKeys.get(k).key+ "\n";
+
+
+/*
+						bigRelativeStandardDeviation += experimentName 
+						+" "+middlewareDataKeys.get(k).key
+						+ " xAxis[rawXIndex]="+xAxis[rawXIndex]
+						+" "+allStats.get(2) 
+						+ " liIndex]=" + linesFilterPrefix+linesFilter[linesToPlotRawIndex]
+						+" aggregate all runs\n";*/
+					}
 
 					//add the runs if needed for plotting => meint dass Werte der Runs hinzugefügt werden,
 					//auch wenn eigentlich nur avg über alle runs geplottet wird
@@ -1026,6 +1065,12 @@ public class DataProcessing extends ASLJobControlling {
 			gnuPlotConfig += "set ylabel \""+yLabel+"\" \n";
 			gnuPlotConfig += "set title \""+title+"\" \n";
 
+			//test with rectangle
+			gnuPlotConfig += "set object 1 rectangle from screen 0,0 to screen 0.33,1 fillcolor \"green\" behind fillstyle transparent solid 0.02 \n";
+			gnuPlotConfig += "set object 2 rectangle from screen 0.33,0 to screen 0.66,1 fillcolor \"orange\" behind fillstyle transparent solid 0.02 \n";
+			gnuPlotConfig += "set object 3 rectangle from screen 0.66,0 to screen 1,1 fillcolor \"red\" behind fillstyle transparent solid 0.02 \n";
+
+			//gnuPlotConfig += "set grid mxtics \n";
 
 			//multiple lines //offset hinzu für reps
 			//	int firstDataPointInRow = numberOfRepetitions.length + 1;
@@ -1936,13 +1981,23 @@ public class DataProcessing extends ASLJobControlling {
 		for (double val: values) {
 			stddev += Math.pow(val-avg, 2);
 		}
-		stddev = Math.sqrt(stddev / (nValues-1));
+		stddev = Math.sqrt(stddev / (nValues));
 
 
 
 		result.add(sum);
 		result.add(avg);
 		result.add(stddev);
+
+		//relative standard deviation (RSD)
+		double rsd = stddev / avg;
+		result.add(rsd);
+		if (stddev > avg){
+			System.out.println("ERROR????? stddev > avg....");
+		}
+		if (rsd > 1){
+			System.out.println("ERROR????? rsd > 1");
+		}
 
 
 		return result;
