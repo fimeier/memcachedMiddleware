@@ -56,9 +56,9 @@ public class Benchmarks extends ASLJobControlling {
 		//		System.out.println("***************************************** starting baseline22() *****************************\n");
 		//		baseline22();
 		//
-//		System.out.println("*****************************************************************************************************************\n");
-//		System.out.println("***************************************** starting baseline31() *****************************\n");
-//		baseline31();
+		System.out.println("*****************************************************************************************************************\n");
+		System.out.println("***************************************** starting baseline31() *****************************\n");
+		baseline31();
 //
 //		System.out.println("*****************************************************************************************************************\n");
 //		System.out.println("***************************************** starting baseline32() *****************************\n");
@@ -1150,23 +1150,23 @@ public class Benchmarks extends ASLJobControlling {
 		int nCT_ThreadsPerMemtierInstance = 2;
 
 		//int nVC_VirtualClients = 4;
-		int[] nVCSamples = {2, 4, 8, 12, 16, 24, 32};
+		int[] nVCSamples = {32};//{2, 4, 8, 12, 16, 24, 32};
 
 		String workload = READONLY;
 
 		//int dataSize=64; 
-		int[] dataSizeSamples = {64, 128, 256, 384, 512, 768, 1024};
+		int[] dataSizeSamples = {64};//{64, 128, 256, 384, 512, 768, 1024};
 
 		int nMW = 1;
 		//int nWorkerThreads = 0;
-		int[] nWorkerThreadsSamples = {8, 32, 64};
+		int[] nWorkerThreadsSamples = {64};//{8, 32, 64};
 		int repetitions = 3;
 
 
 
 		for (int dataSize: dataSizeSamples) {
 			//populate the needed values
-			loadingMemcachedServer(dataSize);
+			loadingMemcachedServer(dataSize); 
 
 
 			for (int nVC_VirtualClients: nVCSamples) {

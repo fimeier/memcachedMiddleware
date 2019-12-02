@@ -1066,9 +1066,9 @@ public class DataProcessing extends ASLJobControlling {
 			gnuPlotConfig += "set title \""+title+"\" \n";
 
 			//test with rectangle
-			gnuPlotConfig += "set object 1 rectangle from screen 0,0 to screen 0.33,1 fillcolor \"green\" behind fillstyle transparent solid 0.02 \n";
-			gnuPlotConfig += "set object 2 rectangle from screen 0.33,0 to screen 0.66,1 fillcolor \"orange\" behind fillstyle transparent solid 0.02 \n";
-			gnuPlotConfig += "set object 3 rectangle from screen 0.66,0 to screen 1,1 fillcolor \"red\" behind fillstyle transparent solid 0.02 \n";
+			//gnuPlotConfig += "set object 1 rectangle from screen 0,0 to screen 0.33,1 fillcolor \"green\" behind fillstyle transparent solid 0.02 \n";
+			//gnuPlotConfig += "set object 2 rectangle from screen 0.33,0 to screen 0.66,1 fillcolor \"orange\" behind fillstyle transparent solid 0.02 \n";
+			//gnuPlotConfig += "set object 3 rectangle from screen 0.66,0 to screen 1,1 fillcolor \"red\" behind fillstyle transparent solid 0.02 \n";
 
 			//gnuPlotConfig += "set grid mxtics \n";
 

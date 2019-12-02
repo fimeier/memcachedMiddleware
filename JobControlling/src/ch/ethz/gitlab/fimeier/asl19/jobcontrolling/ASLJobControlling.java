@@ -27,7 +27,8 @@ public class ASLJobControlling {
 	 */
 	
 	public static boolean dataProcessingMode = false;
-	public static String experimentsBaseFolderDataProcessing = "/home/fimeier/asl-fall19-project/dataSource/benchmarksAzure_3_11_2019/experiments/";
+	//public static String experimentsBaseFolderDataProcessing = "/home/fimeier/asl-fall19-project/dataSource/benchmarksAzure_3_11_2019/experiments/";
+	public static String experimentsBaseFolderDataProcessing = "/home/fimeier/asl-fall19-project/dataSource/benchmarksAzureTeil_1_12_2019/experiments/";
 	public static String plotConfigBaseFolder = "/home/fimeier/asl-fall19-project/plotConfigurations/";
 
 
@@ -164,13 +165,13 @@ public class ASLJobControlling {
 	static public String[] unknownTypeColors = {"#D30FAF", "#D30FAF","#D30FAF", "#D30FAF", "#D30FAF", "#D30FAF"};
 
 
-	public static boolean consolidateStatistics = false;
+	public static boolean consolidateStatistics = true;
 	public static boolean consolidateStatisticsBaseline21 = true;
 	public static boolean consolidateStatisticsBaseline22 = true;
 	public static boolean consolidateStatisticsBaseline31 = true;
 	public static boolean consolidateStatisticsBaseline32 = true;
 	public static boolean consolidateStatisticsBaseline33 = true;
-	public static boolean consolidateStatisticsBaseline34 = true;
+	public static boolean consolidateStatisticsBaseline34 = false;
 
 
 	
