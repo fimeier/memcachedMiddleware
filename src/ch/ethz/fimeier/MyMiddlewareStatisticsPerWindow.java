@@ -500,7 +500,7 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 	}
 
 
-	static private List<Pair<String,Long>> calculateClientThinkTime(LinkedBlockingQueue<QueueMetaData> memtierconnectionsqueue){
+	static private List<Pair<String,Long>> calculateClientThinkTime(ConcurrentLinkedQueue<QueueMetaData> memtierconnectionsqueue){
 		List<Pair<String,Long>> clientThinkTime = new ArrayList<Pair<String,Long>>();
 
 		// IP #conn cumTinkTime
@@ -544,7 +544,7 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 	/*
 	 * FINAL AGGREGATED OUTPUT OVER ALL WINDOWS
 	 */
-	static public String finalStats(LinkedBlockingQueue<QueueMetaData> memtierconnectionsqueue) {
+	static public String finalStats(ConcurrentLinkedQueue<QueueMetaData> memtierconnectionsqueue) {
 		//for clientThinkTime
 		List<Pair<String,Long>> calculateClientThinkTime = calculateClientThinkTime(memtierconnectionsqueue);
 
