@@ -1590,7 +1590,7 @@ public class DataProcessing extends ASLJobControlling {
 			BufferedReader fileReader = new BufferedReader(new FileReader(absoluteFilename));
 
 			HashMap<String,String> notKey = new HashMap<>();
-			notKey.put("BEGIN:", ""); notKey.put("END:","");
+			notKey.put("BEGIN:", ""); notKey.put("END:",""); notKey.put("WorkBalance", "");
 			while(fileReader.ready()) {
 				String line = fileReader.readLine().replace("=", " ");
 				String key = line.split(" ")[0];

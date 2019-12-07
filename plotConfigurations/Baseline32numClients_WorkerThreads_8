@@ -36,7 +36,7 @@ middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedRespo
 #middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedResponseTimeGet,avgMemcachedResponseTimeGet,avgWorkerThreadResponseTimeGet,throughputAllCommands,avgQueueWaitingTime,avgQueueLength,throughputMultiGet,avgMemcachedResponseTimeMultiGet,avgWorkerThreadResponseTimeMultiGet,avgMiddlewareResponseTimeMultiGet,throughputSet,avgMemcachedResponseTimeSet,avgWorkerThreadResponseTimeSet,avgMiddlewareResponseTimeSet
 
 #optional title for all keys in this file
-defaultTitle:=Datasource Middleware: ../baseline32/numClients (WorkerThreads_8)
+defaultTitle:=Datasource Middleware: ../baseline32/numClients (8 Worker Threads)
 
 #####details for keys
 

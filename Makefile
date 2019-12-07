@@ -8,6 +8,7 @@ build:
 		ant -f build.xml
 		mvn -f JobControlling/pom.xml verify
 
+# Starts the control program
 .PHONY: run
 run:
 		java -jar ASLJobControlling.jar

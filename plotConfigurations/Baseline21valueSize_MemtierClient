@@ -12,7 +12,7 @@ expectedNumberOfFiles:=3
 #optional title for all keys in this file
 defaultTitle:=Datasource Client: ../baseline21/valueSize
 
-defaultxLabel:=Value Size
+defaultxLabel:=Value Size [Bytes]
 
 
 #json.txtBaseline21_ReadOnly_nVC=1_Rep=3_Client1

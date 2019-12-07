@@ -533,6 +533,8 @@ public class MyMiddlewareStatisticsPerWindow extends MyMiddlewareStatistics {
 			clientThinkTime.add(new Pair<String,Long>(clientIP,avgThinkTime));
 		}
 
+		if (numberConnectionsAllClients==0)
+			numberConnectionsAllClients++;
 		clientThinkTime.add(new Pair<String,Long>("AllClients",thinkTimeAllClients / (long) numberConnectionsAllClients));
 
 		return clientThinkTime;

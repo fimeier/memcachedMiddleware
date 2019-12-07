@@ -12,8 +12,8 @@ public class RunMW {
 	static int numThreadsPTP = -1;
 	static boolean readSharded = false;
 	
-	static long tWaitBeforeMeasurements = 1000;
-	static long tTimeForMeasurements = 75000;
+	static long tWaitBeforeMeasurements = 1500;
+	static long tTimeForMeasurements = 81500;
 	
 	public static void main(String[] args) throws Exception {
 

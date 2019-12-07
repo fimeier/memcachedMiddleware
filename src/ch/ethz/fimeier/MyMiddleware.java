@@ -168,7 +168,6 @@ public class MyMiddleware{
 		}
 		MyMiddleware.overallStatistic = overallStatisticWindows[0];
 		MyMiddleware.logger.info("init MyMiddleware.... setting tWaitBeforeMeasurements="+tWaitBeforeMeasurements +" and tTimeForMeasurements="+tTimeForMeasurements);
-		MyMiddleware.logger.warning("Using "+nWindows+" windows in this run... not really... just MEMTIERTESTTIME many... as data collecting starts with the first request!!");
 
 		//	}
 
@@ -312,7 +311,12 @@ public class MyMiddleware{
 		MyMiddleware.logger.info("**********MyMiddlewareStatisticsPerWindow.finalStats()**********");
 
 		System.out.println("**********MyMiddlewareStatisticsPerWindow.finalStats()**********");
-		System.out.println(MyMiddlewareStatisticsPerWindow.finalStats(memtierConnectionsQueue));
+		try{
+			System.out.println(MyMiddlewareStatisticsPerWindow.finalStats(memtierConnectionsQueue));
+			
+		} catch (Exception e) {
+			System.out.println("ERROR: Exception while creating finalStats... probably because you didn't collected any data (divison by 0)");
+		}
 		System.out.println("ACHTUNG sind in file finalStats");
 		System.out.println("****************************************************************");
 
