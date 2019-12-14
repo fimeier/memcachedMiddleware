@@ -1,0 +1,72 @@
+reset 
+set terminal pdf 
+set key font ",6" 
+set output "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/generatedPlots/allLines/pdfSource/Baseline31Client.pdf" 
+set xrange [0:*] 
+set yrange [0:*] 
+set key top left 
+set style line 1 lc rgb '#33ccff' lt 1 lw 2 pt 7 ps 0.5 
+set style line 2 lc rgb '#33cc33' lt 1 lw 2 pt 7 ps 0.5 
+set xlabel "Value Size [Bytes]" 
+set ylabel "Throughput [get/sec]" 
+set title "Interactive Law" 
+set x2range [0:200]  
+set y2range [0:40]  
+set y2label "Latency get [ms]" 
+set ytics nomirror 
+set y2tics 
+plot "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline31/Baseline31NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:95:96  with errorlines title "7 Value-Size=1024(Baseline31NumClients_WorkerThreads_64_Memtier:throughputGet:client)" ls 1 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline31/Baseline31NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:95:95 with labels center boxed notitle , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline31/Baseline31NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:100:101  with errorlines title "14 Value-Size=1024(Baseline31NumClients_WorkerThreads_64_Memtier:latencyGet:client)" ls 2  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline31/Baseline31NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:100:100 with labels center boxed notitle  axis x2y2
+reset 
+set terminal pdf 
+set key font ",6" 
+set output "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/generatedPlots/allLines/pdfSource/Baseline32Client.pdf" 
+set xrange [0:*] 
+set yrange [0:*] 
+set key top left 
+set style line 1 lc rgb '#33ccff' lt 1 lw 2 pt 7 ps 0.5 
+set style line 2 lc rgb '#33cc33' lt 1 lw 2 pt 7 ps 0.5 
+set xlabel "Value Size [Bytes]" 
+set ylabel "Throughput [get/sec]" 
+set title "Interactive Law" 
+set x2range [0:200]  
+set y2range [0:10]  
+set y2label "Latency get [ms]" 
+set ytics nomirror 
+set y2tics 
+plot "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline32/Baseline32NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:95:96  with errorlines title "28 Value-Size=1024(Baseline32NumClients_WorkerThreads_64_Memtier:throughputGet:client)" ls 1 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline32/Baseline32NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:95:95 with labels center boxed notitle , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline32/Baseline32NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:100:101  with errorlines title "35 Value-Size=1024(Baseline32NumClients_WorkerThreads_64_Memtier:latencyGet:client)" ls 2  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline32/Baseline32NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:100:100 with labels center boxed notitle  axis x2y2
+reset 
+set terminal pdf 
+set key font ",6" 
+set output "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/generatedPlots/allLines/pdfSource/Baseline33Client.pdf" 
+set xrange [0:*] 
+set yrange [0:*] 
+set key top left 
+set style line 1 lc rgb '#33ccff' lt 1 lw 2 pt 7 ps 0.5 
+set style line 2 lc rgb '#33cc33' lt 1 lw 2 pt 7 ps 0.5 
+set xlabel "Value Size [Bytes]" 
+set ylabel "Throughput [get/sec]" 
+set title "Interactive Law" 
+set x2range [0:200]  
+set y2range [0:6]  
+set y2label "Latency get [ms]" 
+set ytics nomirror 
+set y2tics 
+plot "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline33/Baseline33NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:95:96  with errorlines title "49 Value-Size=1024(Baseline33NumClients_WorkerThreads_64_Memtier:throughputGet:client)" ls 1 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline33/Baseline33NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:95:95 with labels center boxed notitle , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline33/Baseline33NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:100:101  with errorlines title "56 Value-Size=1024(Baseline33NumClients_WorkerThreads_64_Memtier:latencyGet:client)" ls 2  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline33/Baseline33NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:100:100 with labels center boxed notitle  axis x2y2
+reset 
+set terminal pdf 
+set key font ",6" 
+set output "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/generatedPlots/allLines/pdfSource/Baseline34Client.pdf" 
+set xrange [0:*] 
+set yrange [0:*] 
+set key top left 
+set style line 1 lc rgb '#33ccff' lt 1 lw 2 pt 7 ps 0.5 
+set style line 2 lc rgb '#33cc33' lt 1 lw 2 pt 7 ps 0.5 
+set xlabel "Value Size [Bytes]" 
+set ylabel "Throughput [get/sec]" 
+set title "Interactive Law" 
+set x2range [0:200]  
+set y2range [0:10]  
+set y2label "Latency get [ms]" 
+set ytics nomirror 
+set y2tics 
+plot "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline34/Baseline34NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:95:96  with errorlines title "70 Value-Size=1024(Baseline34NumClients_WorkerThreads_64_Memtier:throughputGet:client)" ls 1 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline34/Baseline34NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:95:95 with labels center boxed notitle , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline34/Baseline34NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:100:101  with errorlines title "77 Value-Size=1024(Baseline34NumClients_WorkerThreads_64_Memtier:latencyGet:client)" ls 2  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline34/Baseline34NumClients_WorkerThreads_64_MemtierMemtierClient" using 1:100:100 with labels center boxed notitle  axis x2y2

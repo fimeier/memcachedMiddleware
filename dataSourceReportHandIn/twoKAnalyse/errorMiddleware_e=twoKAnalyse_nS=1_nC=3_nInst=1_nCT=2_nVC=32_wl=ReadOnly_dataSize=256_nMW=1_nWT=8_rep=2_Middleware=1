@@ -1,0 +1,4 @@
+Thu Dec  5 08:07:23 UTC 2019
+[2019-12-05 08:07:23] [WARNING] Using 82 windows in this run... not really... just MEMTIERTESTTIME many... as data collecting starts with the first request!! 
+[2019-12-05 08:08:49] [SEVERE ] BAD WINDOW: Window Nr-80: windowStats.runTimeWindow+=66919204 
+[2019-12-05 08:08:49] [SEVERE ] BAD WINDOW: Window Nr-81: windowStats.runTimeWindow+=0 

@@ -1,0 +1,32 @@
+BEGIN: FINAL STATS
+nWindows=82
+nGoodWindows=79
+nWindowsUsedForAggregation=60 Assert=60 (using windows [15, 74])
+runTimeOverall=81500.15856099999 ms (wrong value if threadstopMeasuring didn't had the chance to stop everything... interrupt?)
+runTimeWindowCumulatedOverRun=60000000000 (60000.0ms)
+cacheMissRatioFinal=0.0 Assert=0.0
+keysSentToServerFinal=111075.0
+keysReturnedFromServerFinal=111075.0
+keysNotReturnedFinal=0.0 Assert=0.0
+numberGetCommands=111075.0
+throughputGet=1851.25
+throughputAllCommands=1851.25
+throughputGetAllKeys=1851.25
+avgQueueWaitingTime=0.10229725810488408
+avgQueueLength=1.1109430564933604
+avgMemcachedResponseTimeGet=0.7789507946612648
+avgWorkerThreadResponseTimeGet=0.806577825766374
+avgMiddlewareResponseTimeGet=0.9088750838712581
+nCommandsAddedToQueueOverRun=111075
+nCommandsProcessedByWorkersOverRun=111075
+Total-set-get-multiget=0 Assert=0
+ClientThinkTime_/10.0.0.13=2.2441079999999998 ms
+ClientThinkTime_/10.0.0.12=2.327842 ms
+ClientThinkTime_/10.0.0.11=2.473467 ms
+ClientThinkTime_AllClients=2.3458319999999997 ms
+InterArrivalTime=0.5416949999999999 ms
+ArrivalRate=1.8460572831574966 1/ms and not per sec!!!
+WorkBalance server1=33.33333333333333% (48977 from a total of 146931.0 for all windows!)
+WorkBalance server2=33.33333333333333% (48977 from a total of 146931.0 for all windows!)
+WorkBalance server3=33.33333333333333% (48977 from a total of 146931.0 for all windows!)
+END: FINAL STATS

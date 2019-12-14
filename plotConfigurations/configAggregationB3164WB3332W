@@ -1,0 +1,35 @@
+middlewareDataKeys:=Baseline31vs33W32vsW64TP,Baseline31vs33W32vsW64Latency
+
+suffixForOutputFiles:=Baseline31vs33
+
+
+##Baseline31vs33W32vsW64TP
+Baseline31vs33W32vsW64TP:=Baseline31vs33W32vsW64TP
+pdfFileName:=Baseline31vs33W32vsW64TP
+id:=1639,1640,1641,1642,1643,1644,1645,1681,1682,1683,1684,1685,1686,1687
+linePrefixPerLine:=1639,1640,1641,1642,1643,1644,1645,1681,1682,1683,1684,1685,1686,1687
+colorsToUse:=funkycolors
+xLabel:=Number of Clients
+yLabel:=Throughput [get/sec]
+title:=Baseline 31 (64WT) vs Baseline 33 (32WT) TP
+keyPosition:=top left
+boxlabelOff:=boxlabelOff
+
+
+
+##Baseline31vs33W32vsW64Latency
+Baseline31vs33W32vsW64Latency:=Baseline31vs33W32vsW64Latency
+pdfFileName:=Baseline31vs33W32vsW64Latency
+id:=1646,1647,1648,1649,1650,1651,1652,1688,1689,1690,1691,1692,1693,1694
+linePrefixPerLine:=1646,1647,1648,1649,1650,1651,1652,1688,1689,1690,1691,1692,1693,1694
+colorsToUse:=funkycolors
+xLabel:=Number of Clients
+yLabel:=Latency get [ms]
+title:=Baseline 31 (64WT) vs Baseline 33 (32WT) Latency
+keyPosition:=top left
+boxlabelOff:=boxlabelOff
+
+
+
+
+

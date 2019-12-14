@@ -1,0 +1,220 @@
+middlewareDataKeys:=Baseline21InteractiveLaw,Baseline22InteractiveLaw,Baseline21MaxTP,Baseline22MaxTP,Baseline31InteractiveLaw,Baseline32InteractiveLaw,Baseline33InteractiveLaw,Baseline34InteractiveLaw,Baseline31InteractiveLawCompare,Baseline32InteractiveLawCompare,Baseline34InteractiveLawCompare
+
+suffixForOutputFiles:=B21IL
+
+
+##Baseline21InteractiveLaw
+Baseline21InteractiveLaw:=Baseline21InteractiveLaw
+pdfFileName:=Baseline21InteractiveLaw
+id:=28,35
+linePrefixPerLine:=(ID=28) Num-Clients=288,(ID=35) Num-Clients=288
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+#yRange:=[0:20] 
+x2y2:=35
+x2y2PT:=7
+x2Range:=[0:1200] 
+y2Range:=[0:30] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=top left
+
+
+
+
+##Baseline22InteractiveLaw
+Baseline22InteractiveLaw:=Baseline22InteractiveLaw
+pdfFileName:=Baseline22InteractiveLaw
+id:=70,77
+linePrefixPerLine:=(ID=70) ,(ID=77) 
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+#yRange:=[0:20] 
+x2y2:=77
+x2y2PT:=7
+x2Range:=[0:1200] 
+y2Range:=[0:30] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=top left
+
+
+##Baseline31InteractiveLaw
+Baseline31InteractiveLaw:=Baseline31InteractiveLaw
+pdfFileName:=Baseline31InteractiveLaw
+id:=259,266
+linePrefixPerLine:=(ID=259) ,(ID=266) 
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+#yRange:=[0:20] 
+x2y2:=266
+x2y2PT:=7
+x2Range:=[0:1200] 
+y2Range:=[0:18] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=bottom right
+
+
+##Baseline32InteractiveLaw
+Baseline32InteractiveLaw:=Baseline32InteractiveLaw
+pdfFileName:=Baseline32InteractiveLaw
+id:=511,518
+linePrefixPerLine:=(ID=511) ,(ID=518) 
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+#yRange:=[0:20] 
+x2y2:=518
+x2y2PT:=7
+x2Range:=[0:1200] 
+y2Range:=[0:10] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=bottom right
+
+
+##Baseline33InteractiveLaw
+Baseline33InteractiveLaw:=Baseline33InteractiveLaw
+pdfFileName:=Baseline33InteractiveLaw
+id:=763,770
+linePrefixPerLine:=(ID=763) ,(ID=770) 
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+#yRange:=[0:20] 
+x2y2:=770
+x2y2PT:=7
+x2Range:=[0:1200] 
+y2Range:=[0:18] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=bottom right
+
+
+
+##Baseline34InteractiveLaw
+Baseline34InteractiveLaw:=Baseline34InteractiveLaw
+pdfFileName:=Baseline34InteractiveLaw
+id:=1015,1022
+linePrefixPerLine:=(ID=1015) ,(ID=1022) 
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+yRange:=[28000:41000] 
+x2y2:=1022
+x2y2PT:=7
+x2Range:=[0:1200] 
+y2Range:=[1.5:4] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=bottom right
+
+
+
+
+#############compare baseline 3. 1 2 4
+
+##Baseline31InteractiveLawCompare
+Baseline31InteractiveLawCompare:=Baseline31InteractiveLawCompare
+pdfFileName:=Baseline31InteractiveLawCompare
+id:=253,260
+linePrefixPerLine:=(ID=253) ,(ID=260) 
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+yRange:=[3500:4000] 
+x2y2:=260
+x2y2PT:=7
+x2Range:=[0:1200] 
+y2Range:=[0:3] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=bottom right
+
+
+##Baseline32InteractiveLawCompare
+Baseline32InteractiveLawCompare:=Baseline32InteractiveLawCompare
+pdfFileName:=Baseline32InteractiveLawCompare
+id:=505,512
+linePrefixPerLine:=(ID=505) ,(ID=512) 
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+#yRange:=[0:20] 
+x2y2:=512
+x2y2PT:=7
+x2Range:=[0:1200] 
+y2Range:=[0:10] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=bottom right
+
+
+
+##Baseline34InteractiveLawCompare
+Baseline34InteractiveLawCompare:=Baseline34InteractiveLawCompare
+pdfFileName:=Baseline34InteractiveLawCompare
+id:=1009,1016
+linePrefixPerLine:=(ID=1009) ,(ID=1016) 
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+yRange:=[28000:41000] 
+x2y2:=1016
+x2y2PT:=7
+x2Range:=[0:1200] 
+y2Range:=[1.5:4] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=bottom right
+
+
+
+
+
+
+#######MAX TP Stuff
+#######
+
+
+
+
+##Baseline21MaxTP
+Baseline21MaxTP:=Baseline21MaxTP
+pdfFileName:=Baseline21MaxTP
+id:=3,10
+linePrefixPerLine:=(ID=3),(ID=10)
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+#yRange:=[0:20] 
+x2y2:=10
+x2y2PT:=7
+x2Range:=[0:300] 
+y2Range:=[0:30] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=top left
+
+
+
+##Baseline22MaxTP
+Baseline22MaxTP:=Baseline22MaxTP
+pdfFileName:=Baseline22MaxTP
+id:=45,52
+linePrefixPerLine:=(ID=45),(ID=52)
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+#yRange:=[0:20] 
+x2y2:=52
+x2y2PT:=7
+x2Range:=[0:300] 
+y2Range:=[0:15] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=top left

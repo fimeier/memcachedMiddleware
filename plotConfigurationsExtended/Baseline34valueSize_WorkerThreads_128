@@ -1,0 +1,137 @@
+
+####Stuff fix for all keys
+mode:=middleware
+
+#Files
+experimentFolder:=baseline34/
+experimentSubfolder:=valueSize
+experimentName:=Baseline34ValueSize_WorkerThreads_128
+filterInnerLoopPrefix:=finalStats_e=baseline34
+expectedNumberOfFiles:=2
+
+experimentDetail:=WT=128
+
+defaultxLabel:=Value Size [Bytes]
+
+
+#Loop-Stuff
+xAxisDataPointsInput:=64,128,256,384,512,768,1024
+ratioXaxis:=1
+xFilterPrefix:=_dataSize=
+
+linesToPlotInput:=32,64,128,256
+linesFilterPrefix:=_nVC=
+
+numberOfRepetitions:=1,2,3
+repetitionFilterPrefix:=_nWT=128_rep=
+
+##read-only case
+middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedResponseTimeGet,avgWorkerThreadResponseTimeGet,avgQueueWaitingTime,avgQueueLength,ClientThinkTime_AllClients,InterArrivalTime,ArrivalRate
+
+
+#optional title for all keys in this file
+defaultTitle:=Datasource Middleware: ../baseline34/valueSize (128 Worker Threads)
+
+#####details for keys
+
+
+##ClientThinkTime_AllClients
+ClientThinkTime_AllClients:=ClientThinkTime_AllClients
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+#linePrefix:=Value-Size=
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+#lineTitles:=
+keyPosition:=bottom right
+
+##InterArrivalTime
+InterArrivalTime:=InterArrivalTime
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+#linePrefix:=Value-Size=
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+#lineTitles:=
+keyPosition:=bottom right
+
+##ArrivalRate
+ArrivalRate:=ArrivalRate
+aggregationType:=sum
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+#linePrefix:=Value-Size=
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+#lineTitles:=
+keyPosition:=bottom right
+
+##############################################################################get
+##throughputGet
+throughputGet:=throughputGet
+aggregationType:=sum
+mainType:=tp
+operation:=get
+colorsToUse:=defaultColorsThroughputRead
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+#lineTitles:=
+#optional
+#yRange:=[-1000:5000]
+#xRange:=[0:500]
+#keyPosition:=left bottom
+#xLabel:=Anzahl von Klienten
+#yLabel:=thruuuputli in kb
+#title:=ein bildli das schön ist vom Experiment baseline34
+#lineTitles:=Lineli 1 #wt8;Lineli 2 #wt28;Lineli 3 #wt38;Lineli 4 #wt48
+
+##avgMiddlewareResponseTimeGet
+avgMiddlewareResponseTimeGet:=avgMiddlewareResponseTimeGet
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+
+
+##avgMemcachedResponseTimeGet
+avgMemcachedResponseTimeGet:=avgMemcachedResponseTimeGet
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+
+
+##avgWorkerThreadResponseTimeGet
+avgWorkerThreadResponseTimeGet:=avgWorkerThreadResponseTimeGet
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+
+
+
+##############################################################################ALL COMMANDS OR NO single operation
+
+##avgQueueWaitingTime
+avgQueueWaitingTime:=avgQueueWaitingTime
+aggregationType:=avg
+mainType:=latency
+operation:=tbd
+colorsToUse:=defaultColorsLatencyRead
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+
+
+##avgQueueLength
+avgQueueLength:=avgQueueLength
+aggregationType:=sum
+mainType:=QueueLength
+operation:=tbd
+colorsToUse:=defaultColorsLatencyRead
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+
+
+

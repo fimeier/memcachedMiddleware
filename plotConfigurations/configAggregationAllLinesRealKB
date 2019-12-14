@@ -1,0 +1,112 @@
+middlewareDataKeys:=Baseline21ClientsRealKB,Baseline22ClientsRealKB,Baseline31MiddlewareRealKB,Baseline32MiddlewareRealKB,Baseline33MiddlewareRealKB,Baseline34MiddlewareRealKB
+suffixForOutputFiles:=RealThroughputKB
+
+
+##Baseline21ClientsRealKB
+Baseline21ClientsRealKB:=Baseline21ClientsRealKB
+pdfFileName:=Baseline21ClientsRealKB
+id:=1,2,3,4,5,6,7
+linePrefixPerLine:=(srcID=1),(srcID=2),(srcID=3),(srcID=4),(srcID=5),(srcID=6),(srcID=7)
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Number of Clients
+yLabel:=Throughput real [KB/sec]
+title:=Real Throughput Lan Baseline 21
+keyPosition:=bottom right
+boxlabelOff:=boxlabelOff
+realKBPlot:=realKBPlot
+#datasize of the source line + 100Bytes
+realKBfactors:=164,228,356,484,612,868,1124
+
+
+
+##Baseline22ClientsRealKB
+Baseline22ClientsRealKB:=Baseline22ClientsRealKB
+pdfFileName:=Baseline22ClientsRealKB
+id:=43,44,45,46,47,48,49
+linePrefixPerLine:=(srcsrcID=43),(srcID=44),(srcID=45),(srcID=46),(srcID=47),(srcID=48),(srcID=49)
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Number of Clients
+yLabel:=Throughput real [KB/sec]
+title:=Real Throughput Lan Baseline 22
+keyPosition:=bottom right
+boxlabelOff:=boxlabelOff
+realKBPlot:=realKBPlot
+#datasize of the source line + 100Bytes
+realKBfactors:=164,228,356,484,612,868,1124
+
+
+
+
+
+##Baseline31MiddlewareRealKB
+Baseline31MiddlewareRealKB:=Baseline31MiddlewareRealKB
+pdfFileName:=Baseline31MiddlewareRealKB
+id:=127,128,129,130,131,132,133
+linePrefixPerLine:=(srcsrcID=127),(srcID=128),(srcID=129),(srcID=130),(srcID=131),(srcID=132),(srcID=133)
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Number of Clients
+yLabel:=Throughput real [KB/sec]
+title:=Real Throughput Lan Baseline 31
+keyPosition:=bottom right
+boxlabelOff:=boxlabelOff
+realKBPlot:=realKBPlot
+#datasize of the source line + 100Bytes
+realKBfactors:=164,228,356,484,612,868,1124
+
+
+##Baseline32MiddlewareRealKB
+Baseline32MiddlewareRealKB:=Baseline32MiddlewareRealKB
+pdfFileName:=Baseline32MiddlewareRealKB
+id:=379,380,381,382,383,384,385
+linePrefixPerLine:=(srcsrcID=379),(srcID=380),(srcID=381),(srcID=382),(srcID=383),(srcID=384),(srcID=385)
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Number of Clients
+yLabel:=Throughput real [KB/sec]
+title:=Real Throughput Lan Baseline 32
+keyPosition:=bottom right
+boxlabelOff:=boxlabelOff
+realKBPlot:=realKBPlot
+#datasize of the source line + 100Bytes
+realKBfactors:=164,228,356,484,612,868,1124
+
+
+##Baseline33MiddlewareRealKB
+Baseline33MiddlewareRealKB:=Baseline33MiddlewareRealKB
+pdfFileName:=Baseline33MiddlewareRealKB
+id:=631,632,633,634,635,636,637
+linePrefixPerLine:=(srcsrcID=631),(srcID=632),(srcID=633),(srcID=634),(srcID=635),(srcID=636),(srcID=637)
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Number of Clients
+yLabel:=Throughput real [KB/sec]
+title:=Real Throughput Lan Baseline 33
+keyPosition:=bottom right
+boxlabelOff:=boxlabelOff
+realKBPlot:=realKBPlot
+#datasize of the source line + 100Bytes
+realKBfactors:=164,228,356,484,612,868,1124
+
+
+
+##Baseline34MiddlewareRealKB
+Baseline34MiddlewareRealKB:=Baseline34MiddlewareRealKB
+pdfFileName:=Baseline34MiddlewareRealKB
+id:=883,884,885,886,887,888,889
+linePrefixPerLine:=(srcsrcID=883),(srcID=884),(srcID=885),(srcID=886),(srcID=887),(srcID=888),(srcID=889)
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Number of Clients
+yLabel:=Throughput real [KB/sec]
+title:=Real Throughput Lan Baseline 34
+keyPosition:=bottom right
+boxlabelOff:=boxlabelOff
+realKBPlot:=realKBPlot
+#datasize of the source line + 100Bytes
+realKBfactors:=164,228,356,484,612,868,1124
+
+
+
+
+
+
+
+
+

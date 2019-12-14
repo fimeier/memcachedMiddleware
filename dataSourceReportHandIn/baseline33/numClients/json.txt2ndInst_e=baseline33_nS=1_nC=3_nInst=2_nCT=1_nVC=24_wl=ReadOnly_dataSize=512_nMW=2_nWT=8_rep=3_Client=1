@@ -1,0 +1,636 @@
+{
+	"configuration":{
+		"server": "10.0.0.22"
+		,"port": 12212
+		,"unix socket": "(null)"
+		,"protocol": "memcache_text"
+		,"out_file": "(null)"
+		,"client_stats": "(null)"
+		,"run_count": 1
+		,"debug": 0
+		,"requests": 0
+		,"clients": 24
+		,"threads": 1
+		,"test_time": 80
+		,"ratio": "0:1"
+		,"pipeline": 1
+		,"data_size": 512
+		,"data_offset": 0
+		,"random_data": "false"
+		,"data_size_range": "0:0"
+		,"data_size_list": ""
+		,"data_size_pattern": "R"
+		,"expiry_range": "2000000:2000001"
+		,"data_import": "(null)"
+		,"data_verify": "false"
+		,"verify_only": "false"
+		,"generate_keys": "false"
+		,"key_prefix": "memtier-"
+		,"key_minimum":           0
+		,"key_maximum":       10000
+		,"key_pattern": "R:R"
+		,"key_stddev": 0.000000
+		,"key_median": 0.000000
+		,"reconnect_interval": 0
+		,"multi_key_get": 0
+		,"authenticate": ""
+		,"select-db": 0
+		,"no-expiry": "false"
+		,"wait-ratio": "0:0"
+		,"num-slaves": "0:0"
+		,"wait-timeout": "0-0"
+		}
+	,"run information":{
+		"Threads": 1
+		,"Connections per thread": 24
+		,"Seconds": 80
+		}
+	,"ALL STATS":{
+		"Sets":{
+			"Ops/sec": 0.00
+			,"Hits/sec": 0.00
+			,"Misses/sec": 0.00
+			,"Latency": 0.00
+			,"KB/sec": 0.00
+			}
+		,"Gets":{
+			"Ops/sec": 2761.61
+			,"Hits/sec": 2761.61
+			,"Misses/sec": 0.00
+			,"Latency": 8.68
+			,"KB/sec": 1517.75
+			}
+		,"Waits":{
+			"Ops/sec": 0.00
+			,"Hits/sec": 0.00
+			,"Misses/sec": 0.00
+			,"Latency": 0.00
+			,"KB/sec": 0.00
+			}
+		,"Totals":{
+			"Ops/sec": 2761.61
+			,"Hits/sec": 2761.61
+			,"Misses/sec": 0.00
+			,"Latency": 8.68
+			,"KB/sec": 1517.75
+			}
+		,"SET":[
+		]
+		,"GET":[
+			{
+				"<=msec": 0.660
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 0.730
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 0.800
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 0.810
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 0.830
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 0.920
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 0.960
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 1.300
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 1.400
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 1.500
+				,"percent": 0.01
+				}
+			,{
+				"<=msec": 1.600
+				,"percent": 0.01
+				}
+			,{
+				"<=msec": 1.700
+				,"percent": 0.01
+				}
+			,{
+				"<=msec": 1.800
+				,"percent": 0.01
+				}
+			,{
+				"<=msec": 1.900
+				,"percent": 0.02
+				}
+			,{
+				"<=msec": 2.000
+				,"percent": 0.02
+				}
+			,{
+				"<=msec": 2.100
+				,"percent": 0.03
+				}
+			,{
+				"<=msec": 2.200
+				,"percent": 0.03
+				}
+			,{
+				"<=msec": 2.300
+				,"percent": 0.04
+				}
+			,{
+				"<=msec": 2.400
+				,"percent": 0.04
+				}
+			,{
+				"<=msec": 2.500
+				,"percent": 0.05
+				}
+			,{
+				"<=msec": 2.600
+				,"percent": 0.05
+				}
+			,{
+				"<=msec": 2.700
+				,"percent": 0.06
+				}
+			,{
+				"<=msec": 2.800
+				,"percent": 0.08
+				}
+			,{
+				"<=msec": 2.900
+				,"percent": 0.10
+				}
+			,{
+				"<=msec": 3.000
+				,"percent": 0.12
+				}
+			,{
+				"<=msec": 3.100
+				,"percent": 0.15
+				}
+			,{
+				"<=msec": 3.200
+				,"percent": 0.19
+				}
+			,{
+				"<=msec": 3.300
+				,"percent": 0.23
+				}
+			,{
+				"<=msec": 3.400
+				,"percent": 0.28
+				}
+			,{
+				"<=msec": 3.500
+				,"percent": 0.33
+				}
+			,{
+				"<=msec": 3.600
+				,"percent": 0.39
+				}
+			,{
+				"<=msec": 3.700
+				,"percent": 0.48
+				}
+			,{
+				"<=msec": 3.800
+				,"percent": 0.57
+				}
+			,{
+				"<=msec": 3.900
+				,"percent": 0.67
+				}
+			,{
+				"<=msec": 4.000
+				,"percent": 0.78
+				}
+			,{
+				"<=msec": 4.100
+				,"percent": 0.90
+				}
+			,{
+				"<=msec": 4.200
+				,"percent": 1.03
+				}
+			,{
+				"<=msec": 4.300
+				,"percent": 1.15
+				}
+			,{
+				"<=msec": 4.400
+				,"percent": 1.28
+				}
+			,{
+				"<=msec": 4.500
+				,"percent": 1.43
+				}
+			,{
+				"<=msec": 4.600
+				,"percent": 1.60
+				}
+			,{
+				"<=msec": 4.700
+				,"percent": 1.77
+				}
+			,{
+				"<=msec": 4.800
+				,"percent": 1.96
+				}
+			,{
+				"<=msec": 4.900
+				,"percent": 2.19
+				}
+			,{
+				"<=msec": 5.000
+				,"percent": 2.39
+				}
+			,{
+				"<=msec": 5.100
+				,"percent": 2.63
+				}
+			,{
+				"<=msec": 5.200
+				,"percent": 2.87
+				}
+			,{
+				"<=msec": 5.300
+				,"percent": 3.12
+				}
+			,{
+				"<=msec": 5.400
+				,"percent": 3.39
+				}
+			,{
+				"<=msec": 5.500
+				,"percent": 3.67
+				}
+			,{
+				"<=msec": 5.600
+				,"percent": 3.97
+				}
+			,{
+				"<=msec": 5.700
+				,"percent": 4.33
+				}
+			,{
+				"<=msec": 5.800
+				,"percent": 4.69
+				}
+			,{
+				"<=msec": 5.900
+				,"percent": 5.12
+				}
+			,{
+				"<=msec": 6.000
+				,"percent": 5.55
+				}
+			,{
+				"<=msec": 6.100
+				,"percent": 6.04
+				}
+			,{
+				"<=msec": 6.200
+				,"percent": 6.64
+				}
+			,{
+				"<=msec": 6.300
+				,"percent": 7.48
+				}
+			,{
+				"<=msec": 6.400
+				,"percent": 8.36
+				}
+			,{
+				"<=msec": 6.500
+				,"percent": 9.40
+				}
+			,{
+				"<=msec": 6.600
+				,"percent": 10.69
+				}
+			,{
+				"<=msec": 6.700
+				,"percent": 12.19
+				}
+			,{
+				"<=msec": 6.800
+				,"percent": 13.78
+				}
+			,{
+				"<=msec": 6.900
+				,"percent": 15.30
+				}
+			,{
+				"<=msec": 7.000
+				,"percent": 16.78
+				}
+			,{
+				"<=msec": 7.100
+				,"percent": 18.32
+				}
+			,{
+				"<=msec": 7.200
+				,"percent": 19.85
+				}
+			,{
+				"<=msec": 7.300
+				,"percent": 21.53
+				}
+			,{
+				"<=msec": 7.400
+				,"percent": 23.22
+				}
+			,{
+				"<=msec": 7.500
+				,"percent": 24.94
+				}
+			,{
+				"<=msec": 7.600
+				,"percent": 26.80
+				}
+			,{
+				"<=msec": 7.700
+				,"percent": 28.98
+				}
+			,{
+				"<=msec": 7.800
+				,"percent": 31.42
+				}
+			,{
+				"<=msec": 7.900
+				,"percent": 34.31
+				}
+			,{
+				"<=msec": 8.000
+				,"percent": 37.60
+				}
+			,{
+				"<=msec": 8.100
+				,"percent": 41.22
+				}
+			,{
+				"<=msec": 8.200
+				,"percent": 45.10
+				}
+			,{
+				"<=msec": 8.300
+				,"percent": 49.77
+				}
+			,{
+				"<=msec": 8.400
+				,"percent": 55.81
+				}
+			,{
+				"<=msec": 8.500
+				,"percent": 61.21
+				}
+			,{
+				"<=msec": 8.600
+				,"percent": 65.00
+				}
+			,{
+				"<=msec": 8.700
+				,"percent": 67.81
+				}
+			,{
+				"<=msec": 8.800
+				,"percent": 70.22
+				}
+			,{
+				"<=msec": 8.900
+				,"percent": 72.32
+				}
+			,{
+				"<=msec": 9.000
+				,"percent": 74.08
+				}
+			,{
+				"<=msec": 9.100
+				,"percent": 75.62
+				}
+			,{
+				"<=msec": 9.200
+				,"percent": 76.92
+				}
+			,{
+				"<=msec": 9.300
+				,"percent": 78.17
+				}
+			,{
+				"<=msec": 9.400
+				,"percent": 79.39
+				}
+			,{
+				"<=msec": 9.500
+				,"percent": 80.54
+				}
+			,{
+				"<=msec": 9.600
+				,"percent": 81.65
+				}
+			,{
+				"<=msec": 9.700
+				,"percent": 82.67
+				}
+			,{
+				"<=msec": 9.800
+				,"percent": 83.66
+				}
+			,{
+				"<=msec": 9.900
+				,"percent": 84.58
+				}
+			,{
+				"<=msec": 10.000
+				,"percent": 88.65
+				}
+			,{
+				"<=msec": 11.000
+				,"percent": 92.13
+				}
+			,{
+				"<=msec": 12.000
+				,"percent": 94.05
+				}
+			,{
+				"<=msec": 13.000
+				,"percent": 95.58
+				}
+			,{
+				"<=msec": 14.000
+				,"percent": 96.68
+				}
+			,{
+				"<=msec": 15.000
+				,"percent": 97.60
+				}
+			,{
+				"<=msec": 16.000
+				,"percent": 98.20
+				}
+			,{
+				"<=msec": 17.000
+				,"percent": 98.59
+				}
+			,{
+				"<=msec": 18.000
+				,"percent": 98.92
+				}
+			,{
+				"<=msec": 19.000
+				,"percent": 99.22
+				}
+			,{
+				"<=msec": 20.000
+				,"percent": 99.45
+				}
+			,{
+				"<=msec": 21.000
+				,"percent": 99.58
+				}
+			,{
+				"<=msec": 22.000
+				,"percent": 99.63
+				}
+			,{
+				"<=msec": 23.000
+				,"percent": 99.69
+				}
+			,{
+				"<=msec": 24.000
+				,"percent": 99.72
+				}
+			,{
+				"<=msec": 25.000
+				,"percent": 99.76
+				}
+			,{
+				"<=msec": 26.000
+				,"percent": 99.80
+				}
+			,{
+				"<=msec": 27.000
+				,"percent": 99.84
+				}
+			,{
+				"<=msec": 28.000
+				,"percent": 99.88
+				}
+			,{
+				"<=msec": 29.000
+				,"percent": 99.92
+				}
+			,{
+				"<=msec": 30.000
+				,"percent": 99.94
+				}
+			,{
+				"<=msec": 31.000
+				,"percent": 99.95
+				}
+			,{
+				"<=msec": 32.000
+				,"percent": 99.95
+				}
+			,{
+				"<=msec": 33.000
+				,"percent": 99.96
+				}
+			,{
+				"<=msec": 34.000
+				,"percent": 99.96
+				}
+			,{
+				"<=msec": 35.000
+				,"percent": 99.96
+				}
+			,{
+				"<=msec": 36.000
+				,"percent": 99.97
+				}
+			,{
+				"<=msec": 37.000
+				,"percent": 99.98
+				}
+			,{
+				"<=msec": 38.000
+				,"percent": 99.98
+				}
+			,{
+				"<=msec": 47.000
+				,"percent": 99.98
+				}
+			,{
+				"<=msec": 48.000
+				,"percent": 99.98
+				}
+			,{
+				"<=msec": 49.000
+				,"percent": 99.98
+				}
+			,{
+				"<=msec": 50.000
+				,"percent": 99.98
+				}
+			,{
+				"<=msec": 51.000
+				,"percent": 99.99
+				}
+			,{
+				"<=msec": 54.000
+				,"percent": 99.99
+				}
+			,{
+				"<=msec": 55.000
+				,"percent": 99.99
+				}
+			,{
+				"<=msec": 57.000
+				,"percent": 99.99
+				}
+			,{
+				"<=msec": 63.000
+				,"percent": 99.99
+				}
+			,{
+				"<=msec": 86.000
+				,"percent": 99.99
+				}
+			,{
+				"<=msec": 87.000
+				,"percent": 99.99
+				}
+			,{
+				"<=msec": 88.000
+				,"percent": 99.99
+				}
+			,{
+				"<=msec": 94.000
+				,"percent": 100.00
+				}
+			,{
+				"<=msec": 95.000
+				,"percent": 100.00
+				}
+			,{
+				"<=msec": 97.000
+				,"percent": 100.00
+				}
+			]
+		,"WAIT":[
+		]
+		}
+	}

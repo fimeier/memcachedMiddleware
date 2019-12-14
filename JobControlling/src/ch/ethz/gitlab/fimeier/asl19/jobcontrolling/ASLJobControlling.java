@@ -28,7 +28,11 @@ public class ASLJobControlling {
 	
 	public static boolean dataProcessingMode = true;
 	//public static String experimentsBaseFolderDataProcessing = "/home/fimeier/asl-fall19-project/dataSource/benchmarksAzure_3_11_2019/experiments/";
-	//public static String experimentsBaseFolderDataProcessing = "/home/fimeier/asl-fall19-project/dataSource/benchmarksAzureTeil_1_12_2019/experiments/";
+
+	//public static String experimentsBaseFolderDataProcessing = "/home/fimeier/asl-fall19-project/dataSource/experiments_extended_params/experiments/";
+	public static boolean createExtendedPlots = false;
+	//public static String plotConfigBaseFolder = "/home/fimeier/asl-fall19-project/plotConfigurationsExtended/";
+
 	public static String experimentsBaseFolderDataProcessing = "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/";
 	public static String plotConfigBaseFolder = "/home/fimeier/asl-fall19-project/plotConfigurations/";
 
@@ -163,16 +167,24 @@ public class ASLJobControlling {
 	static public String[] defaultColorsThroughputWrite = {"#33ccff", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"};
 	static public String[] defaultColorsLatencyRead = {"#33ccff", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068", "#FFAAFF"};
 	static public String[] defaultColorsLatencyWrite = {"#661400", "#33cc33","#cc3300", "#000066", "#5370AF", "#8BA068"};
-	static public String[] unknownTypeColors = {"#D30FAF", "#D30FAF","#D30FAF", "#D30FAF", "#D30FAF", "#D30FAF"};
+	static public String[] unknownTypeColors = {"#cc3300", "#cc3300","#cc3300", "#cc3300", "#cc3300","#cc3300","#cc3300", "#000066", "#000066", "#000066", "#000066", "#000066", "#000066", "#000066"};
+	static public String[] funkycolors	 = {"#cc3300", "#cc3300","#cc3300", "#cc3300", "#cc3300","#cc3300","#cc3300", "#000066", "#000066", "#000066", "#000066", "#000066", "#000066", "#000066"};
 
 
 	public static boolean consolidateStatistics = true;
-	public static boolean consolidateStatisticsBaseline21 = true;
-	public static boolean consolidateStatisticsBaseline22 = true;
-	public static boolean consolidateStatisticsBaseline31 = true;
-	public static boolean consolidateStatisticsBaseline32 = true;
-	public static boolean consolidateStatisticsBaseline33 = true;
-	public static boolean consolidateStatisticsBaseline34 = true;
+	public static boolean consolidateStatisticsBaseline21 = false;
+	public static boolean consolidateStatisticsBaseline22 = false;
+	public static boolean consolidateStatisticsBaseline31 = false;
+	public static boolean consolidateStatisticsBaseline32 = false;
+	public static boolean consolidateStatisticsBaseline33 = false;
+	public static boolean consolidateStatisticsBaseline34 = false;
+
+
+	public static boolean createConsolitatedPlots = false; //achtung habe aktuelle excluded
+
+	public static boolean createMemtierMiddlewarplots = false;
+	public static boolean create2kPlots = true;
+
 
 
 	
@@ -184,7 +196,6 @@ public class ASLJobControlling {
 	public static boolean consolidateStatisticsnonshardedCase52 = false;
 	public static boolean consolidateStatisticsMultiGetsPercentiles = false;
 	public static boolean createHistogramsMultiGets = false;
-	public static boolean createConsolitatedPlots = false;
 
 
 	/*

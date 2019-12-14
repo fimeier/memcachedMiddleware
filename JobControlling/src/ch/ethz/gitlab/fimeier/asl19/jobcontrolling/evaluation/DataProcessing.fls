@@ -1,0 +1,9 @@
+PWD /mnt/c/01Dropbox/Dropbox/00ETH/HS19/05_Advanced_Systems_Lab/asl-fall19-project/JobControlling/src/ch/ethz/gitlab/fimeier/asl19/jobcontrolling/evaluation
+INPUT /etc/texmf/web2c/texmf.cnf
+INPUT /usr/share/texmf/web2c/texmf.cnf
+INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT /mnt/c/01Dropbox/Dropbox/00ETH/HS19/05_Advanced_Systems_Lab/asl-fall19-project/JobControlling/src/ch/ethz/gitlab/fimeier/asl19/jobcontrolling/evaluation/DataProcessing.java
+OUTPUT /mnt/c/01Dropbox/Dropbox/00ETH/HS19/05_Advanced_Systems_Lab/asl-fall19-project/JobControlling/src/ch/ethz/gitlab/fimeier/asl19/jobcontrolling/evaluation/DataProcessing.log
+OUTPUT /mnt/c/01Dropbox/Dropbox/00ETH/HS19/05_Advanced_Systems_Lab/asl-fall19-project/JobControlling/src/ch/ethz/gitlab/fimeier/asl19/jobcontrolling/evaluation/DataProcessing.pdf
+INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map

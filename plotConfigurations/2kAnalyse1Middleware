@@ -1,0 +1,136 @@
+#finalStats_e=twoKAnalyse_nS=1_nC=3_nInst=1_nCT=2_nVC=32_wl=ReadOnly_dataSize=256_nMW=1_nWT=8_rep=1_Middleware=1
+#
+
+mode:=middleware
+
+#Files
+experimentFolder:=twoKAnalyse/
+experimentSubfolder:=numClients
+experimentName:=2kAnalyseEineMiddleware
+filterInnerLoopPrefix:=finalStats_e=twoKAnalyse
+expectedNumberOfFiles:=1
+
+experimentDetail:=MW=1
+
+
+
+#Loop-Stuff
+xAxisDataPointsInput:=8,32
+ratioXaxis:=1
+xFilterPrefix:=_nMW=1_nWT=
+
+linesToPlotInput:=1,3
+linesFilterPrefix:=_nS=
+
+numberOfRepetitions:=1,2,3
+repetitionFilterPrefix:=_rep=
+
+#optional title for all keys in this file
+defaultTitle:=Datasource Middleware: ../twoKAnalyse/numClients (1 MW)
+
+##read-only case
+middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedResponseTimeGet,avgWorkerThreadResponseTimeGet,avgQueueWaitingTime,avgQueueLength,ClientThinkTime_AllClients,InterArrivalTime,ArrivalRate
+
+#####details for keys
+
+##ClientThinkTime_AllClients
+ClientThinkTime_AllClients:=ClientThinkTime_AllClients
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+keyPosition:=bottom right
+yLabel:=Think Time [ms]
+
+##InterArrivalTime
+InterArrivalTime:=InterArrivalTime
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+keyPosition:=top right
+yLabel:=Inter Arrival Time [ms]
+
+##ArrivalRate
+ArrivalRate:=ArrivalRate
+aggregationType:=sum
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+keyPosition:=top left
+yLabel:=Arrival Rate [1/ms]
+
+
+##############################################################################get
+##throughputGet
+throughputGet:=throughputGet
+aggregationType:=sum
+mainType:=tp
+operation:=get
+colorsToUse:=defaultColorsThroughputRead
+linePrefix:=Num of Servers=
+#lineTitles:=
+#optional
+#yRange:=[-1000:5000]
+#xRange:=[0:500]
+#keyPosition:=left bottom
+#xLabel:=Anzahl von Klienten
+#yLabel:=thruuuputli in kb
+#title:=ein bildli das schön ist vom Experiment baseline31
+#lineTitles:=Lineli 1 #wt8;Lineli 2 #wt28;Lineli 3 #wt38;Lineli 4 #wt48
+
+##avgMiddlewareResponseTimeGet
+avgMiddlewareResponseTimeGet:=avgMiddlewareResponseTimeGet
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Num of Servers=
+#lineTitles:=
+
+##avgMemcachedResponseTimeGet
+avgMemcachedResponseTimeGet:=avgMemcachedResponseTimeGet
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Num of Servers=
+#lineTitles:=
+
+##avgWorkerThreadResponseTimeGet
+avgWorkerThreadResponseTimeGet:=avgWorkerThreadResponseTimeGet
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Num of Servers=
+#lineTitles:=
+
+
+##############################################################################ALL COMMANDS OR NO single operation
+
+##avgQueueWaitingTime
+avgQueueWaitingTime:=avgQueueWaitingTime
+aggregationType:=avg
+mainType:=latency
+operation:=tbd
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Num of Servers=
+#lineTitles:=
+
+##avgQueueLength
+avgQueueLength:=avgQueueLength
+aggregationType:=sum
+mainType:=QueueLength
+operation:=tbd
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Num of Servers=
+#lineTitles:=
+
+

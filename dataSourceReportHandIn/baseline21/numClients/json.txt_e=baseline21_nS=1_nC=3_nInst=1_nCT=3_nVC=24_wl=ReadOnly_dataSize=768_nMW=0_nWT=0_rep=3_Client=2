@@ -1,0 +1,228 @@
+{
+	"configuration":{
+		"server": "10.0.0.31"
+		,"port": 12333
+		,"unix socket": "(null)"
+		,"protocol": "memcache_text"
+		,"out_file": "(null)"
+		,"client_stats": "(null)"
+		,"run_count": 1
+		,"debug": 0
+		,"requests": 0
+		,"clients": 24
+		,"threads": 3
+		,"test_time": 80
+		,"ratio": "0:1"
+		,"pipeline": 1
+		,"data_size": 768
+		,"data_offset": 0
+		,"random_data": "false"
+		,"data_size_range": "0:0"
+		,"data_size_list": ""
+		,"data_size_pattern": "R"
+		,"expiry_range": "2000000:2000001"
+		,"data_import": "(null)"
+		,"data_verify": "false"
+		,"verify_only": "false"
+		,"generate_keys": "false"
+		,"key_prefix": "memtier-"
+		,"key_minimum":           0
+		,"key_maximum":       10000
+		,"key_pattern": "R:R"
+		,"key_stddev": 0.000000
+		,"key_median": 0.000000
+		,"reconnect_interval": 0
+		,"multi_key_get": 0
+		,"authenticate": ""
+		,"select-db": 0
+		,"no-expiry": "false"
+		,"wait-ratio": "0:0"
+		,"num-slaves": "0:0"
+		,"wait-timeout": "0-0"
+		}
+	,"run information":{
+		"Threads": 3
+		,"Connections per thread": 24
+		,"Seconds": 80
+		}
+	,"ALL STATS":{
+		"Sets":{
+			"Ops/sec": 0.00
+			,"Hits/sec": 0.00
+			,"Misses/sec": 0.00
+			,"Latency": 0.00
+			,"KB/sec": 0.00
+			}
+		,"Gets":{
+			"Ops/sec": 4257.23
+			,"Hits/sec": 4257.23
+			,"Misses/sec": 0.00
+			,"Latency": 16.80
+			,"KB/sec": 3404.03
+			}
+		,"Waits":{
+			"Ops/sec": 0.00
+			,"Hits/sec": 0.00
+			,"Misses/sec": 0.00
+			,"Latency": 0.00
+			,"KB/sec": 0.00
+			}
+		,"Totals":{
+			"Ops/sec": 4257.23
+			,"Hits/sec": 4257.23
+			,"Misses/sec": 0.00
+			,"Latency": 16.80
+			,"KB/sec": 3404.03
+			}
+		,"SET":[
+		]
+		,"GET":[
+			{
+				"<=msec": 7.400
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 7.500
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 7.800
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 7.900
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 8.000
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 8.100
+				,"percent": 0.00
+				}
+			,{
+				"<=msec": 8.200
+				,"percent": 0.01
+				}
+			,{
+				"<=msec": 8.300
+				,"percent": 0.01
+				}
+			,{
+				"<=msec": 8.400
+				,"percent": 0.01
+				}
+			,{
+				"<=msec": 8.500
+				,"percent": 0.01
+				}
+			,{
+				"<=msec": 8.600
+				,"percent": 0.01
+				}
+			,{
+				"<=msec": 9.200
+				,"percent": 0.01
+				}
+			,{
+				"<=msec": 9.400
+				,"percent": 0.01
+				}
+			,{
+				"<=msec": 9.500
+				,"percent": 0.02
+				}
+			,{
+				"<=msec": 9.800
+				,"percent": 0.02
+				}
+			,{
+				"<=msec": 9.900
+				,"percent": 0.02
+				}
+			,{
+				"<=msec": 10.000
+				,"percent": 0.04
+				}
+			,{
+				"<=msec": 11.000
+				,"percent": 0.10
+				}
+			,{
+				"<=msec": 12.000
+				,"percent": 0.12
+				}
+			,{
+				"<=msec": 13.000
+				,"percent": 0.38
+				}
+			,{
+				"<=msec": 14.000
+				,"percent": 0.45
+				}
+			,{
+				"<=msec": 15.000
+				,"percent": 4.83
+				}
+			,{
+				"<=msec": 16.000
+				,"percent": 6.21
+				}
+			,{
+				"<=msec": 17.000
+				,"percent": 98.10
+				}
+			,{
+				"<=msec": 18.000
+				,"percent": 98.80
+				}
+			,{
+				"<=msec": 19.000
+				,"percent": 99.43
+				}
+			,{
+				"<=msec": 20.000
+				,"percent": 99.67
+				}
+			,{
+				"<=msec": 21.000
+				,"percent": 99.81
+				}
+			,{
+				"<=msec": 22.000
+				,"percent": 99.89
+				}
+			,{
+				"<=msec": 23.000
+				,"percent": 99.95
+				}
+			,{
+				"<=msec": 24.000
+				,"percent": 99.98
+				}
+			,{
+				"<=msec": 25.000
+				,"percent": 99.99
+				}
+			,{
+				"<=msec": 26.000
+				,"percent": 100.00
+				}
+			,{
+				"<=msec": 27.000
+				,"percent": 100.00
+				}
+			,{
+				"<=msec": 29.000
+				,"percent": 100.00
+				}
+			,{
+				"<=msec": 31.000
+				,"percent": 100.00
+				}
+			]
+		,"WAIT":[
+		]
+		}
+	}

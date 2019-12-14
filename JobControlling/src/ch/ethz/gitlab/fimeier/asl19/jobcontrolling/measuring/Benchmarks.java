@@ -24,7 +24,7 @@ public class Benchmarks extends ASLJobControlling {
 
 	public static int totalNumberOfexperiments = 0;
 
-	public static int nmonExperimentNumber = 2000; //ACHTUNG!!!!!
+	public static int nmonExperimentNumber = 8000; //ACHTUNG!!!!!
 
 	//SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
@@ -48,33 +48,33 @@ public class Benchmarks extends ASLJobControlling {
 
 
 
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting baseline21() *****************************\n");
-		baseline21();
+//		System.out.println("*****************************************************************************************************************\n");
+//		System.out.println("***************************************** starting baseline21() *****************************\n");
+//		baseline21();
 		
 		System.out.println("*****************************************************************************************************************\n");
 		System.out.println("***************************************** starting baseline22() *****************************\n");
 		baseline22();
 		
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting baseline31() *****************************\n");
-		baseline31();
+//		System.out.println("*****************************************************************************************************************\n");
+//		System.out.println("***************************************** starting baseline31() *****************************\n");
+//		baseline31();
 //
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting baseline32() *****************************\n");
-		baseline32();
+//		System.out.println("*****************************************************************************************************************\n");
+//		System.out.println("***************************************** starting baseline32() *****************************\n");
+//		baseline32();
 //
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting baseline33() *****************************\n");
-		baseline33();
+//		System.out.println("*****************************************************************************************************************\n");
+//		System.out.println("***************************************** starting baseline33() *****************************\n");
+//		baseline33();
 //
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting baseline34() *****************************\n");
-		baseline34();
-
-		System.out.println("*****************************************************************************************************************\n");
-		System.out.println("***************************************** starting twoKAnalyse() ****************************\n");
-		twoKAnalyse();
+//		System.out.println("*****************************************************************************************************************\n");
+//		System.out.println("***************************************** starting baseline34() *****************************\n");
+//		baseline34();
+//
+//		System.out.println("*****************************************************************************************************************\n");
+//		System.out.println("***************************************** starting twoKAnalyse() ****************************\n");
+//		twoKAnalyse();
 
 
 
@@ -530,7 +530,7 @@ public class Benchmarks extends ASLJobControlling {
 				k++;
 				MemtierCommand memtierRun3 = new MemtierCommand();
 				memtierInstance = 3;
-				memtierRun3.setMemtierCommand(testSetting.clientInTestIPs[i], testSetting.argsDifferentFromDefault2ndInstance, memtierInstance);
+				memtierRun3.setMemtierCommand(testSetting.clientInTestIPs[i], testSetting.argsDifferentFromDefault3thInstance, memtierInstance);
 
 				Thread threadMemtier3 = new Thread(new RunCommandInThread(memtierRun3));
 				clientThreads.add(threadMemtier3);

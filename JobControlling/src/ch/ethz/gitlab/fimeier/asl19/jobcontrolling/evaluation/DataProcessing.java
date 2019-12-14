@@ -27,7 +27,8 @@ public class DataProcessing extends ASLJobControlling {
 
 	public void runDataProcessing() {
 
-		if (consolidateStatistics) { 
+		if (consolidateStatistics) {
+			System.out.println("Lets create some nice plots.... :-D");
 			if(consolidateStatisticsBaseline21) {
 				System.out.println("\n*****************************************************************************************************************");
 				System.out.println("***************************************** creating CLIENT baseline21/numClients plots **************************************\n");
@@ -87,7 +88,6 @@ public class DataProcessing extends ASLJobControlling {
 				System.out.println("***************************************** creating Baseline31ValueSize_WorkerThreads_64 **************************************\n");
 				configAggregation=plotConfigBaseFolder+"Baseline31valueSize_WorkerThreads_64";
 				createPlots(configAggregation);
-
 
 			}
 			if(consolidateStatisticsBaseline32) {
@@ -192,8 +192,33 @@ public class DataProcessing extends ASLJobControlling {
 				System.out.println("***************************************** creating Baseline34ValueSize_WorkerThreads_64 **************************************\n");
 				configAggregation=plotConfigBaseFolder+"Baseline34valueSize_WorkerThreads_64";
 				createPlots(configAggregation);
+			}
+
+			
+			if(createExtendedPlots) {
 
 
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline34NumClients_WorkerThreads_64 **************************************\n");
+				String configAggregation=plotConfigBaseFolder+"Baseline34numClients_WorkerThreads_64";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline34NumClients_WorkerThreads_128 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline34numClients_WorkerThreads_128";
+				createPlots(configAggregation);
+				
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline34ValueSize_WorkerThreads_64 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline34valueSize_WorkerThreads_64";
+				createPlots(configAggregation);
+
+					
+				System.out.println("\n*****************************************************************************************************************");
+				System.out.println("***************************************** creating Baseline34ValueSize_WorkerThreads_128 **************************************\n");
+				configAggregation=plotConfigBaseFolder+"Baseline34valueSize_WorkerThreads_128";
+				createPlots(configAggregation);
+				
 			}
 
 			
@@ -208,14 +233,45 @@ public class DataProcessing extends ASLJobControlling {
 				System.out.println("\n*****************************************************************************************************************");
 				System.out.println("***************************************** consolidate PLOTS **************************************\n");
 				String configAggregation=plotConfigBaseFolder+"configAggregationAllLines";
-				createSpecialPlots(configAggregation,"special Plot: allLines ");
+				//createSpecialPlots(configAggregation,"special Plot: Interactive Law ");
+
+				//createSpecialPlots(plotConfigBaseFolder+"configAggregationAllLinesRealKB","special Plot: Real Throughput");
+				//createSpecialPlots(plotConfigBaseFolder+"configAggregationAllLinesQueueLength","special Plot: Queue Length");
+
+				//createSpecialPlots(plotConfigBaseFolder+"configAggregationB3164WB3332W","special Plot: Queue Length");
+
+				createSpecialPlots(plotConfigBaseFolder+"configAggregationAllLinesMaxTPTableChapter3","special Plot: max tp table chapter 3");
+				
 
 
 			}
 
+			if (createMemtierMiddlewarplots){
+				String[] clientplots = {"Baseline31numClients_WorkerThreads_64_MemtierClient","Baseline32numClients_WorkerThreads_64_MemtierClient","Baseline33numClients_WorkerThreads_64_MemtierClient","Baseline34numClients_WorkerThreads_64_MemtierClient"};
+				for (String clientplot: clientplots){
+						
+					System.out.println("\n*******************************creating*********************************************");
+					System.out.println("*****************************************"+clientplot+" **************************************\n");
+					String configAggregation=plotConfigBaseFolder+clientplot;
+					createPlots(configAggregation);
+				}
+			}
 
-			System.out.println("************************************bigRelativeStandardDeviation***************\n"+bigRelativeStandardDeviation);
-			writeFile("failstuff.txt",bigRelativeStandardDeviation);
+			if (create2kPlots){
+				String[] plots = {"2kAnalyse1Middleware","2kAnalyse2Middleware"};
+				for (String twokplots: plots){
+						
+					System.out.println("\n*******************************creating*********************************************");
+					System.out.println("*****************************************"+twokplots+" **************************************\n");
+					String configAggregation=plotConfigBaseFolder+twokplots;
+					createPlots(configAggregation);
+				}
+			}
+
+
+
+			//System.out.println("************************************bigRelativeStandardDeviation***************\n"+bigRelativeStandardDeviation);
+			//writeFile("failstuff.txt",bigRelativeStandardDeviation);
 
 		}
 
@@ -1243,8 +1299,14 @@ public class DataProcessing extends ASLJobControlling {
 			String y2Label = dataToPlot.containsKey(plot+"_y2Label")? dataToPlot.get(plot+"_y2Label"):"";
 			String x2y2PT = dataToPlot.containsKey(plot+"_x2y2PT")? dataToPlot.get(plot+"_x2y2PT"):"default";
 
+			Boolean useBoxlabel = dataToPlot.containsKey(plot+"_boxlabelOff")? false:true;
+			Boolean createRealKBPlot = dataToPlot.containsKey(plot+"_realKBPlot")? true:false;
+			String[] realKBPlotFactors = null;
+			if (createRealKBPlot){
+				realKBPlotFactors = dataToPlot.get(plot+"_realKBfactors").split(",");
+			}
 
-
+			
 			//change prefix for line titles
 			//linePrefixPerLine
 			if (dataToPlot.containsKey(plot+"_linePrefixPerLine")) {
@@ -1252,7 +1314,7 @@ public class DataProcessing extends ASLJobControlling {
 				lineTitles.clear();
 				String[] prefix = dataToPlot.get(plot+"_linePrefixPerLine").split(",");
 				for (int i = 0; i<lineTitlesOld.size();i++) {
-					lineTitles.add(prefix[i]+" "+lineTitlesOld.get(i));		
+					lineTitles.add(prefix[i]+" "+lineTitlesOld.get(i));
 				}
 			}
 
@@ -1317,11 +1379,32 @@ public class DataProcessing extends ASLJobControlling {
 				String sndAxis = "";
 				if(use2Axis)
 					sndAxis = (lineIsOnx2y2Axis.get(lineN-1))?" axis x2y2":"";
-				if (lineN==1) {
-					gnuPlotConfig += "plot \""+dataFiles.get(lineN-1)+"\" using "+dataPositions.get(lineN-1)+"  with errorlines title \""+lineTitles.get(lineN-1)+"\" ls "+lineN+" "+sndAxis;
-				} else {
-					gnuPlotConfig += ", \""+dataFiles.get(lineN-1)+"\" using "+dataPositions.get(lineN-1)+"  with errorlines title \""+lineTitles.get(lineN-1)+"\" ls "+lineN+" "+sndAxis;
+				
+				String usingData = dataPositions.get(lineN-1);
+				if (createRealKBPlot){
+					String factor = realKBPlotFactors[lineN-1];
+					int factorInt = Integer.parseInt(factor);
+
+					String part1 = dataPositions.get(lineN-1).split(":")[0];
+					String part2 = dataPositions.get(lineN-1).split(":")[1];
+					String part3 = dataPositions.get(lineN-1).split(":")[2];
+
+					//	1:5:6
+					//	1:($5 *123213):6
+					usingData = part1 +":" +"($"+part2+"*"+factorInt+"/1024):"+part3;
+
 				}
+				if (lineN==1) {
+					gnuPlotConfig += "plot \""+dataFiles.get(lineN-1)+"\" using "+usingData+"  with errorlines title \""+lineTitles.get(lineN-1)+"\" ls "+lineN+" "+sndAxis;
+				} else {
+					gnuPlotConfig += ", \""+dataFiles.get(lineN-1)+"\" using "+usingData+"  with errorlines title \""+lineTitles.get(lineN-1)+"\" ls "+lineN+" "+sndAxis;
+				}
+				//add labels for interactive law
+				if (useBoxlabel){
+					String usinglabelBox = dataPositions.get(lineN-1).split(":")[0] +":"+ dataPositions.get(lineN-1).split(":")[1] +":"+ dataPositions.get(lineN-1).split(":")[1];
+					gnuPlotConfig += ", \""+dataFiles.get(lineN-1)+"\" using "+usinglabelBox +" with labels center boxed notitle"+" "+sndAxis;
+				}
+			
 			}
 			allgnuPlotConfigsAsOneFile += gnuPlotConfig + "\n";
 		}//END gnuPlotConfig
@@ -1692,7 +1775,7 @@ public class DataProcessing extends ASLJobControlling {
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("hallo");
 		}
 		return extractedData;
 	}

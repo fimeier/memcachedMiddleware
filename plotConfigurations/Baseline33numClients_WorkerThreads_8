@@ -29,16 +29,47 @@ linesFilterPrefix:=_dataSize=
 numberOfRepetitions:=1,2,3
 repetitionFilterPrefix:=_nWT=8_rep=
 
-##read-only case
-middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedResponseTimeGet,avgWorkerThreadResponseTimeGet,avgQueueWaitingTime,avgQueueLength
-
-##all keys
-#middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedResponseTimeGet,avgMemcachedResponseTimeGet,avgWorkerThreadResponseTimeGet,throughputAllCommands,avgQueueWaitingTime,avgQueueLength,throughputMultiGet,avgMemcachedResponseTimeMultiGet,avgWorkerThreadResponseTimeMultiGet,avgMiddlewareResponseTimeMultiGet,throughputSet,avgMemcachedResponseTimeSet,avgWorkerThreadResponseTimeSet,avgMiddlewareResponseTimeSet
 
 #optional title for all keys in this file
 defaultTitle:=Datasource Middleware: ../baseline33/numClients (8 Worker Threads)
 
+##read-only case
+middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedResponseTimeGet,avgWorkerThreadResponseTimeGet,avgQueueWaitingTime,avgQueueLength,ClientThinkTime_AllClients,InterArrivalTime,ArrivalRate
+
 #####details for keys
+
+##ClientThinkTime_AllClients
+ClientThinkTime_AllClients:=ClientThinkTime_AllClients
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+keyPosition:=bottom right
+yLabel:=Think Time [ms]
+
+##InterArrivalTime
+InterArrivalTime:=InterArrivalTime
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+keyPosition:=top right
+yLabel:=Inter Arrival Time [ms]
+
+##ArrivalRate
+ArrivalRate:=ArrivalRate
+aggregationType:=sum
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+linePrefix:=Value-Size=
+#lineTitles:=
+keyPosition:=top left
+yLabel:=Arrival Rate [1/ms]
 
 ##############################################################################get
 ##throughputGet

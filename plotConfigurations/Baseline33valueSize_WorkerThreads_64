@@ -31,15 +31,52 @@ numberOfRepetitions:=1,2,3
 repetitionFilterPrefix:=_nWT=64_rep=
 
 ##read-only case
-middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedResponseTimeGet,avgWorkerThreadResponseTimeGet,avgQueueWaitingTime,avgQueueLength
+middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedResponseTimeGet,avgWorkerThreadResponseTimeGet,avgQueueWaitingTime,avgQueueLength,ClientThinkTime_AllClients,InterArrivalTime,ArrivalRate
 
-##all keys
-#middlewareDataKeys:=throughputGet,avgMiddlewareResponseTimeGet,avgMemcachedResponseTimeGet,avgMemcachedResponseTimeGet,avgWorkerThreadResponseTimeGet,throughputAllCommands,avgQueueWaitingTime,avgQueueLength,throughputMultiGet,avgMemcachedResponseTimeMultiGet,avgWorkerThreadResponseTimeMultiGet,avgMiddlewareResponseTimeMultiGet,throughputSet,avgMemcachedResponseTimeSet,avgWorkerThreadResponseTimeSet,avgMiddlewareResponseTimeSet
 
 #optional title for all keys in this file
 defaultTitle:=Datasource Middleware: ../baseline33/valueSize (64 Worker Threads)
 
 #####details for keys
+
+##ClientThinkTime_AllClients
+ClientThinkTime_AllClients:=ClientThinkTime_AllClients
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+#linePrefix:=Value-Size=
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+#lineTitles:=
+keyPosition:=bottom right
+yLabel:=Think Time [ms]
+
+
+##InterArrivalTime
+InterArrivalTime:=InterArrivalTime
+aggregationType:=avg
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+#linePrefix:=Value-Size=
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+#lineTitles:=
+keyPosition:=bottom right
+yLabel:=Inter Arrival Time [ms]
+
+
+##ArrivalRate
+ArrivalRate:=ArrivalRate
+aggregationType:=sum
+mainType:=latency
+operation:=get
+colorsToUse:=defaultColorsLatencyRead
+#linePrefix:=Value-Size=
+lineTitles:=Num-Clients=12;Num-Clients=24;Num-Clients=48;Num-Clients=72;Num-Clients=96;Num-Clients=144;Num-Clients=192
+#lineTitles:=
+keyPosition:=bottom right
+yLabel:=Arrival Rate [1/ms]
+
 
 ##############################################################################get
 ##throughputGet

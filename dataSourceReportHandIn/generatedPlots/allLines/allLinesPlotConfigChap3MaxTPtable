@@ -1,0 +1,76 @@
+reset 
+set terminal pdf 
+set key font ",6" 
+set output "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/generatedPlots/allLines/pdfSource/Baseline31.pdf" 
+set xrange [0:*] 
+set yrange [0:*] 
+set key top left 
+set style line 1 lc rgb '#33ccff' lt 1 lw 2 pt 7 ps 0.5 
+set style line 2 lc rgb '#33cc33' lt 1 lw 2 pt 7 ps 0.5 
+set style line 3 lc rgb '#cc3300' lt 1 lw 2 pt 7 ps 0.5 
+set xlabel "Value Size [Bytes]" 
+set ylabel "Throughput [get/sec]" 
+set title "Interactive Law" 
+set x2range [0:200]  
+set y2range [0:40]  
+set y2label "Latency get [ms]" 
+set ytics nomirror 
+set y2tics 
+plot "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline31/Baseline31NumClients_WorkerThreads_64_Aggregated" using 1:275:276  with errorlines title "217 Value-Size=1024(Baseline31NumClients_WorkerThreads_64:throughputGet:middleware)" ls 1 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline31/Baseline31NumClients_WorkerThreads_64_Aggregated" using 1:275:275 with labels center boxed notitle , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline31/Baseline31NumClients_WorkerThreads_64_Aggregated" using 1:280:281  with errorlines title "224 Value-Size=1024(Baseline31NumClients_WorkerThreads_64:avgMiddlewareResponseTimeGet:middleware)" ls 2  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline31/Baseline31NumClients_WorkerThreads_64_Aggregated" using 1:280:280 with labels center boxed notitle  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline31/Baseline31NumClients_WorkerThreads_64_Aggregated" using 1:295:296  with errorlines title "245 Value-Size=1024(Baseline31NumClients_WorkerThreads_64:avgQueueWaitingTime:middleware)" ls 3 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline31/Baseline31NumClients_WorkerThreads_64_Aggregated" using 1:295:295 with labels center boxed notitle 
+reset 
+set terminal pdf 
+set key font ",6" 
+set output "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/generatedPlots/allLines/pdfSource/Baseline32.pdf" 
+set xrange [0:*] 
+set yrange [0:*] 
+set key top left 
+set style line 1 lc rgb '#33ccff' lt 1 lw 2 pt 7 ps 0.5 
+set style line 2 lc rgb '#33cc33' lt 1 lw 2 pt 7 ps 0.5 
+set style line 3 lc rgb '#cc3300' lt 1 lw 2 pt 7 ps 0.5 
+set xlabel "Value Size [Bytes]" 
+set ylabel "Throughput [get/sec]" 
+set title "Interactive Law" 
+set x2range [0:200]  
+set y2range [0:10]  
+set y2label "Latency get [ms]" 
+set ytics nomirror 
+set y2tics 
+plot "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline32/Baseline32NumClients_WorkerThreads_64_Aggregated" using 1:275:276  with errorlines title "595 Value-Size=1024(Baseline32NumClients_WorkerThreads_64:throughputGet:middleware)" ls 1 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline32/Baseline32NumClients_WorkerThreads_64_Aggregated" using 1:275:275 with labels center boxed notitle , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline32/Baseline32NumClients_WorkerThreads_64_Aggregated" using 1:280:281  with errorlines title "602 Value-Size=1024(Baseline32NumClients_WorkerThreads_64:avgMiddlewareResponseTimeGet:middleware)" ls 2  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline32/Baseline32NumClients_WorkerThreads_64_Aggregated" using 1:280:280 with labels center boxed notitle  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline32/Baseline32NumClients_WorkerThreads_64_Aggregated" using 1:295:296  with errorlines title "623 Value-Size=1024(Baseline32NumClients_WorkerThreads_64:avgQueueWaitingTime:middleware)" ls 3 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline32/Baseline32NumClients_WorkerThreads_64_Aggregated" using 1:295:295 with labels center boxed notitle 
+reset 
+set terminal pdf 
+set key font ",6" 
+set output "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/generatedPlots/allLines/pdfSource/Baseline33.pdf" 
+set xrange [0:*] 
+set yrange [0:*] 
+set key top left 
+set style line 1 lc rgb '#33ccff' lt 1 lw 2 pt 7 ps 0.5 
+set style line 2 lc rgb '#33cc33' lt 1 lw 2 pt 7 ps 0.5 
+set style line 3 lc rgb '#cc3300' lt 1 lw 2 pt 7 ps 0.5 
+set xlabel "Value Size [Bytes]" 
+set ylabel "Throughput [get/sec]" 
+set title "Interactive Law" 
+set x2range [0:200]  
+set y2range [0:6]  
+set y2label "Latency get [ms]" 
+set ytics nomirror 
+set y2tics 
+plot "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline33/Baseline33NumClients_WorkerThreads_64_Aggregated" using 1:275:276  with errorlines title "973 Value-Size=1024(Baseline33NumClients_WorkerThreads_64:throughputGet:middleware)" ls 1 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline33/Baseline33NumClients_WorkerThreads_64_Aggregated" using 1:275:275 with labels center boxed notitle , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline33/Baseline33NumClients_WorkerThreads_64_Aggregated" using 1:280:281  with errorlines title "980 Value-Size=1024(Baseline33NumClients_WorkerThreads_64:avgMiddlewareResponseTimeGet:middleware)" ls 2  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline33/Baseline33NumClients_WorkerThreads_64_Aggregated" using 1:280:280 with labels center boxed notitle  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline33/Baseline33NumClients_WorkerThreads_64_Aggregated" using 1:295:296  with errorlines title "1001 Value-Size=1024(Baseline33NumClients_WorkerThreads_64:avgQueueWaitingTime:middleware)" ls 3 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline33/Baseline33NumClients_WorkerThreads_64_Aggregated" using 1:295:295 with labels center boxed notitle 
+reset 
+set terminal pdf 
+set key font ",6" 
+set output "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/generatedPlots/allLines/pdfSource/Baseline34.pdf" 
+set xrange [0:*] 
+set yrange [0:*] 
+set key top left 
+set style line 1 lc rgb '#33ccff' lt 1 lw 2 pt 7 ps 0.5 
+set style line 2 lc rgb '#33cc33' lt 1 lw 2 pt 7 ps 0.5 
+set style line 3 lc rgb '#cc3300' lt 1 lw 2 pt 7 ps 0.5 
+set xlabel "Value Size [Bytes]" 
+set ylabel "Throughput [get/sec]" 
+set title "Interactive Law" 
+set x2range [0:200]  
+set y2range [0:1.5]  
+set y2label "Latency get [ms]" 
+set ytics nomirror 
+set y2tics 
+plot "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline34/Baseline34NumClients_WorkerThreads_64_Aggregated" using 1:275:276  with errorlines title "1351 Value-Size=1024(Baseline34NumClients_WorkerThreads_64:throughputGet:middleware)" ls 1 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline34/Baseline34NumClients_WorkerThreads_64_Aggregated" using 1:275:275 with labels center boxed notitle , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline34/Baseline34NumClients_WorkerThreads_64_Aggregated" using 1:280:281  with errorlines title "1358 Value-Size=1024(Baseline34NumClients_WorkerThreads_64:avgMiddlewareResponseTimeGet:middleware)" ls 2  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline34/Baseline34NumClients_WorkerThreads_64_Aggregated" using 1:280:280 with labels center boxed notitle  axis x2y2, "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline34/Baseline34NumClients_WorkerThreads_64_Aggregated" using 1:295:296  with errorlines title "1379 Value-Size=1024(Baseline34NumClients_WorkerThreads_64:avgQueueWaitingTime:middleware)" ls 3 , "/home/fimeier/asl-fall19-project/dataSource/azure_5_12_complete/experiments/baseline34/Baseline34NumClients_WorkerThreads_64_Aggregated" using 1:295:295 with labels center boxed notitle 

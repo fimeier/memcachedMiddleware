@@ -1,0 +1,21 @@
+middlewareDataKeys:=
+suffixForOutputFiles:=QueueLengthAndClients
+
+
+##Baseline31
+Baseline21InteractiveLaw:=Baseline21InteractiveLaw
+pdfFileName:=Baseline21InteractiveLaw
+id:=28,35
+linePrefixPerLine:=(ID=28) Num-Clients=288,(ID=35) Num-Clients=288
+colorsToUse:=defaultColorsThroughputRead
+xLabel:=Value Size [Bytes]
+yLabel:=Throughput [get/sec]
+#yRange:=[0:20] 
+x2y2:=35
+x2y2PT:=7
+x2Range:=[0:1200] 
+y2Range:=[0:30] 
+y2Label:=Latency get [ms]
+title:=Interactive Law
+keyPosition:=top left
+
