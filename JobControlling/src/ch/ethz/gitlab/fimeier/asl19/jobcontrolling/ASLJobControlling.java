@@ -172,18 +172,18 @@ public class ASLJobControlling {
 
 
 	public static boolean consolidateStatistics = true;
-	public static boolean consolidateStatisticsBaseline21 = false;
-	public static boolean consolidateStatisticsBaseline22 = false;
-	public static boolean consolidateStatisticsBaseline31 = false;
-	public static boolean consolidateStatisticsBaseline32 = false;
-	public static boolean consolidateStatisticsBaseline33 = false;
-	public static boolean consolidateStatisticsBaseline34 = false;
+	public static boolean consolidateStatisticsBaseline21 = true;
+	public static boolean consolidateStatisticsBaseline22 = true;
+	public static boolean consolidateStatisticsBaseline31 = true;
+	public static boolean consolidateStatisticsBaseline32 = true;
+	public static boolean consolidateStatisticsBaseline33 = true;
+	public static boolean consolidateStatisticsBaseline34 = true;
 
 
 	public static boolean createConsolitatedPlots = false; //achtung habe aktuelle excluded
 
 	public static boolean createMemtierMiddlewarplots = false;
-	public static boolean create2kPlots = true;
+	public static boolean create2kPlots = false;
 
 
 
