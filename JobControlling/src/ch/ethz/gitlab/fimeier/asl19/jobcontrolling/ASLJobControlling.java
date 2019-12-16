@@ -203,7 +203,7 @@ public class ASLJobControlling {
 	 */
 	//used in createAllStatistics&createSpecialPlots
 	//Shows a unique ID per run... to easily copy lines together (my assumption, cool what I did last year)
-	public static boolean showIdInLineTitle = true;
+	public static boolean showIdInLineTitle = false;
 
 
 	/*
